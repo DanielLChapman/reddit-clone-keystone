@@ -1,1 +1,2 @@
-Modified the code from Wes Bos's AdvancedReact course to create a skeleton template for frontend and backend React+GraphQL applications. Code for users left in for easy user authentication.
+Reddit Clone built on the keystone skeleton app on my profile, based on the base code from wes bos's Advanced react course with the user authentication left in.
+
