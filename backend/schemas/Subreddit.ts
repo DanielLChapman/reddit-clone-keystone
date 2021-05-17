@@ -5,6 +5,7 @@ import { rules, isSignedIn } from '../access';
 export const Subreddit = list({
   fields: {
     name: text({ isRequired: true, isUnique: true }),
+    slug: text({ isRequired: true, isUnique: true}),
     description: text({
       ui: {
         displayMode: 'textarea',

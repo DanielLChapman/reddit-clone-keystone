@@ -38,6 +38,8 @@ export const Post = list({
         ref: 'Vote.post',
         many: true,
     }),
-    
+    post_slug: text({isRequired: true}),
+    link: text(),
+
   },
 });

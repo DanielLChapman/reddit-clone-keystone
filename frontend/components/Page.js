@@ -35,7 +35,6 @@ const InnerStyles = styled.div`
 `;
 
 export default function Page({ children }) {
-  console.log(children);
   return (
     <div>
       <Head>
