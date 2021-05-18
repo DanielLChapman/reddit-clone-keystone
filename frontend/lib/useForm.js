@@ -18,11 +18,21 @@ export default function useForm(initial = {}) {
     if (type === 'file') {
       [value] = e.target.files;
     }
-    setInputs({
-      // copy existing state
-      ...inputs,
-      [name]: value,
-    });
+    if (type === 'error') {
+      setInputs({
+        ...inputs,
+        errors: {
+          [name]: value,
+        }
+      })
+    } else {
+      setInputs({
+        // copy existing state
+        ...inputs,
+        [name]: value,
+      });
+    }
+    
   }
 
   function resetForm() {

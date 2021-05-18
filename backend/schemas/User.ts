@@ -32,6 +32,7 @@ export const User = list({
         }),
         // differentiation between admin and member of.
         moderator: relationship({ ref: 'Subreddit.owner', many: true }),
+        moderating: relationship({ref: 'Subreddit.moderators', many: true}),
         subreddits: relationship({ 
             ref: 'Subreddit.subscriber', 
             many: true,

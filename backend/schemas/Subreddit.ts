@@ -5,16 +5,25 @@ import { rules, isSignedIn } from '../access';
 export const Subreddit = list({
   fields: {
     name: text({ isRequired: true, isUnique: true }),
+    title: text({isRequired: true}),
     slug: text({ isRequired: true, isUnique: true}),
+    sidebar: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+      defaultValue: 'Nothing Here Yet!'
+    }),
+    
     description: text({
       ui: {
         displayMode: 'textarea',
       },
+      defaultValue: 'Nothing Here Yet!'
     }),
     status: select({
       options: [
         { label: 'Public', value: 'PUBLIC' },
-        { label: 'Private', value: 'Private' },
+        { label: 'Private', value: 'PRIVATE' },
       ],
       defaultValue: 'PUBLIC',
       ui: {
@@ -27,7 +36,10 @@ export const Subreddit = list({
       defaultValue: ({ context }) => ({
         connect: { id: context.session.itemId },
       }),
-      many: true,
+    }),
+    moderators: relationship({
+      ref: 'User.moderating',
+      many: true
     }),
     subscriber: relationship({
       ref: 'User.subreddits',
@@ -37,5 +49,6 @@ export const Subreddit = list({
         ref: 'Post.subreddit',
         many: true,
     }),
+    
   },
 });

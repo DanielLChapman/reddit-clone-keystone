@@ -28,11 +28,7 @@ export default function Header() {
                 </div>
             </div> 
             <section className="signin-login-button-container">
-                <div className="signup-top-bar-button">
-                    <button type="submit" className="signup-button">
-                        Sign up
-                    </button>
-                </div>
+                
                {user && (
                     <>
                     <div className="login-top-bar-button">
@@ -42,13 +38,17 @@ export default function Header() {
                     </>
                 )}
                   {!user && (
-
+                      <>
                         <div className="login-top-bar-button">
                             <button><Link href="/signin">Sign In</Link></button>
                             
                         </div>
-            
-                    
+                        <div className="signup-top-bar-button">
+                        <button type="submit" className="signup-button">
+                            Sign up
+                        </button>
+                    </div>
+                    </>
                     )} 
                 
             </section>
