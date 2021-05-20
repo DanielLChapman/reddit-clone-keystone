@@ -1,12 +1,13 @@
 import React from 'react';
+import SubredditPage from '../../components/Subreddits/SubredditPage';
 
-function SubredditPage(props) {
-    console.log(props);
+function SubredditSlugPage(props) {
+    console.log(props)
     return (
         <div>
-            
+            <SubredditPage slug={props.query.slug} />
         </div>
     );
 }
 
-export default SubredditPage;
+export default SubredditSlugPage;
