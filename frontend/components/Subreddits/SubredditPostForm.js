@@ -6,11 +6,13 @@ import Form from '../styles/SubredditSubmitForm';
 
 
 const SUBREDDIT_TEXT_POST_MUTATION = gql`
-    mutation SUBREDDIT_TEXT_POST_MUTATION($title: String!, $content: String,  $subreddit_id: ID! ) {
-        createTextPost(
+    mutation SUBREDDIT_TEXT_POST_MUTATION($title: String!, $content: String,  $subreddit_id: ID!, $type: String!, $link: String ) {
+        createVariedPost(
             title: $title,
             content: $content,
-            subreddit_id: $subreddit_id
+            subreddit_id: $subreddit_id,
+            type: $type,
+            link: $link,
         ) {
             id
             content
@@ -26,21 +28,23 @@ function SubredditPostForm(props) {
         title: '',
       });
 
-    const [createPost, { data, error, loading}] = useMutation(
+    const [createVariedPost, { data, error, loading}] = useMutation(
         SUBREDDIT_TEXT_POST_MUTATION
     );
 
     return (
         <div>
+            {error}
         <Form onSubmit={async (e) => {
             e.preventDefault();
 
-            const res = await createPost({
+            const res = await createVariedPost({
                 variables: {
                     title: inputs.title,
                     content: inputs.content,
                     subreddit_id: props.id,
-
+                    link: '',
+                    type: 'text'
                 }
             });
 

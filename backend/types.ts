@@ -42,4 +42,6 @@ export type TextPostArgs = {
   title: String;
   subreddit_slug: String;
   content: String;
+  link: String,
+  type: String,
 }
