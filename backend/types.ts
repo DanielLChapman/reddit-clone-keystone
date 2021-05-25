@@ -37,3 +37,9 @@ export type ListAccessArgs = {
   itemId?: string;
   session?: Session;
 };
+
+export type TextPostArgs = {
+  title: String;
+  subreddit_slug: String;
+  content: String;
+}

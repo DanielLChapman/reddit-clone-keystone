@@ -1,0 +1,17 @@
+.subreddit-content {
+    width: 95%;
+    left: 1%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    ". ."
+    ". ."
+    ". .";
+    .subreddit-left, .subreddit-right {
+        vertical-align: top;
+        border:1px solid black;
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PleaseSignIn from '../../../components/PleaseSignIn';
+import SubredditPage from '../../../components/Subreddits/SubredditPage';
 
 function SubmitPage(props) {
    //need to be logged in first
@@ -8,10 +9,10 @@ function SubmitPage(props) {
 
     return (
         <div>
-                
-                hi
-                {props.query.slug}
-                {props?.query?.selftext}
+
+                <PleaseSignIn>
+                <SubredditPage slug={props.query.slug} type="form" selftext={props.query.selftext} />
+                </PleaseSignIn>
         </div>
     );
 }

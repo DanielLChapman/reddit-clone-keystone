@@ -9,20 +9,14 @@ export const Post = list({
         displayMode: 'textarea',
       },
     }),
+    title: text(),
     user: relationship({
       ref: 'User.posts',
       defaultValue: ({ context }) => ({
         connect: { id: context.session.itemId },
       }),
     }),
-    children: relationship({
-        ref: 'Post',
-        many: true,
-    }),
-    parent: relationship({
-        ref: 'Post',
-        many: false,
-    }),
+
     subreddit: relationship({
         ref: 'Subreddit.posts',
         many: false,
@@ -40,6 +34,6 @@ export const Post = list({
     }),
     post_slug: text({isRequired: true}),
     link: text(),
-
+    type: text(),
   },
 });

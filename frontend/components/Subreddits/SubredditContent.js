@@ -5,13 +5,19 @@ import PropTypes from 'prop-types';
 import SubredditPostForm from './SubredditPostForm';
 import SubredditHomePage from './SubredditHomePage';
 import SubredditComments from './SubredditComments';
+import SubredditMediaForm from './SubredditMediaForm';
 
 
 function SubredditContent(props) {
     
     if (props.type === "form") {
+        if (props.selftext === "true") {
+            return (
+                <SubredditPostForm slug={props.slug} id={props.id} />
+            )
+        }
         return (
-            <SubredditPostForm slug={props.slug} />
+            <SubredditMediaForm slug={props.slug} id={props.id} />
         )
     }
 
