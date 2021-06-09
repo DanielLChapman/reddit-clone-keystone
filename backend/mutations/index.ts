@@ -13,7 +13,7 @@ export const extendGraphqlSchema = graphQLSchemaExtension({
         createVariedPost(content: String title: String! subreddit_id: ID!, type: String!, link: String): Post
     }
     type Query {
-      getFrontPage(name: String): [Post]
+      getFrontPage(name: String, skip: Float): [Post]
     }
   `,
 
