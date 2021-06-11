@@ -12,9 +12,6 @@ export const extendGraphqlSchema = graphQLSchemaExtension({
         subscribeToDefault(id: ID): User
         createVariedPost(content: String title: String! subreddit_id: ID!, type: String!, link: String): Post
     }
-    type Query {
-      getFrontPage(name: String, skip: Float): [Post]
-    }
   `,
 
   resolvers: {
@@ -22,9 +19,6 @@ export const extendGraphqlSchema = graphQLSchemaExtension({
         subscribeToDefault,
         createVariedPost,
     },
-    Query: {
-        getFrontPage,
-    }
   },
 });
 

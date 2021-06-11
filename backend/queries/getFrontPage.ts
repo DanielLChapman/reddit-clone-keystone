@@ -1,18 +1,12 @@
 import { KeystoneContext, SessionStore } from '@keystone-next/types';
 import { Session } from '../types';
-import { PostWhereInput } from '../.keystone/schema-types';
+import { PostListTypeInfo, PostRelateToManyInput, PostWhereInput } from '../.keystone/schema-types';
 import {id_array} from '../lib/allSubreddits';
 import { gql } from '@keystone-next/keystone/schema';
 
 const graphql = String.raw;
 
-const ALL_SUBREDDITS_POSTS = gql`
-    query ALL_SUBREDDITS_POSTS($array: [ID]!) {
-        allPosts(id_in: $array) {
-            id
-        }
-    }
-`;
+
 
 async function getFrontPage(
     root: any,
@@ -52,36 +46,39 @@ async function getFrontPage(
     //get 100, sort, display 50 and then store the next 50. On next load, add 100 in for now?
     //Maybe?
 
-    frontPageSubreddits = await context.lists.Post.findMany({
-        where: {
-            subreddit: {
-                id_in: subreddits
-            }
-        },
-        skip: skip,
-        resolveFields: graphql`
-                id
-                content
-                title
-                user {
-                    name
+    const { data, errors } = await context.executeGraphQL({
+        query: gql`
+            query GET_POSTS($subreddits: [String], $skip: Float) {
+                allPosts(subreddits: $subreddits, skip: $skip) {
+                    user {
+                        name
+                        id
+                    }
                     id
+                    content
+                    title
+                    createdAt
+                    votes   {
+                        vflag
+                    }
+                    post_slug
+                    link
+                    type
+                    
                 }
-                createdAt
-                votes   {
-                    vflag
-                }
-                post_slug
-                link
-                type
-            `
-    }); 
+    }
+        `,
+        variables: {
+            subreddits,
+            skip,
+         },
+      });
 
-    console.log(frontPageSubreddits);
+
+    return data.allPosts;
 
     //if amount is over 100 + total, and then skip the first and return only the end.
 
-    return frontPageSubreddits;
 
 }
 

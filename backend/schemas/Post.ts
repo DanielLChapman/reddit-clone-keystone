@@ -15,6 +15,7 @@ export const Post = list({
       defaultValue: ({ context }) => ({
         connect: { id: context.session.itemId },
       }),
+      many: false,
     }),
 
     subreddit: relationship({
