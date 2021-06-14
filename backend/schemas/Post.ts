@@ -25,15 +25,15 @@ export const Post = list({
     createdAt: text({ 
         isRequired: true,
         defaultValue: () => {
-            let date = new Date();
-            return date.toLocaleDateString();
+            let date = new Date(Date.now()).toString();
+            return date;
         },
     }),
     votes: relationship({
         ref: 'Vote.post',
         many: true,
     }),
-    post_slug: text({isRequired: true}),
+    post_slug: text({isRequired: true, isUnique: true}),
     link: text(),
     type: text(),
   },

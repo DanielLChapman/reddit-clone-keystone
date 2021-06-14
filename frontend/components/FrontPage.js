@@ -21,6 +21,24 @@ const GET_FRONT_PAGE_POSTS = gql`
             first: 200,
         ) {
             id
+            content
+            title
+            user {
+            id
+            name
+            }
+            createdAt
+            votes {
+            vflag
+            }
+            post_slug
+            link
+            type
+            subreddit {
+                name
+                id
+                slug
+            }
         }
     }
 `;
@@ -43,13 +61,12 @@ function FrontPage(props) {
         }
     });
         
+    
 
     if(loading) return <div>Loading...</div>
     if(error) return <div>{error.error}</div>
 
-    console.log(data);
-    
-    
+    let posts = data?.allPosts;
     return (
         
         <div>
@@ -58,6 +75,12 @@ function FrontPage(props) {
             { user && (
                     <Link href="/subreddits/create">Create Your Own Subreddit</Link>
                  )
+            }
+
+            {
+                posts && posts.map((x) => {
+                    return <PostMain post={x} key={x.id} />
+                })
             }
         </div>
     );

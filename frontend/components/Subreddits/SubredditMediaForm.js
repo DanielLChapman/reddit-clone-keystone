@@ -88,7 +88,7 @@ function SubredditMediaForm(props) {
                             onChange={handleChange}
                         />
                     </label>
-                    <button type="submit">Create Media Post</button>
+                    <button type="submit">Create Link/Media Post</button>
                     
                 </fieldset>
 

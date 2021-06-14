@@ -7,7 +7,9 @@ import {convertDateFromNow} from '../../lib/convertDateFromNow';
 function PostMain(props) {
     console.log(props);
     return (
-        <section className="reddit-post" onClick={() => {window.location.href=`/r/`}}>
+        <section className="reddit-post" onClick={(e) => {if(e.target.className !== 'subreddit-link') {
+            window.location.href=`/r/`
+        } /**/}}>
         <section className="reddit-post-left">
          {/*upvote, downvote and current score*/}
          <FaLongArrowAltUp />
@@ -18,13 +20,13 @@ function PostMain(props) {
         </section>
         <section className="reddit-post-right">
             <section className="reddit-post-right-top">
-                <Link href={`../r/`}>
-                    <a><b>r/kjnjknnk</b></a>
+                <Link href={`/r/${props?.post?.subreddit?.slug}`}>
+                    <a><b className="subreddit-link">r/{props?.post?.subreddit?.name}</b></a>
                 </Link>
                 <span>&nbsp;•&nbsp;</span>
                 <span>Posted by&nbsp;
-                    <Link href={`../u/`}>
-                    <a>u/sadsdasdasdas</a>
+                    <Link href={`/user/${props?.post?.user?.name}`}>
+                    <a  className="subreddit-link">u/{props?.post?.user?.name}</a>
                 </Link>
                 </span>
                 &nbsp;

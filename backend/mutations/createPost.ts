@@ -7,6 +7,13 @@ import { Post } from '../schemas/Post';
 
 const graphql = String.raw;
 
+//https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
+function uuidv4() {
+return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+});
+}
 
 async function createVariedPost(
     root: any,
@@ -51,23 +58,57 @@ async function createVariedPost(
     }
 
     //generate type in frontend
+    let newPost;
+    try {
+        newPost = await context.lists.Post.createOne({
+            data: {
+                user: { connect: { id: sesh.itemId } },
+                subreddit: { connect: { id: subreddit_id}},
+                title: title,
+                post_slug: postslug,
+                type: type,
+                link: link,
+            },
+            resolveFields: graphql`
+                id
+                title
+                link
+                post_slug
+            `,
+        })
+    } catch(err) {
+        let error = err.message.toString().substring(0, 6);
+        switch (error) {
+            case 'E11000':
+                postslug = postslug + "_" + uuidv4().substring(0,12);
+                newPost = await context.lists.Post.createOne({
+                    data: {
+                        user: { connect: { id: sesh.itemId } },
+                        subreddit: { connect: { id: subreddit_id}},
+                        title: title,
+                        post_slug: postslug,
+                        type: type,
+                        link: link,
+                    },
+                    resolveFields: graphql`
+                        id
+                        title
+                        link
+                        post_slug
+                    `,
+                })
+                break;
+            default:
+
+                console.log(error);
+        }
+    }
     
-    return await context.lists.Post.createOne({
-        data: {
-            user: { connect: { id: sesh.itemId } },
-            subreddit: { connect: { id: subreddit_id}},
-            title: title,
-            post_slug: postslug,
-            type: type,
-            link: link,
-        },
-        resolveFields: graphql`
-            id
-            title
-            link
-            post_slug
-        `,
-    })
+
+    return newPost;
+    
+
+    //return newPost;
 }
 
 export default createVariedPost;
