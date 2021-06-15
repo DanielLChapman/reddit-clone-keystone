@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import Link from 'next/link';
-import {convertDateFromNow} from '../../lib/convertDateFromNow';
+import convertDateFromNow from '../../lib/convertDateFromNow'; 
 
 function PostMain(props) {
     console.log(props);
+    
     return (
         <section className="reddit-post" onClick={(e) => {if(e.target.className !== 'subreddit-link') {
             window.location.href=`/r/`
@@ -30,13 +31,15 @@ function PostMain(props) {
                 </Link>
                 </span>
                 &nbsp;
-                <span>Posted </span>
+                <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
             </section>
             <section className="reddit-post-right-bottom">
-                
+                {
+                    props?.post?.link === '' ? <span>Text Post</span> : <span>Media Post</span>
+                 }
             </section>
             <section className="reddit-post-right-bottom-footer">
-  
+                <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}> Comments</a>
             </section>
 
         </section>

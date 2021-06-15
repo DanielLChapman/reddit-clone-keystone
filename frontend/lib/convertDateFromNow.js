@@ -1,6 +1,10 @@
 export default function convertDateFromNow(date) {
-    let today = new Date();
-    let calculatedSeconds = Math.abs((today - new Date(date))/1000);
+    let today = new Date(Date.now())
+    let convertedDate = new Date(date);
+
+
+    
+    let calculatedSeconds = Math.abs((today - convertedDate)/1000);
 
     if (calculatedSeconds >= 31556952) {
         return `${Math.floor(calculatedSeconds/31556952)} year${Math.floor(calculatedSeconds/31556952) >= 2 ? 's': ''}  ago`;

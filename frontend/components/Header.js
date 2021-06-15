@@ -9,7 +9,7 @@ import { useUser } from './User';
 export default function Header() {
     const user = useUser();
     return (
-    <div>
+    <div className="top-bear-container">
         <Meta />
         <div className="top-bar">
             <Link href="/" >

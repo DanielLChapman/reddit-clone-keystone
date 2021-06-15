@@ -32,6 +32,7 @@ const GlobalStyles = createGlobalStyle`
 const InnerStyles = styled.div`
   margin: 0 auto;
   padding: 2rem;
+  margin-top:30px;
 `;
 
 export default function Page({ children }) {
