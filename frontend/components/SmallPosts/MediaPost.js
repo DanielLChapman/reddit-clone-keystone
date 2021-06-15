@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 function checkURL(url) {
@@ -30,14 +31,18 @@ function MediaPost(props) {
 
     return (
         <div>
-            {props?.post?.title}
-            <br />
+            <h4>{props?.post?.title}</h4>
+            
             <section class="media-output-small-post">
                 {getMediaCode(props?.post?.link)}
             </section>
             
         </div>
     );
+}
+
+MediaPost.propTypes = {
+    post: PropTypes.object.isRequired,
 }
 
 export default MediaPost;
