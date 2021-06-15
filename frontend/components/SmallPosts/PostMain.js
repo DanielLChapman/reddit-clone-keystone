@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import Link from 'next/link';
 import convertDateFromNow from '../../lib/convertDateFromNow'; 
+import MediaPost from './MediaPost';
+import TextPost from './TextPost';
 
 function PostMain(props) {
     console.log(props);
@@ -35,7 +37,7 @@ function PostMain(props) {
             </section>
             <section className="reddit-post-right-bottom">
                 {
-                    props?.post?.link === '' ? <span>Text Post</span> : <span>Media Post</span>
+                    props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />
                  }
             </section>
             <section className="reddit-post-right-bottom-footer">
