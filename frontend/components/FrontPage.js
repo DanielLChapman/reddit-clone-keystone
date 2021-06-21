@@ -69,19 +69,23 @@ function FrontPage(props) {
     let posts = data?.allPosts;
     return (
         
-        <div>
+        <div className="frontpage-content">
+            <section className="left-side">
+                {
+                    posts && posts.map((x) => {
+                        return <PostMain post={x} key={x.id} />
+                    })
+                }
+            </section>
+            <section className="right-side">
+                { user && (
+                        <Link href="/subreddits/create">Create Your Own Subreddit</Link>
+                    )
+                }
+
+            </section>
             
-
-            { user && (
-                    <Link href="/subreddits/create">Create Your Own Subreddit</Link>
-                 )
-            }
-
-            {
-                posts && posts.map((x) => {
-                    return <PostMain post={x} key={x.id} />
-                })
-            }
+            
         </div>
     );
 }
