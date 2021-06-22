@@ -7,7 +7,6 @@ import MediaPost from './MediaPost';
 import TextPost from './TextPost';
 
 function PostMain(props) {
-    console.log(props);
     
     return (
         <section className="reddit-post" onClick={(e) => {if(e.target.className !== 'subreddit-link') {

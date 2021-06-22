@@ -9,7 +9,7 @@ function TextPost(props) {
     if (props?.post?.link !== '') {
         return (
             <>
-                <h4>{props?.post?.title}</h4>
+                <h4>{props?.post?.title.split('').length > 100 ? props?.post?.title.split('').splice(0,100).join('') + "..." : props?.post?.title}</h4>
                 <section className={`reddit-post-right-bottom-description ${afterClass}`} >
                     <a href={props?.post?.link}>{
                         props?.post?.link.split('').length > 100 ? props?.post?.link.split('').splice(0,100).join('') + "..." : props?.post?.link
@@ -23,7 +23,7 @@ function TextPost(props) {
         <>
             <h4>{props?.post?.title}</h4>
             <section className={`reddit-post-right-bottom-description ${afterClass}`} >
-                <span>{props.post.content}</span>
+                <span>{props?.post?.content.split('').length > 200 ? props?.post?.content.split('').splice(0,200).join('') + "..." : props?.post?.content}</span>
             </section>
         </>
     );

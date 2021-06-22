@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 
 function checkURL(url) {
-    return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    let urlMatch =  (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    let urlIncludes = false;
+    const substrings = ['jpg', 'jpeg', 'gif', 'png'];
+    if (substrings.some(v => url.includes(v))) {
+        urlIncludes = true;
+    }
+    return urlMatch || urlIncludes;
 }
 
 function MediaPost(props) {
@@ -33,7 +39,7 @@ function MediaPost(props) {
         <div>
             <h4>{props?.post?.title}</h4>
             
-            <section class="media-output-small-post">
+            <section className="media-output-small-post">
                 {getMediaCode(props?.post?.link)}
             </section>
             

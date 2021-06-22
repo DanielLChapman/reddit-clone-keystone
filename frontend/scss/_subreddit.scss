@@ -4,7 +4,7 @@
     margin: 0 auto;
     position: relative;
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.3fr 0.7fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px 25px;
     grid-template-areas:
@@ -13,5 +13,11 @@
     ". .";
     .subreddit-left, .subreddit-right, .left-side, .right-side {
         vertical-align: top;
+    }
+    .media-output-small-post img{
+        max-width: 95%;
+        max-height: 800px;
+        width: auto;
+        height: auto;
     }
 }
