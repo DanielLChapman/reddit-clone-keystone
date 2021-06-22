@@ -6,19 +6,27 @@ import convertDateFromNow from '../../lib/convertDateFromNow';
 import MediaPost from './MediaPost';
 import TextPost from './TextPost';
 
+function checkClasses(classes) {
+    const substrings = ['subreddit-link', 'upvote-arrow-box', 'downvote-arrow-box'];
+    return substrings.includes(classes);
+}
+
 function PostMain(props) {
-    
+
     return (
-        <section className="reddit-post" onClick={(e) => {if(e.target.className !== 'subreddit-link') {
-            window.location.href=`/r/`
+        <section className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
+           window.location.href=`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`
         } /**/}}>
         <section className="reddit-post-left">
          {/*upvote, downvote and current score*/}
-         <FaLongArrowAltUp />
+         <FaLongArrowAltUp className="upvote-arrow" />
+         <div className="upvote-arrow-box"></div>
          <br />
          <span></span>
          <br />
-         <FaLongArrowAltDown />
+         <FaLongArrowAltDown className="upvote-arrow" />
+         <div className="downvote-arrow-box"></div>
+         
         </section>
         <section className="reddit-post-right">
             <section className="reddit-post-right-top">
