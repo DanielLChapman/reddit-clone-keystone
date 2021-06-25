@@ -10,6 +10,14 @@ export const CURRENT_USER_QUERY = gql`
         subreddits {
           id
         }
+        postvotes {
+          post {
+            title
+            id
+          }
+          id
+          vflag
+        }
     }
   }
   }

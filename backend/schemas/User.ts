@@ -41,8 +41,8 @@ export const User = list({
             ref: 'Post.user',
             many: true,
         }),
-        votes: relationship({
-            ref: 'Vote.user',
+        postvotes: relationship({
+            ref: 'PostVote.user',
             many: true,
         }),
         firstSignin: checkbox({

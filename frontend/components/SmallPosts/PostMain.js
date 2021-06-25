@@ -5,13 +5,91 @@ import Link from 'next/link';
 import convertDateFromNow from '../../lib/convertDateFromNow'; 
 import MediaPost from './MediaPost';
 import TextPost from './TextPost';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import { CURRENT_USER_QUERY } from '../User';
+import { useUser } from '../User';
 
 function checkClasses(classes) {
     const substrings = ['subreddit-link', 'upvote-arrow-box', 'downvote-arrow-box'];
     return substrings.includes(classes);
 }
 
+const CREATE_VOTE = gql`
+    mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
+        createPostVote(data: {
+            post: {
+                connect: {
+                    id: $post_id,
+                }
+            },
+            vflag: $vflag
+        }) {
+            id
+            post {
+                title
+            }
+        }
+    }
+`;
+
+const DELETE_VOTE = gql`
+    mutation DELETE_VOTE($id: ID!) {
+        deletePostVote(id: $id) {
+            id
+        }
+    }
+`;
+
+const UPDATE_VOTE = gql`
+    mutation UPDATE_VOTE($id: ID!, $vflag: String!) {
+        updatePostVote(id: $id, data: {
+            vflag: $vflag
+        }) {
+            id
+        }
+    }
+`;
+
 function PostMain(props) {
+    const user = useUser();
+    let postVoteId;
+    let upvoted = user.postvotes.some((x) => {
+        if (x.post.id === props?.post?.id) {
+            if (x.vflag === 'Upvote') {
+                return true
+            }
+        } 
+    })
+    let downvoted = user.postvotes.some((x) => {
+        if (x.post.id === props?.post?.id) {
+            if (x.vflag === 'Downvote') {
+                return true
+            }
+        } 
+    })
+
+    const getPostVoteId = () => {
+        let id = user.postvotes.find((x) => {
+            if (x.post.id === props?.post.id) {
+                return x.id;
+            }
+        });
+
+        return id.id;
+    }
+
+    const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
+
+    const [deletePostVote, { data: data_delete, error: error_delete, loading: loading_delete }] = useMutation(DELETE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
+
+    const [updatePostVote, { data: data_update, error: error_update, loading: loading_update}] = useMutation(UPDATE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
 
     return (
         <section className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
@@ -19,13 +97,92 @@ function PostMain(props) {
         } /**/}}>
         <section className="reddit-post-left">
          {/*upvote, downvote and current score*/}
-         <FaLongArrowAltUp className="upvote-arrow" />
-         <div className="upvote-arrow-box"></div>
+         <FaLongArrowAltUp className={`upvote-arrow ${upvoted? 'upvote-arrow-colored' : ''}`}   />
+         <div className="upvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
+                if (user) {
+                    if (!upvoted) {
+                        //if its downvoted
+                        if (downvoted) {
+                            //update 
+                            const res = await updatePostVote({
+                                variables: {
+                                    id: getPostVoteId(),
+                                    vflag: 'Upvote'
+                                }
+                            });
+                            
+                            console.log(res);
+                        } else {
+                            const res = await createPostVote({
+                                variables: {
+                                    post_id: props.post.id,
+                                    vflag: 'Upvote'
+                                }
+                            });
+    
+                            console.log(res);
+                        }
+                        
+                    } else {    
+                        let id = getPostVoteId();
+                        console.log(id);
+                        const res = await deletePostVote({
+                            variables: {
+                                id: id
+                            }
+                        });
+
+                        console.log(res);
+
+                    }
+
+                }
+             }
+             
+         }></div>
          <br />
          <span></span>
          <br />
-         <FaLongArrowAltDown className="upvote-arrow" />
-         <div className="downvote-arrow-box"></div>
+         <FaLongArrowAltDown className={`upvote-arrow ${downvoted ? 'downvote-arrow-colored' : ''}`} />
+         <div className="downvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
+                if (user) {
+                    if (!downvoted) {
+                        //if its downvoted
+                        if (upvoted) {
+                            const res = await updatePostVote({
+                                variables: {
+                                    id: getPostVoteId(),
+                                    vflag: 'Downvote'
+                                }
+                            });        
+                        } else {
+                            const res = await createPostVote({
+                                variables: {
+                                    post_id: props.post.id,
+                                    vflag: 'Downvote'
+                                }
+                            });
+    
+                            console.log(res);
+                        }
+                        
+                    } else {    
+                        let id = getPostVoteId();
+                        console.log(id);
+                        const res = await deletePostVote({
+                            variables: {
+                                id: id
+                            }
+                        });
+
+                        console.log(res);
+
+                    }
+
+                }
+             }
+             
+         }></div>
          
         </section>
         <section className="reddit-post-right">

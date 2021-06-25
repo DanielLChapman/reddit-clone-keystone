@@ -30,7 +30,7 @@ export const Post = list({
         },
     }),
     votes: relationship({
-        ref: 'Vote.post',
+        ref: 'PostVote.post',
         many: true,
     }),
     post_slug: text({isRequired: true, isUnique: true}),

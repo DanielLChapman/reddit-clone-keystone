@@ -8,7 +8,7 @@ import { User } from './schemas/User';
 import { Role } from './schemas/Role';
 import { Subreddit} from './schemas/Subreddit';
 import { Post  } from './schemas/Post';
-import { Vote } from './schemas/Vote';
+import { PostVote } from './schemas/PostVote';
 import { sendPasswordResetEmail } from './lib/mail';
 import { permissionsList } from './schemas/fields';
 import { extendGraphqlSchema } from './mutations';
@@ -55,7 +55,7 @@ export default withAuth(config({
         Role,
         Post,
         Subreddit,
-        Vote,
+        PostVote,
     }),
     extendGraphqlSchema,
     ui: {
