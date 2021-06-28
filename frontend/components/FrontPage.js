@@ -5,6 +5,7 @@ import React from 'react';
 import PostMain from './SmallPosts/PostMain';
 import { useUser } from './User';
 import { id_array  } from '../lib/allSubreddits'
+import {rawConvertDateFromNow} from '../lib/convertDateFromNow';
 
 
 // get front page posts, sorted by some algorithm (upvotes / time posted for now)
@@ -67,6 +68,30 @@ function FrontPage(props) {
     if(error) return <div>{error.error}</div>
 
     let posts = data?.allPosts;
+    //sorting posts by votes / posted times
+
+    let scoredPosts = posts.map((x) => {
+        
+        //count votes
+        let score = 1;
+        let numVotes = x.votes.length;
+        numVotes === 0 ? numVotes = 1 : '';
+        
+        x.votes.forEach((y) => {
+            y.vflag === 'Upvote' ? score += 1 : score -= 1;
+        });
+
+        let revisedScore = score/numVotes;
+        revisedScore === 0 ? revisedScore -= 1 : '';
+
+        let date = rawConvertDateFromNow(x.createdAt);
+        score = revisedScore/date;
+
+        return {...x, score};
+    })
+
+    posts = scoredPosts.sort((a,b) => (a.score < b.score) ? 1: -1);
+    console.log(posts);
     return (
         
         <div className="frontpage-content">

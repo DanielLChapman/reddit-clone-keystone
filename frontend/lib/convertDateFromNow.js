@@ -17,3 +17,9 @@ export default function convertDateFromNow(date) {
     } 
     return `${Math.floor(calculatedSeconds/60)} minute${Math.floor(calculatedSeconds/60) >= 2 ? 's': ''} ago`
 }
+
+export function rawConvertDateFromNow(date) {
+    let today = new Date(Date.now())
+    let convertedDate = new Date(date);
+    return Math.abs((today - convertedDate)/1000);
+}
