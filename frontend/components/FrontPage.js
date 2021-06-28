@@ -6,6 +6,7 @@ import PostMain from './SmallPosts/PostMain';
 import { useUser } from './User';
 import { id_array  } from '../lib/allSubreddits'
 import {rawConvertDateFromNow} from '../lib/convertDateFromNow';
+import sortingPosts from '../lib/postSorting';
 
 
 // get front page posts, sorted by some algorithm (upvotes / time posted for now)
@@ -70,28 +71,7 @@ function FrontPage(props) {
     let posts = data?.allPosts;
     //sorting posts by votes / posted times
 
-    let scoredPosts = posts.map((x) => {
-        
-        //count votes
-        let score = 1;
-        let numVotes = x.votes.length;
-        numVotes === 0 ? numVotes = 1 : '';
-        
-        x.votes.forEach((y) => {
-            y.vflag === 'Upvote' ? score += 1 : score -= 1;
-        });
-
-        let total = score;
-        let revisedScore = score/numVotes;
-        revisedScore === 0 ? revisedScore -= 1 : '';
-
-        let date = rawConvertDateFromNow(x.createdAt);
-        score = revisedScore/date;
-
-        return {...x, score, total};
-    })
-
-    posts = scoredPosts.sort((a,b) => (a.score < b.score) ? 1 : -1);
+    posts = sortingPosts(posts, 'Best');
 
 
     return (
