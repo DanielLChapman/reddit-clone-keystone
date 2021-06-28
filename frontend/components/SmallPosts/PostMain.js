@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 import { useUser } from '../User';
+
 
 function checkClasses(classes) {
     const substrings = ['subreddit-link', 'upvote-arrow-box', 'downvote-arrow-box'];
@@ -53,6 +54,9 @@ const UPDATE_VOTE = gql`
 
 function PostMain(props) {
     const user = useUser();
+    const [post, setPost] = useState({
+        total: props?.post?.total
+    });
     let postVoteId;
     let upvoted = user.postvotes.some((x) => {
         if (x.post.id === props?.post?.id) {
@@ -110,8 +114,12 @@ function PostMain(props) {
                                     vflag: 'Upvote'
                                 }
                             });
+                            setPost({
+                                total: post.total + 2
+                            })
                             
-                            console.log(res);
+                            
+         
                         } else {
                             const res = await createPostVote({
                                 variables: {
@@ -119,21 +127,24 @@ function PostMain(props) {
                                     vflag: 'Upvote'
                                 }
                             });
+                            setPost({
+                                total: post.total + 1
+                            })
     
-                            console.log(res);
                         }
                         
                     } else {    
                         let id = getPostVoteId();
-                        console.log(id);
+              
                         const res = await deletePostVote({
                             variables: {
                                 id: id
                             }
                         });
 
-                        console.log(res);
-
+                        setPost({
+                            total: post.total - 1
+                        })
                     }
 
                 }
@@ -141,7 +152,7 @@ function PostMain(props) {
              
          }></div>
          <br />
-         <span></span>
+         <span >{post.total}</span>
          <br />
          <FaLongArrowAltDown className={`upvote-arrow ${downvoted ? 'downvote-arrow-colored' : ''}`} />
          <div className="downvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
@@ -155,6 +166,9 @@ function PostMain(props) {
                                     vflag: 'Downvote'
                                 }
                             });        
+                            setPost({
+                                total: post.total - 2
+                            })
                         } else {
                             const res = await createPostVote({
                                 variables: {
@@ -162,20 +176,26 @@ function PostMain(props) {
                                     vflag: 'Downvote'
                                 }
                             });
+                            setPost({
+                                total:post.total - 1
+                            })
     
-                            console.log(res);
+                      
                         }
                         
                     } else {    
                         let id = getPostVoteId();
-                        console.log(id);
+    
                         const res = await deletePostVote({
                             variables: {
                                 id: id
                             }
                         });
 
-                        console.log(res);
+                        setPost({
+                            total: post.total + 1
+                        })
+      
 
                     }
 

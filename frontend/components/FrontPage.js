@@ -81,17 +81,19 @@ function FrontPage(props) {
             y.vflag === 'Upvote' ? score += 1 : score -= 1;
         });
 
+        let total = score;
         let revisedScore = score/numVotes;
         revisedScore === 0 ? revisedScore -= 1 : '';
 
         let date = rawConvertDateFromNow(x.createdAt);
         score = revisedScore/date;
 
-        return {...x, score};
+        return {...x, score, total};
     })
 
-    posts = scoredPosts.sort((a,b) => (a.score < b.score) ? 1: -1);
-    console.log(posts);
+    posts = scoredPosts.sort((a,b) => (a.score < b.score) ? 1 : -1);
+
+
     return (
         
         <div className="frontpage-content">
