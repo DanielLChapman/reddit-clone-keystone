@@ -2,6 +2,8 @@ import { integer, select, text, relationship } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 import { rules, isSignedIn } from '../access';
 
+//maybe prevent certain subreddits from being created
+
 export const Subreddit = list({
   fields: {
     name: text({ isRequired: true, isUnique: true }),
@@ -49,6 +51,13 @@ export const Subreddit = list({
         ref: 'Post.subreddit',
         many: true,
     }),
+    createdAt: text({ 
+      isRequired: true,
+      defaultValue: () => {
+          let date = new Date(Date.now()).toString();
+          return date;
+      },
+  }),
     
   },
 });

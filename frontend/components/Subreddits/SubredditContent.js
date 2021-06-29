@@ -13,20 +13,20 @@ function SubredditContent(props) {
     if (props.type === "form") {
         if (props.selftext === "true") {
             return (
-                <SubredditPostForm slug={props.slug} id={props.id} />
+                <SubredditPostForm slug={props.slug} id={props.subreddit.id} />
             )
         }
         return (
-            <SubredditMediaForm slug={props.slug} id={props.id} />
+            <SubredditMediaForm slug={props.slug} id={props.subreddit.id} />
         )
     }
 
     else if (props.type === "comment") {
-        return <SubredditComments slug={props.slug} id={props.id} />
+        return <SubredditComments slug={props.slug} id={props.subreddit.id} />
     }
     
     return (
-            <SubredditHomePage slug={props.slug} id={props.id} />
+            <SubredditHomePage slug={props.slug} id={props.subreddit.id} subreddit={props.subreddit}/>
     )
     
 

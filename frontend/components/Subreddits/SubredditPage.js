@@ -22,6 +22,7 @@ const GET_SUBREDDIT_INFO = gql`
             moderators {
                 name
             }
+            createdAt
         }
     }
 `;
@@ -39,11 +40,11 @@ function SubredditPage(props) {
     if (loading) return <span>Loading...</span>
     if(error) return <span>Nothing To See Here</span>
     return (
-        <>
+        <div className="subreddit-content">
                 {/* HArd coding news id, will grab from gql later */}
-                <SubredditContent slug={props.slug} id={data?.allSubreddits[0].id} /> 
+                <SubredditContent slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
                     
-        </>
+        </div>
     );
 }
 

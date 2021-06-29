@@ -7,6 +7,28 @@ import { useQuery } from '@apollo/client';
 import sortingPosts from '../../lib/postSorting';
 import PostMain from '../SmallPosts/PostMain';
 
+export function createdAtConvert(dateString) {
+    let d = new Date(dateString).toDateString();
+    d = d.slice(4);
+    d = d.split(' ');
+    d[0] = d[0] + " " + d[1];
+    return d[0] + ', ' + d[2];
+}
+
+const COUNT_MEMBERS = gql`
+    query COUNT_MEMBERS($id: ID!) {
+        _allUsersMeta(
+            where: {
+                subreddits_some: {
+                    id: $id
+                }
+            }
+        ) {
+            count
+        }
+    }
+`;
+
 export const GET_POSTS_FROM_SUBREDDIT = gql`
     query GET_POSTS_FROM_SUBREDDIT($id: ID!, $skip: Int) {
         allPosts(
@@ -47,9 +69,14 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
 
 function SubredditHomePage(props) {
     const user = useUser();
+    const {data: userData, error: userError, loading: userLoading} = useQuery(COUNT_MEMBERS, {
+        variables: {
+            id: props?.subreddit.id
+        }
+    });
     const {data, error, loading} = useQuery(GET_POSTS_FROM_SUBREDDIT, {
         variables: {
-            id: props?.id,
+            id: props?.subreddit?.id,
             skip: 0
         }
     }) 
@@ -62,7 +89,7 @@ function SubredditHomePage(props) {
     posts = sortingPosts(posts, 'Best');
 
     return (
-        <div className="subreddit-content">
+        <>
             <div className="subreddit-left">
                {
                     posts && posts.map((x) => {
@@ -73,30 +100,54 @@ function SubredditHomePage(props) {
             <div className="subreddit-right">
                 { user && (
                         <div>
-                            <div className="block-link">
-                                <Link href={`/r/${props.slug}/submit`}>
-                                    Create a Link Post
-                                </Link>
-                            </div> 
                             
-                            <div className="block-link">
+                                <Link href={`/r/${props.slug}/submit`}>
+                                    <a>
+                                        <div className="block-link">
+                                            Create a Link Post
+                                        </div>
+                                    </a>
+                                </Link>
+                            
                                 <Link href={`/r/${props.slug}/submit?selftext=true`}>
-                                    Create a Text Post
+                                <a>
+                                        <div className="block-link">
+                                            Create a Text Post
+                                        </div>
+                                    </a>
                                 </Link>    
-                            </div> 
                             
                         </div>
                     )
                 }
+
+                <section className="subreddit-about-box">
+                    <header>
+                        About Community
+                    </header>
+                    <section className="subreddit-about-box-description">
+                        {props?.subreddit?.description}
+                        <br />
+                        
+                    </section>
+                    <section className="subreddit-members">
+                        {userData._allUsersMeta.count}
+                        <br />
+                        Members
+                    </section>
+                    <section className="subreddit-created-at">
+                        🎂 &nbsp; Created {createdAtConvert(props.subreddit.createdAt)}
+                    </section>
+                </section>
         
             </div>
-        </div>
+        </>
     )
         
 }
 
 SubredditHomePage.propTypes = {
-    id: PropTypes.string.isRequired,
+    subreddit: PropTypes.object.isRequired,
 
 }
 
