@@ -22,13 +22,11 @@ function SubredditContent(props) {
     }
 
     else if (props.type === "comment") {
-        return <SubredditComments slug={props.slug} />
+        return <SubredditComments slug={props.slug} id={props.id} />
     }
     
     return (
-        <div>
-            <SubredditHomePage slug={props.slug} />
-        </div>
+            <SubredditHomePage slug={props.slug} id={props.id} />
     )
     
 
