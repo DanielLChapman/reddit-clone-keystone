@@ -5,6 +5,8 @@ import useForm from '../lib/useForm';
 import Router from 'next/router';
 import Form from './styles/SubredditForm';
 
+
+//NEED TO SET OWNER HERE
 const CREATE_SUBREDDIT_MUTATION = gql`
     mutation CREATE_SUBREDDIT_MUTATION(
         $name: String!,

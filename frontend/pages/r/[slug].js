@@ -5,7 +5,7 @@ function SubredditSlugPage(props) {
 
     return (
         <div>
-            <SubredditPage slug={props.query.slug} />
+            <SubredditPage slug={props.query.slug} type={'Home'} />
         </div>
     );
 }

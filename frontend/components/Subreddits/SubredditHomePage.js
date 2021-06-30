@@ -96,6 +96,15 @@ function SubredditHomePage(props) {
                         return <PostMain post={x} key={x.id} />
                     })
                 }
+                {
+                    posts.length === 0 && (
+                        <span>Nothing to see here...</span>
+                     )
+                                                
+                    
+                }
+
+
             </div>
             <div className="subreddit-right">
                 { user && (
@@ -121,7 +130,7 @@ function SubredditHomePage(props) {
                     )
                 }
 
-                <section className="subreddit-about-box">
+                <section className="subreddit-right-box">
                     <header>
                         About Community
                     </header>
@@ -137,6 +146,28 @@ function SubredditHomePage(props) {
                     </section>
                     <section className="subreddit-created-at">
                         🎂 &nbsp; Created {createdAtConvert(props.subreddit.createdAt)}
+                    </section>
+                </section>
+
+                <section className="subreddit-right-box">
+                    <header>
+                        Rules
+                    </header>
+                    <section className="subreddit-about-box-description">
+                        {props?.subreddit?.sidebar}
+                        <br />
+                        
+                    </section>
+                </section>
+
+                <section className="subreddit-right-box">
+                    <header>
+                        Rules
+                    </header>
+                    <section className="subreddit-about-box-description">
+                        {props?.subreddit?.sidebar}
+                        <br />
+                        
                     </section>
                 </section>
         
