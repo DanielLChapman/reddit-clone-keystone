@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/client';
 import sortingPosts from '../../lib/postSorting';
 import PostMain from '../SmallPosts/PostMain';
+import FilterBar from '../FilterBar';
 
 export function createdAtConvert(dateString) {
     let d = new Date(dateString).toDateString();
@@ -15,7 +16,7 @@ export function createdAtConvert(dateString) {
     return d[0] + ', ' + d[2];
 }
 
-const COUNT_MEMBERS = gql`
+export const COUNT_MEMBERS = gql`
     query COUNT_MEMBERS($id: ID!) {
         _allUsersMeta(
             where: {
@@ -91,6 +92,9 @@ function SubredditHomePage(props) {
     return (
         <>
             <div className="subreddit-left">
+                {posts && posts.length > 0 && (
+                    <FilterBar />
+                )} 
                {
                     posts && posts.map((x) => {
                         return <PostMain post={x} key={x.id} />
@@ -162,12 +166,19 @@ function SubredditHomePage(props) {
 
                 <section className="subreddit-right-box">
                     <header>
-                        Rules
+                        Moderators
                     </header>
                     <section className="subreddit-about-box-description">
-                        {props?.subreddit?.sidebar}
-                        <br />
-                        
+                        <ul>
+                            <li> <Link href={`/user/${props?.subreddit?.owner?.username}`} >{props?.subreddit?.owner?.username || 'none'}</Link></li>
+                            {
+                                props?.subreddit?.moderators?.map((x) => {
+                                    return <li key={x.id}><Link href={`/user/${x.username}`}>{x.username}</Link></li>
+                                })
+                            }
+                        </ul>
+                       
+
                     </section>
                 </section>
         

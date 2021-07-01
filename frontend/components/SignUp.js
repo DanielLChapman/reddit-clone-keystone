@@ -9,12 +9,16 @@ const SIGNUP_MUTATION = gql`
     $name: String!
     $email: String!
     $password: String!
+    $username: String!
+    $case_username: String!
   ) {
-    createUser(data: { name: $name, email: $email, password: $password }) {
+    createUser(data: { name: $name, email: $email, password: $password, username: $username, case_username: $case_username }) {
       id
       name
       email
-      subreddits
+      subreddits {
+        id
+      }
     }
   }
 `;
@@ -24,16 +28,33 @@ function SignUp(props) {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
     password: '',
+    username: '',
     name: '',
+    case_username: '',
   });
-  const [signup, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
-    variables: inputs,
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
-  });
+  const [signup, { data, error, loading }] = useMutation(SIGNUP_MUTATION);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // send email and password to graphql api
-    const res = await signup().catch(console.error);
+    let variables = {
+      email: inputs.email,
+      password: inputs.password,
+      username: inputs.username,
+      name: inputs.name,
+      case_username: inputs.username.toLowerCase()
+    }
+
+    console.log(variables);
+    
+    const res = await signup({
+      variables: {
+        email: inputs.email,
+        password: inputs.password,
+        username: inputs.username,
+        name: inputs.name,
+        case_username: inputs.username.toLowerCase()
+      }
+    }).catch(console.log(error));
     console.log(res);
     resetForm();
   };
@@ -47,6 +68,17 @@ function SignUp(props) {
             Signed Up With {data.createUser.email} - Please Go Ahead And Sign In
           </p>
         )}
+         <label htmlFor="name">
+          Username
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            autoComplete="username"
+            value={inputs.username}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="name">
           Name
           <input
@@ -80,7 +112,7 @@ function SignUp(props) {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sign In</button>
+        <button type="submit">Sign Up</button>
       </fieldset>
     </Form>
   );

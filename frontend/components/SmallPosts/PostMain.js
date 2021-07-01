@@ -58,14 +58,14 @@ function PostMain(props) {
         total: props?.post?.total
     });
     let postVoteId;
-    let upvoted = user.postvotes.some((x) => {
+    let upvoted = user?.postvotes.some((x) => {
         if (x.post.id === props?.post?.id) {
             if (x.vflag === 'Upvote') {
                 return true
             }
         } 
     })
-    let downvoted = user.postvotes.some((x) => {
+    let downvoted = user?.postvotes.some((x) => {
         if (x.post.id === props?.post?.id) {
             if (x.vflag === 'Downvote') {
                 return true
@@ -74,7 +74,7 @@ function PostMain(props) {
     })
 
     const getPostVoteId = () => {
-        let id = user.postvotes.find((x) => {
+        let id = user?.postvotes.find((x) => {
             if (x.post.id === props?.post.id) {
                 return x.id;
             }

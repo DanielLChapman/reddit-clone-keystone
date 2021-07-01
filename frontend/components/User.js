@@ -5,6 +5,7 @@ export const CURRENT_USER_QUERY = gql`
     authenticatedItem {
       ... on User {
         id
+        username
         email
         name
         subreddits {

@@ -45,7 +45,7 @@ export default function Header() {
                         </div>
                         <div className="signup-top-bar-button">
                         <button type="submit" className="signup-button">
-                            Sign up
+                            <Link href="/signin">Sign up</Link>
                         </button>
                     </div>
                     </>

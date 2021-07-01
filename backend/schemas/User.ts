@@ -21,6 +21,8 @@ export const User = list({
     },
     fields: {
         name: text({ isRequired: true }),
+        username: text({isRequired: true, isUnique: true}),
+        case_username:text({isUnique: true, isRequired: true}),
         email: text({ isRequired: true, isUnique: true }),
         password: password(),
         role: relationship({

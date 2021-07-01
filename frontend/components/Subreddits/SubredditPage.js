@@ -5,6 +5,7 @@ import { useUser } from '../User';
 import Link from 'next/link';
 import SubredditContent from './SubredditContent';
 import { CURRENT_USER_QUERY } from '../User';
+import SubredditTopBar from './SubredditTopBar';
 
 const GET_SUBREDDIT_INFO = gql`
     query GET_SUBREDDIT_INFO($slug: String!) {
@@ -18,10 +19,10 @@ const GET_SUBREDDIT_INFO = gql`
             description
             status
             owner {
-                name
+                username
             }
             moderators {
-                name
+                username
             }
             createdAt
         }
@@ -78,49 +79,21 @@ function SubredditPage(props) {
     if (loading) return <span>Loading...</span>
     if(error) return <span>Nothing To See Here</span>
 
-    const [subscribe, {data:subscribeData, error: subscribeError, loading: subscribeLoading}] = useMutation(SUBSCRIBE_TO_SUBREDDIT, {
-        variables: {
-            id: user.id,
-            subreddit_id: data.allSubreddits[0].id
-        },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }]
-    })
+    
 
-    const [unsubscribe, {data:unSubscribeData, error: unSubscribeError, loading: unSubscribeLoading}] = useMutation(UNSUBSCRIBE_TO_SUBREDDIT, {
-        variables: {
-            id: user.id,
-            subreddit_id: data.allSubreddits[0].id
-        },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }]
-    })
+    
+
     
     return (
         <>
         {
-            props.type === 'Home' && (
-                <section className="subreddit-top-bar">
-                    <section className="subreddit-top-bar-content">
-                        <section className="subreddit-top-bar-name">
-                            <h1>{data?.allSubreddits[0].name}</h1>
-                            <button onClick={ () => {
-                                let subscribed = user.subreddits.some((x) => {
-                                    return x.id === data?.allSubreddits[0].id
-                                })  
-
-                                subscribed ? unsubscribe() : subscribe()
-                            }
-                                
-                            }>{user.subreddits.some((x) => {
-                                return x.id === data?.allSubreddits[0].id
-                            }) ? 'Leave' : 'Join'}</button>
-                        </section>
-                        <span>
-                            r/{props.slug}
-                        </span>
-                    </section>
-                    
-                </section>
-            )
+            <SubredditTopBar 
+                type={props.type}
+                subreddit={data?.allSubreddits[0]}
+                slug={props.slug}
+                subscribe={() => {subscribe}}
+                unsubscribe={() => {unsubscribe}}
+            />
         }
         <div className="subreddit-content">
                 {/* HArd coding news id, will grab from gql later */}

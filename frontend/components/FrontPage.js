@@ -7,6 +7,7 @@ import { useUser } from './User';
 import { id_array  } from '../lib/allSubreddits'
 import {rawConvertDateFromNow} from '../lib/convertDateFromNow';
 import sortingPosts from '../lib/postSorting';
+import FilterBar from './FilterBar';
 
 
 // get front page posts, sorted by some algorithm (upvotes / time posted for now)
@@ -27,7 +28,7 @@ const GET_FRONT_PAGE_POSTS = gql`
             title
             user {
             id
-            name
+            username
             }
             createdAt
             votes {
@@ -78,6 +79,7 @@ function FrontPage(props) {
         
         <div className="frontpage-content">
             <section className="left-side">
+                <FilterBar />
                 {
                     posts && posts.map((x) => {
                         return <PostMain post={x} key={x.id} />
