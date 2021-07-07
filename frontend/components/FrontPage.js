@@ -9,6 +9,17 @@ import {rawConvertDateFromNow} from '../lib/convertDateFromNow';
 import sortingPosts from '../lib/postSorting';
 import FilterBar from './FilterBar';
 
+export function arrayUnique(arrayInput) {
+    var a = arrayInput.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
+} 
 
 // get front page posts, sorted by some algorithm (upvotes / time posted for now)
 const GET_FRONT_PAGE_POSTS = gql`
@@ -53,6 +64,21 @@ function FrontPage(props) {
         subreddits = user.subreddits.map((x) => {
             return x.id
         });
+
+        //get moderating and owning
+        let moderatingsubs = user.moderating.map((x) => {
+            return x.id;
+        })
+
+        let ownersubs = user.owner.map((x) => {
+            return x.id
+        });
+
+        subreddits = [...subreddits, ...moderatingsubs, ...ownersubs];
+        subreddits = arrayUnique(subreddits);
+
+        
+
     } else {
         subreddits = id_array;
     } 
