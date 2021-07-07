@@ -3,33 +3,38 @@
 .filter-bar {
     font-family: 'Roboto', sans-serif;
     max-width: 100%;
-    width: 640px;
+    width: 100%;
+    background: white;
+    border: 1px solid  #ccc;
+    height: 60px;
+    padding-left: 15px;
+        border-radius: 5px;
 
     h5 {
         text-align: left;
-        width: 100%;
         color: #1a1a1b;
         margin-top: -5px;
         font-size: 14px;
+        display: inline-block;
     }
     ul {
-        border: 1px solid  #ccc;
-        background: white;
-        height: 60px;
-        width: 100%;
-        border-radius: 5px;
+    
         padding: 0;
+        display: inline-block;
         margin: 0;
         list-style: none;
+        top: 50%;
+        transform: translateY(-50%);
         text-align: left;
-        margin-top: -15px;
+        position: relative;
         li {
             display: inline-block;
             position: relative;
-            top: 50%;
-            transform: translateY(-50%);
+
             margin-left:25px;
             width: auto;
+            
+            font-size: 14px;
             padding: 8px;
             vertical-align: top;
             border-radius: 25px;
@@ -42,14 +47,10 @@
         }
         .active {
             background-color: #f6f7f8;
-            border:1px solid #f6f7f8;
         }
         .time-selector-for-filter-bar {
             margin-left: 10px;
             margin-right: -10px;
-        }
-        &:hover {
-            border: 1px solid black;
         }
     }
 }

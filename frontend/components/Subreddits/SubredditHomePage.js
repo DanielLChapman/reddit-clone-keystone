@@ -172,9 +172,9 @@ function SubredditHomePage(props) {
                         <ul>
                             <li key={'owner'}> <Link href={`/user/${props?.subreddit?.owner?.username}`} >{props?.subreddit?.owner?.username || 'none'}</Link></li>
                             {
-                                props?.subreddit?.moderators?.map((x) => {
+                                props?.subreddit?.moderators?.map((x, i) => {
                                     if (x.username !== props?.subreddit?.owner?.username) {
-                                        return <li key={x.id}><Link href={`/user/${x.username}`}>{x.username}</Link></li>
+                                        return <li key={i}><Link href={`/user/${x.username}`}>{x.username}</Link></li>
                                     }
                                     
                                 })
