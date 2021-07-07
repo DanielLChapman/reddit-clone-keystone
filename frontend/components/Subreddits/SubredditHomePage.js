@@ -170,7 +170,7 @@ function SubredditHomePage(props) {
                     </header>
                     <section className="subreddit-about-box-description">
                         <ul>
-                            <li> <Link href={`/user/${props?.subreddit?.owner?.username}`} >{props?.subreddit?.owner?.username || 'none'}</Link></li>
+                            <li key={'owner'}> <Link href={`/user/${props?.subreddit?.owner?.username}`} >{props?.subreddit?.owner?.username || 'none'}</Link></li>
                             {
                                 props?.subreddit?.moderators?.map((x) => {
                                     return <li key={x.id}><Link href={`/user/${x.username}`}>{x.username}</Link></li>

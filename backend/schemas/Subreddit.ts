@@ -15,7 +15,12 @@ export const Subreddit = list({
       },
       defaultValue: 'Nothing Here Yet!'
     }),
-    
+    rules: text({
+      ui: {
+        displayMode: 'textarea',
+      },
+      defaultValue: 'Nothing Here Yet!'
+    }),
     description: text({
       ui: {
         displayMode: 'textarea',
@@ -34,7 +39,7 @@ export const Subreddit = list({
       },
     }),
     owner: relationship({
-      ref: 'User.moderator',
+      ref: 'User.owner',
       defaultValue: ({ context }) => ({
         connect: { id: context.session.itemId },
       }),

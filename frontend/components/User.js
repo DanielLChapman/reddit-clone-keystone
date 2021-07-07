@@ -8,8 +8,20 @@ export const CURRENT_USER_QUERY = gql`
         username
         email
         name
+        moderating {
+          id
+          slug
+          name
+        }
+        owner {
+          id
+          slug
+          name
+        }
         subreddits {
           id
+          slug
+          name
         }
         postvotes {
           post {
