@@ -26,6 +26,7 @@ export default function useForm(initial = {}) {
         }
       })
     } else {
+      
       setInputs({
         // copy existing state
         ...inputs,
@@ -34,6 +35,8 @@ export default function useForm(initial = {}) {
     }
     
   }
+
+
 
   function resetForm() {
     setInputs(initial);

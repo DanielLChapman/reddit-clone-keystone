@@ -7,7 +7,7 @@ import SubredditContent from './SubredditContent';
 import { CURRENT_USER_QUERY } from '../User';
 import SubredditTopBar from './SubredditTopBar';
 
-const GET_SUBREDDIT_INFO = gql`
+export const GET_SUBREDDIT_INFO = gql`
     query GET_SUBREDDIT_INFO($slug: String!) {
         allSubreddits(where: {
             slug: $slug
@@ -15,6 +15,7 @@ const GET_SUBREDDIT_INFO = gql`
             id
             name
             title
+            slug
             sidebar
             description
             status
@@ -80,14 +81,10 @@ function SubredditPage(props) {
     if(error) return <span>Nothing To See Here</span>
 
     
-
-    
-
-    
     return (
         <>
         {
-            <SubredditTopBar 
+           props.type && props.type === 'Home' && <SubredditTopBar 
                 type={props.type}
                 subreddit={data?.allSubreddits[0]}
                 slug={props.slug}
@@ -96,7 +93,6 @@ function SubredditPage(props) {
             />
         }
         <div className="subreddit-content">
-                {/* HArd coding news id, will grab from gql later */}
                 <SubredditContent slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
                     
         </div>

@@ -4,11 +4,13 @@ import React from 'react';
 import useForm from '../lib/useForm';
 import Router from 'next/router';
 import Form from './styles/SubredditForm';
+import { useState } from 'react';
 
 //get subreddit info
 
 //able to change owner needs to be added
-const EDITSUBREDDIT_MUTATION = gql`
+/*
+const EDIT_SUBREDDIT_MUTATION = gql`
     mutation CREATE_SUBREDDIT_MUTATION(
         $name: String!,
         $slug: String!,
@@ -18,15 +20,17 @@ const EDITSUBREDDIT_MUTATION = gql`
     ) {
         
     }
-`;
+`;*/
 
 function SubredditEdit(props) {
+    const [isChecked, setIsChecked] = useState(props.subreddit.status === 'PUBLIC' ? true : false);
+
     const { inputs, handleChange, resetForm } = useForm({
-        name: '',//shouldn't be able to be changed so set as data from query
-        slug: '',//shouldn't be able to be changed so set as data from query
-        description: '',
-        sidebar: '',
-        title: '',
+        name: props.subreddit.name,//shouldn't be able to be changed so set as data from query
+        slug: props.subreddit.slug,//shouldn't be able to be changed so set as data from query
+        description: props.subreddit.description,
+        sidebar: props.subreddit.sidebar,
+        title: props.subreddit.title,
         errors: {
             name: 'false'
         }
@@ -34,10 +38,10 @@ function SubredditEdit(props) {
 
       //const [createSubreddit, {loading, data, error}] = useMutation(CREATE_SUBREDDIT_MUTATION);
 
-
     
     return (
         <div>
+
             <Form
             onSubmit={async (e) => {
                 e.preventDefault();
@@ -90,6 +94,14 @@ function SubredditEdit(props) {
                             value={inputs.sidebar}
                             onChange={handleChange}
                         />
+                    </label>
+                    <label htmlFor="status" className="form-checkbox">
+                        Status: {isChecked ? 'Public' : 'Private'}<br />
+                        <input
+                            name="status"
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => {setIsChecked(!isChecked) }} />
                     </label>
                     <button type="submit">Edit {/* subreddit name */}</button>
                     

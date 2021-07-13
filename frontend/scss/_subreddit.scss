@@ -3,14 +3,25 @@
     max-width: 1100px;
     margin: 0 auto;
     position: relative;
-    display: grid;
+    /*display: grid;
     grid-template-columns: 1.3fr 0.7fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px 25px;
     grid-template-areas:
     ". ."
     ". ."
-    ". .";
+    ". .";*/
+    display: flex;
+    height:100%;
+    .subreddit-left, .left-side {
+        width: 69%;
+        margin-right:1%;
+    }
+    .subreddit-right, .right-side {
+        width: 29%;
+        left:1%;
+        position: relative;
+    }
     .subreddit-left, .subreddit-right, .left-side, .right-side {
         vertical-align: top;
     }

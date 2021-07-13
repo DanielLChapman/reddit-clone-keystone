@@ -6,7 +6,6 @@ import { useUser } from '../../../components/User';
 function SubmitPage(props) {
     const user = useUser();
    //need to be a subscriber of subreddit 
-   console.log(user);
    let boolPass = false;
     if (user) {
         boolPass = user.subreddits.some((x) => {
