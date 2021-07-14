@@ -1,5 +1,14 @@
 import { rawConvertDateFromNow } from "./convertDateFromNow";
 
+export function totalPostsVotes(post) {
+    let count = 1; 
+    post.votes.forEach((x) => {
+        x.vflag === 'Upvote' ? count += 1 : count -= 1;
+    });
+
+    return count;
+}
+
 export default function sortingPosts(posts, sortType) {
     let unsortedPosts = posts;
     switch(sortType) {
