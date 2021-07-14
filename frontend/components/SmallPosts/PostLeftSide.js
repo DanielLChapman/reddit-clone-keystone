@@ -4,6 +4,7 @@ import getPostVoteId from '../../lib/getPostId';
 import { gql, useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
+import { totalPostsVotes } from '../../lib/postSorting';
 
 
 export const CREATE_VOTE = gql`
@@ -45,7 +46,7 @@ export const UPDATE_VOTE = gql`
 function PostLeftSide(props) {
     const user = useUser();
     const [post, setPost] = useState({
-        total: props?.post?.total
+        total: props?.post?.total || totalPostsVotes(props.post)
     });
 
     let upvoted = user?.postvotes.some((x) => {

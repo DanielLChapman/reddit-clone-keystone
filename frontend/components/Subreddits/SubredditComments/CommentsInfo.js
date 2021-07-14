@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import convertDateFromNow from '../../../lib/convertDateFromNow';
 import { totalPostsVotes } from '../../../lib/postSorting';
+import PostLeftSide from '../../SmallPosts/PostLeftSide';
 import { CURRENT_USER_QUERY } from '../../User';
 
 
@@ -49,154 +50,13 @@ const UPDATE_VOTE = gql`
 
 
 function CommentsInfo(props) {
-    const [post, setPost] = useState({
-        total: totalPostsVotes(props.post)
-    });
 
-    let upvoted = props.user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
-            if (x.vflag === 'Upvote') {
-                return true
-            }
-        } 
-    })
-    let downvoted = props.user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
-            if (x.vflag === 'Downvote') {
-                return true
-            }
-        } 
-    });
 
-    const getPostVoteId = () => {
-        let id = props.user?.postvotes.find((x) => {
-            if (x.post.id === props?.post.id) {
-                return x.id;
-            }
-        });
-
-        return id.id;
-    }
-
-    const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [deletePostVote, { data: data_delete, error: error_delete, loading: loading_delete }] = useMutation(DELETE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [updatePostVote, { data: data_update, error: error_update, loading: loading_update}] = useMutation(UPDATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
 
     return (
         <section className="reddit-post">
          <section className="reddit-post-left">
-          {/*upvote, downvote and current score*/}
-          <FaLongArrowAltUp className={`upvote-arrow ${upvoted? 'upvote-arrow-colored' : ''}`}   />
-          <div className="upvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
-                 if (user) {
-                     if (!upvoted) {
-                         //if its downvoted
-                         if (downvoted) {
-                             //update 
-                             const res = await updatePostVote({
-                                 variables: {
-                                     id: getPostVoteId(),
-                                     vflag: 'Upvote'
-                                 }
-                             });
-                             setPost({
-                                 total: post.total + 2
-                             })
-                             
-                             
-          
-                         } else {
-                             const res = await createPostVote({
-                                 variables: {
-                                     post_id: props.post.id,
-                                     vflag: 'Upvote'
-                                 }
-                             });
-                             setPost({
-                                 total: post.total + 1
-                             })
-     
-                         }
-                         
-                     } else {    
-                         let id = getPostVoteId();
-               
-                         const res = await deletePostVote({
-                             variables: {
-                                 id: id
-                             }
-                         });
- 
-                         setPost({
-                             total: post.total - 1
-                         })
-                     }
- 
-                 }
-              }
-              
-          }></div>
-          <br />
-          <span >{post.total}</span>
-          <br />
-          <FaLongArrowAltDown className={`upvote-arrow ${downvoted ? 'downvote-arrow-colored' : ''}`} />
-          <div className="downvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
-                 if (user) {
-                     if (!downvoted) {
-                         //if its downvoted
-                         if (upvoted) {
-                             const res = await updatePostVote({
-                                 variables: {
-                                     id: getPostVoteId(),
-                                     vflag: 'Downvote'
-                                 }
-                             });        
-                             setPost({
-                                 total: post.total - 2
-                             })
-                         } else {
-                             const res = await createPostVote({
-                                 variables: {
-                                     post_id: props.post.id,
-                                     vflag: 'Downvote'
-                                 }
-                             });
-                             setPost({
-                                 total:post.total - 1
-                             })
-     
-                       
-                         }
-                         
-                     } else {    
-                         let id = getPostVoteId();
-     
-                         const res = await deletePostVote({
-                             variables: {
-                                 id: id
-                             }
-                         });
- 
-                         setPost({
-                             total: post.total + 1
-                         })
-       
- 
-                     }
- 
-                 }
-              }
-              
-          }></div>
-          
+            <PostLeftSide post={props.post} />
          </section>
          <section className="reddit-post-right">
              <section className="reddit-post-right-top">
