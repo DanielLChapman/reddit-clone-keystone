@@ -6,6 +6,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_VOTE, DELETE_VOTE, UPDATE_VOTE } from '../SmallPosts/PostMain';
 import { CURRENT_USER_QUERY, useUser } from '../User';
 import SubredditTopBar from './SubredditComments/CommentsTopBar';
+import CommentsPage from './SubredditComments/CommentsPage';
 
 const GET_POST_INFO = gql`
     query GET_POST_INFO($id: ID!) {
@@ -42,29 +43,12 @@ function SubredditCommentsContainer(props) {
     if (error) return <span>Error...</span>
     if (loading) return <span>Loading...</span>
 
-    console.log(data);
-
-    
-
-    
-/*
-    const [createPostVote, { data: data_create, error: error_create, loading: loading_create }] = useMutation(CREATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [deletePostVote, { data: data_delete, error: error_delete, loading: loading_delete }] = useMutation(DELETE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [updatePostVote, { data: data_update, error: error_update, loading: loading_update}] = useMutation(UPDATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-*/
-
     return (
         <div className="comment-page">
+            <SubredditTopBar user={user} post={data.Post} subreddit={props.subreddit}/>
             <section className="comment-container">
-                <SubredditTopBar user={user} post={data.Post} subreddit={props.subreddit}/>
+                
+                <CommentsPage user={user} post={data.Post} subreddit={props.subreddit} />
             </section>
         </div>
     );

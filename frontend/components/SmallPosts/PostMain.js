@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
+
 import Link from 'next/link';
 import convertDateFromNow from '../../lib/convertDateFromNow'; 
 import MediaPost from './MediaPost';
@@ -9,6 +9,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 import { useUser } from '../User';
+import PostLeftSide from './PostLeftSide';
 
 
 function checkClasses(classes) {
@@ -16,7 +17,7 @@ function checkClasses(classes) {
     return substrings.includes(classes);
 }
 
-const CREATE_VOTE = gql`
+export const CREATE_VOTE = gql`
     mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
         createPostVote(data: {
             post: {
@@ -34,7 +35,7 @@ const CREATE_VOTE = gql`
     }
 `;
 
-const DELETE_VOTE = gql`
+export const DELETE_VOTE = gql`
     mutation DELETE_VOTE($id: ID!) {
         deletePostVote(id: $id) {
             id
@@ -42,7 +43,7 @@ const DELETE_VOTE = gql`
     }
 `;
 
-const UPDATE_VOTE = gql`
+export const UPDATE_VOTE = gql`
     mutation UPDATE_VOTE($id: ID!, $vflag: String!) {
         updatePostVote(id: $id, data: {
             vflag: $vflag
@@ -53,157 +54,14 @@ const UPDATE_VOTE = gql`
 `;
 
 function PostMain(props) {
-    const user = useUser();
-    const [post, setPost] = useState({
-        total: props?.post?.total
-    });
-    let postVoteId;
-    let upvoted = user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
-            if (x.vflag === 'Upvote') {
-                return true
-            }
-        } 
-    })
-    let downvoted = user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
-            if (x.vflag === 'Downvote') {
-                return true
-            }
-        } 
-    })
 
-    const getPostVoteId = () => {
-        let id = user?.postvotes.find((x) => {
-            if (x.post.id === props?.post.id) {
-                return x.id;
-            }
-        });
-
-        return id.id;
-    }
-
-    const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [deletePostVote, { data: data_delete, error: error_delete, loading: loading_delete }] = useMutation(DELETE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
-
-    const [updatePostVote, { data: data_update, error: error_update, loading: loading_update}] = useMutation(UPDATE_VOTE,{
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    });
 
     return (
         <section className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
            window.location.href=`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`
         } /**/}}>
         <section className="reddit-post-left">
-         {/*upvote, downvote and current score*/}
-         <FaLongArrowAltUp className={`upvote-arrow ${upvoted? 'upvote-arrow-colored' : ''}`}   />
-         <div className="upvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
-                if (user) {
-                    if (!upvoted) {
-                        //if its downvoted
-                        if (downvoted) {
-                            //update 
-                            const res = await updatePostVote({
-                                variables: {
-                                    id: getPostVoteId(),
-                                    vflag: 'Upvote'
-                                }
-                            });
-                            setPost({
-                                total: post.total + 2
-                            })
-                            
-                            
-         
-                        } else {
-                            const res = await createPostVote({
-                                variables: {
-                                    post_id: props.post.id,
-                                    vflag: 'Upvote'
-                                }
-                            });
-                            setPost({
-                                total: post.total + 1
-                            })
-    
-                        }
-                        
-                    } else {    
-                        let id = getPostVoteId();
-              
-                        const res = await deletePostVote({
-                            variables: {
-                                id: id
-                            }
-                        });
-
-                        setPost({
-                            total: post.total - 1
-                        })
-                    }
-
-                }
-             }
-             
-         }></div>
-         <br />
-         <span >{post.total}</span>
-         <br />
-         <FaLongArrowAltDown className={`upvote-arrow ${downvoted ? 'downvote-arrow-colored' : ''}`} />
-         <div className="downvote-arrow-box" aria-disabled={loading || loading_delete} onClick={async () => {
-                if (user) {
-                    if (!downvoted) {
-                        //if its downvoted
-                        if (upvoted) {
-                            const res = await updatePostVote({
-                                variables: {
-                                    id: getPostVoteId(),
-                                    vflag: 'Downvote'
-                                }
-                            });        
-                            setPost({
-                                total: post.total - 2
-                            })
-                        } else {
-                            const res = await createPostVote({
-                                variables: {
-                                    post_id: props.post.id,
-                                    vflag: 'Downvote'
-                                }
-                            });
-                            setPost({
-                                total:post.total - 1
-                            })
-    
-                      
-                        }
-                        
-                    } else {    
-                        let id = getPostVoteId();
-    
-                        const res = await deletePostVote({
-                            variables: {
-                                id: id
-                            }
-                        });
-
-                        setPost({
-                            total: post.total + 1
-                        })
-      
-
-                    }
-
-                }
-             }
-             
-         }></div>
-         
+            <PostLeftSide post={props.post} />
         </section>
         <section className="reddit-post-right">
             <section className="reddit-post-right-top">
