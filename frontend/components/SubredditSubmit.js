@@ -30,6 +30,7 @@ const CREATE_SUBREDDIT_MUTATION = gql`
     }
 `;
 
+
 function SubredditSubmitForm(props) {
     const { inputs, handleChange, resetForm } = useForm({
         name: '',

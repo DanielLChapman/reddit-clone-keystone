@@ -4,10 +4,12 @@ import Link from 'next/link';
 import React from 'react';
 import { useState } from 'react';
 import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
+import ReactMarkdown from 'react-markdown';
 import convertDateFromNow from '../../../lib/convertDateFromNow';
 import { totalPostsVotes } from '../../../lib/postSorting';
 import PostLeftSide from '../../SmallPosts/PostLeftSide';
 import { CURRENT_USER_QUERY } from '../../User';
+import CommentsMedia from './CommentsMedia';
 
 
 //These give errors on importing from postmain, but not when copy+pasted. Not sure why
@@ -60,10 +62,6 @@ function CommentsInfo(props) {
          </section>
          <section className="reddit-post-right">
              <section className="reddit-post-right-top">
-                 <Link href={`/r/${props?.post?.subreddit?.slug}`}>
-                     <a><b className="subreddit-link">r/{props?.post?.subreddit?.name}</b></a>
-                 </Link>
-                 <span>&nbsp;•&nbsp;</span>
                  <span>Posted by&nbsp;
                      <Link href={`/user/${props?.post?.user?.name}`}>
                      <a  className="subreddit-link">u/{props?.post?.user?.name}</a>
@@ -73,9 +71,12 @@ function CommentsInfo(props) {
                  <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
              </section>
              <section className="reddit-post-right-bottom">
-                 {
-                     /*props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />*/
-                  }
+                <h6>{props.post.title}</h6>
+                <p>
+                    {
+                        props.post.link === '' ? <ReactMarkdown>{props.post.content }</ReactMarkdown>: <CommentsMedia post={props.post} user={props.user} />
+                    }
+                </p>
              </section>
              <section className="reddit-post-right-bottom-footer">
                  <a className="subreddit-link" href={`/r/${props?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}> Comments</a>

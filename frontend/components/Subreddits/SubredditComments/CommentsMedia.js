@@ -1,19 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { checkURL } from '../../SmallPosts/MediaPost';
 
 
-export function checkURL(url) {
-    let urlMatch =  (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
-    let urlIncludes = false;
-    const substrings = ['jpg', 'jpeg', 'gif', 'png'];
-    if (substrings.some(v => url.includes(v))) {
-        urlIncludes = true;
-    }
-    return urlMatch || urlIncludes;
-}
 
-function MediaPost(props) {
-
+function CommentsMedia(props) {
     const getMediaCode = (inputURL) => {
 
         let isImage = checkURL(inputURL);
@@ -35,20 +25,12 @@ function MediaPost(props) {
         }
     }
 
+
     return (
-        <div>
-            <h4>{props?.post?.title}</h4>
-            
-            <section className="media-output-small-post">
-                {getMediaCode(props?.post?.link)}
-            </section>
-            
-        </div>
+        <section className="comment-page-media">
+            {getMediaCode(props?.post?.link)}
+        </section>
     );
 }
 
-MediaPost.propTypes = {
-    post: PropTypes.object.isRequired,
-}
-
-export default MediaPost;
+export default CommentsMedia;

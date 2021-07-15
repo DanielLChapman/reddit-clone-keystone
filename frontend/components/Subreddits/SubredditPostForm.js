@@ -22,6 +22,11 @@ const SUBREDDIT_TEXT_POST_MUTATION = gql`
     }
 `;
 
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return (str.length > 300) ? str.substr(0, 300-1) + '&hellip;' : str;
+}
+
 function SubredditPostForm(props) {
     const { inputs, handleChange, resetForm } = useForm({
         content: '',
@@ -40,15 +45,13 @@ function SubredditPostForm(props) {
 
             const res = await createVariedPost({
                 variables: {
-                    title: inputs.title,
+                    title: sanitizeString(inputs.title),
                     content: inputs.content,
                     subreddit_id: props.id,
                     link: '',
                     type: 'text'
                 }
             });
-
-            console.log(res);
 
             /*
 

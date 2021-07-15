@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import React from 'react';
 import useForm from '../../lib/useForm';
 import Form from '../styles/SubredditSubmitForm';
+//refetch queries
+//import { id_array  } from '../../lib/allSubreddits';
 
 
 const SUBREDDIT_MEDIA_POST_MUTATION = gql`
@@ -21,6 +23,12 @@ const SUBREDDIT_MEDIA_POST_MUTATION = gql`
         }
     }
 `;
+
+
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return (str.length > 300) ? str.substr(0, 300-1) + '&hellip;' : str;
+}
 
 function SubredditMediaForm(props) {
     const { inputs, handleChange, resetForm } = useForm({
@@ -48,7 +56,7 @@ function SubredditMediaForm(props) {
             }
             const res = await createVariedPost({
                 variables: {
-                    title: inputs.title,
+                    title: sanitizeString(inputs.title),
                     subreddit_id: props.id,
                     content: '',
                     link: inputs.link,

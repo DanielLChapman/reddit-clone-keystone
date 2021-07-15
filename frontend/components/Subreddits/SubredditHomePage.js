@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client';
 import sortingPosts from '../../lib/postSorting';
 import PostMain from '../SmallPosts/PostMain';
 import FilterBar from '../FilterBar';
+import ReactMarkdown from 'react-markdown';
 
 export function createdAtConvert(dateString) {
     let d = new Date(dateString).toDateString();
@@ -139,7 +140,7 @@ function SubredditHomePage(props) {
                         About Community
                     </header>
                     <section className="subreddit-about-box-description">
-                        {props?.subreddit?.description}
+                        <ReactMarkdown>{props?.subreddit?.description}</ReactMarkdown>
                         <br />
                         
                     </section>
@@ -158,7 +159,7 @@ function SubredditHomePage(props) {
                         Rules
                     </header>
                     <section className="subreddit-about-box-description">
-                        {props?.subreddit?.sidebar}
+                        <ReactMarkdown>{props?.subreddit?.sidebar}</ReactMarkdown>
                         <br />
                         
                     </section>
