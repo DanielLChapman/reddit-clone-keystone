@@ -8,6 +8,8 @@ import { User } from './schemas/User';
 import { Role } from './schemas/Role';
 import { Subreddit} from './schemas/Subreddit';
 import { Post  } from './schemas/Post';
+import { Comment} from './schemas/Comment';
+import { CommentVote  } from './schemas/CommentVote';
 import { PostVote } from './schemas/PostVote';
 import { sendPasswordResetEmail } from './lib/mail';
 import { permissionsList } from './schemas/fields';
@@ -56,6 +58,8 @@ export default withAuth(config({
         Post,
         Subreddit,
         PostVote,
+        Comment,
+        CommentVote,
     }),
     extendGraphqlSchema,
     ui: {

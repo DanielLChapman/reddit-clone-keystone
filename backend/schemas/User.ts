@@ -51,5 +51,13 @@ export const User = list({
             defaultValue: false,
             label: 'User has signed in before',
         }),
+        comments: relationship({
+            ref: 'Comment.user',
+            many: true,
+        }),
+        commentvotes: relationship({
+            ref: 'CommentVote.user',
+            many: true,
+        }),
     },
 });
