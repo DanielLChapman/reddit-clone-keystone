@@ -1,4 +1,4 @@
-export default convertCommentCount = (comments) => {
+export default function convertCommentCount(comments) {
     if (comments < 1000) {
         return comments;
     }

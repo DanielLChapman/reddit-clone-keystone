@@ -10,6 +10,7 @@ import { useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 import { useUser } from '../User';
 import PostLeftSide from './PostLeftSide';
+import convertCommentCount from '../../lib/convertCommentCount';
 
 
 function checkClasses(classes) {
@@ -82,8 +83,8 @@ function PostMain(props) {
                     props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />
                  }
             </section>
-            <section className="reddit-post-right-bottom-footer">
-                <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}> Comments</a>
+            <section className="reddit-post-right-bottom-footer"> 
+                <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
             </section>
 
         </section>

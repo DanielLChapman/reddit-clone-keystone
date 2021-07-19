@@ -61,6 +61,9 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
                     id
                     slug
                 }
+                comments {
+                    id
+                }
             
         }
     }
