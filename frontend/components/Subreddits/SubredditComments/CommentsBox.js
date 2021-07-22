@@ -75,7 +75,7 @@ function CommentsBox(props) {
             res = await createComment({
                 variables: {
                     content: sanitizeString(inputs.content),
-                    post_id: props.post.id,
+                    post_id: props.postid,
                     parent: props.parentid || '',
                 }
             });
@@ -83,7 +83,7 @@ function CommentsBox(props) {
             res = await createComment({
                 variables: {
                     content: sanitizeString(inputs.content),
-                    post_id: props.post.id,
+                    post_id: props.postid,
                 }
             });
 

@@ -76,7 +76,6 @@ function CommentsInfo(props) {
     if (error) return <span>Err...</span>
     if (loading) return <div>Loading...</div>
 
-    console.log(data);
     return (
         <section className="reddit-post">
          <section className="reddit-post-left">
