@@ -5,13 +5,9 @@ function CommentsDisplay(props) {
     const tree = new Tree;
     let currentNode = null;
 
-    console.log(tree);
-
-    console.log(tree.contains(550, tree.traverseBF));
-
     tree.addNew(
         'jkdsfnsjkdfns nsdfk nsdfjk s f',
-        550,
+        1,
         3423432,
         {}
     );
