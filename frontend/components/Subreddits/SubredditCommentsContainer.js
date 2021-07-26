@@ -26,6 +26,18 @@ const GET_POST_INFO = gql`
         post_slug
         link
         type
+        comments {
+            id
+            parent {
+                id
+            }
+            content
+            createdAt
+            user {
+                id
+                name
+            }
+        }
 
     }
     }
