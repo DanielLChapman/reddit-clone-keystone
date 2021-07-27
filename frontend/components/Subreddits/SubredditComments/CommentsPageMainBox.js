@@ -10,7 +10,7 @@ import convertDateFromNow from '../../../lib/convertDateFromNow';
 import { totalPostsVotes } from '../../../lib/postSorting';
 import PostLeftSide from '../../SmallPosts/PostLeftSide';
 import { CURRENT_USER_QUERY } from '../../User';
-import CommentsMedia from './CommentsMedia';
+import CommentsMedia from './CommentsPageMedia';
 
 
 //These give errors on importing from postmain, but not when copy+pasted. Not sure why

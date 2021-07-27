@@ -2,7 +2,7 @@ import React from 'react';
 import { useUser } from '../../User';
 import CommentsContainer from './CommentsContainer';
 import CommentsDisplay from './CommentsDisplay';
-import CommentsInfo from './CommentsInfo';
+import CommentsInfo from './CommentsPageMainBox';
 
 function CommentsPage(props) {
     return (

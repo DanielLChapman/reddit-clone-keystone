@@ -5,8 +5,8 @@ import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_VOTE, DELETE_VOTE, UPDATE_VOTE } from '../SmallPosts/PostMain';
 import { CURRENT_USER_QUERY, useUser } from '../User';
-import SubredditTopBar from './SubredditComments/CommentsTopBar';
 import CommentsPage from './SubredditComments/CommentsPage';
+import SubredditTopBar from './SubredditComments/CommentsPageTopBar';
 
 const GET_POST_INFO = gql`
     query GET_POST_INFO($id: ID!) {

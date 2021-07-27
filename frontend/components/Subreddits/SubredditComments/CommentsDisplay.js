@@ -1,5 +1,6 @@
 import React from 'react';
 import Tree from '../../../lib/commentTree';
+import IndividualComments from './IndividualComments';
 
 function CommentsDisplay(props) {
     const tree = new Tree;
@@ -9,7 +10,6 @@ function CommentsDisplay(props) {
     if (props?.post?.comments.length === 0) return <div>Nothing yet...</div>
     //convert comments to tree
     props.post.comments.forEach((x) => {
-        console.log(x);
         tree.addNew(
             x.content,
             x.parent?.id || 1,
@@ -17,11 +17,16 @@ function CommentsDisplay(props) {
             x
         )
     })
+    let root = tree.root;
+    let queue = root.descendents;
+    //need to sort by votes on comment
 
-    console.log(JSON.stringify(tree));
+    console.log(queue);
     return (
-        <div>
-            hi
+        <div className="comment-tree-beginning">
+            {queue.map((x, i) => {
+                return <IndividualComments comment={x} count={1} />
+            })}
         </div>
     );
 }

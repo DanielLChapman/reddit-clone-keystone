@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUser } from '../../User';
-import CommentsBox from './CommentsBox';
+import CommentsBox from './CommentsSubmitBox';
 
 function CommentsContainer(props) {
     const user = useUser();
