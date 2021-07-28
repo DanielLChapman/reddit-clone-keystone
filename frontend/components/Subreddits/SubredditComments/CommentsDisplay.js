@@ -25,7 +25,7 @@ function CommentsDisplay(props) {
     return (
         <div className="comment-tree-beginning">
             {queue.map((x, i) => {
-                return <IndividualComments comment={x} count={1} />
+                return <IndividualComments comment={x} count={1} post={props.post} key={x.id} />
             })}
         </div>
     );

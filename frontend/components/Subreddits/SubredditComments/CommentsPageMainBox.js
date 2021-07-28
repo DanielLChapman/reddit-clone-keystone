@@ -84,8 +84,8 @@ function CommentsInfo(props) {
          <section className="reddit-post-right">
              <section className="reddit-post-right-top">
                  <span>Posted by&nbsp;
-                     <Link href={`/user/${props?.post?.user?.name}`}>
-                     <a  className="subreddit-link">u/{props?.post?.user?.name}</a>
+                     <Link href={`/user/${props?.post?.user?.username}`}>
+                     <a  className="subreddit-link">u/{props?.post?.user?.username}</a>
                  </Link>
                  </span>
                  &nbsp;

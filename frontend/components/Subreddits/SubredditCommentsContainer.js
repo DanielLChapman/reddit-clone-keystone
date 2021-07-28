@@ -18,6 +18,7 @@ const GET_POST_INFO = gql`
         user {
             id
             name
+            username
         }
         createdAt
         votes {
@@ -35,7 +36,7 @@ const GET_POST_INFO = gql`
             createdAt
             user {
                 id
-                name
+                username
             }
         }
 

@@ -217,4 +217,17 @@
             }
         }
     }
+    .comment-tree-beginning {
+        width: calc(100%);
+        position: relative;
+        height: auto;
+        overflow-x: hidden;
+        border:1px solid black;
+        .comments-indent {
+            border-left: 2px solid grey;
+            height: auto;
+            min-height: 75px;
+            width: auto;
+        }
+    }
 } 
