@@ -222,12 +222,93 @@
         position: relative;
         height: auto;
         overflow-x: hidden;
-        border:1px solid black;
+        .comments-threadline-container {
+            position: relative;
+            overflow: hidden;
+        }
+
         .comments-indent {
-            border-left: 2px solid grey;
             height: auto;
             min-height: 75px;
             width: auto;
+            margin-left: 15px;
+            padding:20px;
+            padding-left: 20px;
+        }
+        
+        .threadline {
+            position: absolute;
+            height: 100%;
+            border: 1px solid black;
+            width: 2px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .comments-indent-1, .comments-indent-3 {
+            .threadline {
+                border: 1px solid lightgray;
+            }
+        }
+        .comments-indent-2, .comments-indent-4 {
+            .threadline {
+                border: 1px solid black;
+            }
+        }
+        .threadline:hover {
+            border-color: orange;
+        }
+        .threadline:hover ~ .comments-indent {
+            background: rgba(33, 33, 33, .05)
+        }
+        .comment-top {
+            font-size: 11px;
+            a {
+                font-weight: 700;
+            }
+        }
+        .comment-content {
+            p {
+                padding: 15px 0px;
+                font-size: 14px;
+            }
+        }
+        .comment-bottom {
+            font-size: 12px;
+            padding-bottom: 20px;
+            .total {
+                padding-left: 8px;
+                padding-right:8px;
+            }
+            .upvote-arrow {
+                top: 3px;
+                font-size: 16px;
+                position: relative;
+                cursor: pointer;
+            }
+            .downvote-arrow {
+                top:3px;
+                font-size: 16px;
+                position: relative;
+                cursor: pointer;
+            }
+            .downvoted-arrow {
+                color: red;
+            }
+            .upvoted-arrow {
+                color: orange;
+            }
         }
     }
+
+    .comment-sorting {
+        width: calc(100% - 38px);
+        margin-left: 38px;
+        font-size: 12px;
+        margin-top: -5px;
+        border-bottom: 1px solid grey;
+        font-weight: 700;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+
 } 

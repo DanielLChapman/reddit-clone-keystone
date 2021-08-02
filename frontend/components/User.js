@@ -31,6 +31,13 @@ export const CURRENT_USER_QUERY = gql`
           id
           vflag
         }
+        commentvotes {
+          comment {
+            id
+          }
+          id
+          vflag
+        }
     }
   }
   }

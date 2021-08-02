@@ -1,6 +1,47 @@
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 import React from 'react';
 import Tree from '../../../lib/commentTree';
+import { CURRENT_USER_QUERY } from '../../User';
 import IndividualComments from './IndividualComments';
+
+
+const CREATE_VOTE = gql`
+    mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
+        createCommentVote(data: {
+            comment: {
+                connect: {
+                    id: $post_id,
+                }
+            },
+            vflag: $vflag
+        }) {
+            id
+            comment {
+                id
+            }
+        }
+    }
+`;
+
+const DELETE_VOTE = gql`
+    mutation DELETE_VOTE($id: ID!) {
+        deleteCommentVote(id: $id) {
+            id
+        }
+    }
+`;
+
+const UPDATE_VOTE = gql`
+    mutation UPDATE_VOTE($id: ID!, $vflag: String!) {
+        updateCommentVote(id: $id, data: {
+            vflag: $vflag
+        }) {
+            id
+        }
+    }
+`;
+
 
 function CommentsDisplay(props) {
     const tree = new Tree;
@@ -21,13 +62,30 @@ function CommentsDisplay(props) {
     let queue = root.descendents;
     //need to sort by votes on comment
 
-    console.log(queue);
+    const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
+
+    const [deletePostVote, { data: data_delete, error: error_delete, loading: loading_delete }] = useMutation(DELETE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
+
+    const [updatePostVote, { data: data_update, error: error_update, loading: loading_update}] = useMutation(UPDATE_VOTE,{
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
+
     return (
+        <>
+        <div className="comment-sorting">
+            <span>Sort By Best</span>
+        </div>
+
         <div className="comment-tree-beginning">
             {queue.map((x, i) => {
-                return <IndividualComments comment={x} count={1} post={props.post} key={x.id} />
+                return <IndividualComments comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
             })}
         </div>
+        </>
     );
 }
 

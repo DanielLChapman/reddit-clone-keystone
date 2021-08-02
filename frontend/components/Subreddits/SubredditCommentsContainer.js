@@ -38,6 +38,9 @@ const GET_POST_INFO = gql`
                 id
                 username
             }
+            votes {
+                vflag
+            }
         }
 
     }
