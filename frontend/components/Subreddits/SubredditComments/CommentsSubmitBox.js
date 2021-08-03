@@ -65,14 +65,17 @@ function CommentsBox(props) {
 
       const [createComment, {data, error, loading}] = useMutation(SUBMIT_POST_WITHOUT_PARENT_MUTATION);
     
+      const [createCommentWithParent, {data:parentdata, error: parenterror, loading: parentloading}] = useMutation(SUBMIT_POST_WITH_PARENT_MUTATION);
+    
     return (
         <div>
     <form onSubmit={async (e) => {
         e.preventDefault();
 
         let res;
+
         if (props.parentid) {
-            res = await createComment({
+            res = await createCommentWithParent({
                 variables: {
                     content: sanitizeString(inputs.content),
                     post_id: props.postid,
@@ -89,9 +92,7 @@ function CommentsBox(props) {
 
             
         }
-        
-        console.log(res);
-
+    
         //add to UI element up one level at top through some prop function
     }}>
         <fieldset>
@@ -106,7 +107,7 @@ function CommentsBox(props) {
                 </label>
                 <br />
                 {/* Markdown/formatting help */}
-                <button type="submit">Submit</button>
+                <button type="submit" className="comment-box-submit">Submit</button>
                 
             </fieldset>
 

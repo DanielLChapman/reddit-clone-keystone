@@ -7,6 +7,7 @@ import { CURRENT_USER_QUERY, useUser } from '../../User';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { totalPostsVotes } from '../../../lib/postSorting';
+import CommentsBox from './CommentsSubmitBox';
 
 
 
@@ -15,6 +16,8 @@ function IndividualComments(props) {
     let [total, setTotal] = useState({
         total: totalPostsVotes(props.comment.commentObject)
     });
+
+    let [reply, openReply] = useState(false);
 
     let upvoted = user?.commentvotes?.some((x) => {
         if (x.comment.id === props?.comment?.id) {
@@ -170,12 +173,30 @@ function IndividualComments(props) {
                     
                 }  />
                 </section>
-                {/* Reply */} {/* Share */}
+                <span onClick={() => {
+                    openReply(!reply)
+                }}>Reply</span> {/* Share */}
                 </section>
+                {
+                    reply && (
+                        
+                        <div className="comments-threadline-container">
+
+                            <div className="threadline">
+                                
+                            </div>
+                            <section className={`comments-indent comment-indent-reply comments-indent-${props.count}` }>
+                                <CommentsBox postid={props.post.id} parentid={props.comment.id} />
+                            </section>
+                        </div>
+                        
+                    )
+                }
+                
                 <section className="comment-children">
                     {props.comment.descendents.map((x, i) => {
                         //need to sort descenents first
-                        return <IndividualComments comment={x} count={props.count + 1} key={x.id}
+                        return <IndividualComments comment={x} post={props.post} count={props.count + 1} key={x.id}
                         createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                          />
                     })}
