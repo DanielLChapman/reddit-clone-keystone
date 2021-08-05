@@ -3,6 +3,7 @@ import useForm from '../../../lib/useForm';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { CURRENT_USER_QUERY } from '../../User';
 
 const SUBMIT_POST_WITH_PARENT_MUTATION = gql`
     mutation SUBMIT_POST_WITH_PARENT_MUTATION(
@@ -35,7 +36,9 @@ const SUBMIT_POST_WITH_PARENT_MUTATION = gql`
                 id
                 username
             }
-
+            votes {
+                vflag
+            }
         }
     }
 `;
@@ -65,6 +68,25 @@ const SUBMIT_POST_WITHOUT_PARENT_MUTATION = gql`
                 id
                 username
             }
+            votes {
+                vflag
+            }
+        }
+    }
+`;
+
+const CREATE_VOTE = gql`
+    mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
+        createCommentVote(data: {
+            comment: {
+                connect: {
+                    id: $post_id,
+                }
+            },
+            vflag: $vflag
+        }) {
+            id
+            vflag
         }
     }
 `;
@@ -80,10 +102,15 @@ function CommentsBox(props) {
         content: '',
       });
 
+      
+
       const [createComment, {data, error, loading}] = useMutation(SUBMIT_POST_WITHOUT_PARENT_MUTATION);
     
       const [createCommentWithParent, {data:parentdata, error: parenterror, loading: parentloading}] = useMutation(SUBMIT_POST_WITH_PARENT_MUTATION);
     
+      const [createPostVote, { data:votedata, error:voteerror, loading:voteloading }] = useMutation(CREATE_VOTE,{
+            refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        });
       //NEED TO CREATE A COMMENTVOTE ON SUBMIT AS WELL
     return (
         <div>
@@ -113,7 +140,16 @@ function CommentsBox(props) {
 
             
         }
-        console.log(props.returnFunction)
+
+        let voteres = await createPostVote({
+            variables: {
+                post_id: res.data.createComment.id,
+                vflag: 'Upvote'
+            }
+        });
+
+        res.data.createComment.votes.push(voteres.data.createCommentVote)
+
         if (props.returnFunction) {
             props.returnFunction(res.data.createComment);
         }

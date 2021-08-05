@@ -1,7 +1,7 @@
 import { rawConvertDateFromNow } from "./convertDateFromNow";
 
 export function totalPostsVotes(post) {
-    let count = 1; 
+    let count = 0; 
     post.votes?.forEach((x) => {
         x.vflag === 'Upvote' ? count += 1 : count -= 1;
     });

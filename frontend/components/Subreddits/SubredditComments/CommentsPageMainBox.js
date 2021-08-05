@@ -28,42 +28,6 @@ const COMMENT_COUNT = gql`
     }
 `;
 
-const CREATE_VOTE = gql`
-    mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
-        createPostVote(data: {
-            post: {
-                connect: {
-                    id: $post_id,
-                }
-            },
-            vflag: $vflag
-        }) {
-            id
-            post {
-                title
-            }
-        }
-    }
-`;
-
-const DELETE_VOTE = gql`
-    mutation DELETE_VOTE($id: ID!) {
-        deletePostVote(id: $id) {
-            id
-        }
-    }
-`;
-
-const UPDATE_VOTE = gql`
-    mutation UPDATE_VOTE($id: ID!, $vflag: String!) {
-        updatePostVote(id: $id, data: {
-            vflag: $vflag
-        }) {
-            id
-        }
-    }
-`;
-
 
 function CommentsInfo(props) {
 
