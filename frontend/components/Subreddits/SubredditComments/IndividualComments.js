@@ -16,6 +16,9 @@ function IndividualComments(props) {
     let [total, setTotal] = useState({
         total: totalPostsVotes(props.comment.commentObject)
     });
+    let [userComments, setUserComments] = useState({
+        comments: []
+    })
 
     let [reply, openReply] = useState(false);
 
@@ -50,6 +53,14 @@ function IndividualComments(props) {
         return id.id;
     }
 
+    const addToParent = (res) => {
+        let x = props.tree.createNode(res.content, res.parent.id, res.id, res);
+        setUserComments(
+           {
+               comments: [x, ...userComments.comments]
+           }
+        )
+    }
     return (
         <div className="comments-threadline-container">
 
@@ -186,7 +197,7 @@ function IndividualComments(props) {
                                 
                             </div>
                             <section className={`comments-indent comment-indent-reply comments-indent-${props.count}` }>
-                                <CommentsBox postid={props.post.id} parentid={props.comment.id} />
+                                <CommentsBox postid={props.post.id} parentid={props.comment.id} returnFunction={addToParent}/>
                             </section>
                         </div>
                         
@@ -194,9 +205,17 @@ function IndividualComments(props) {
                 }
                 
                 <section className="comment-children">
+                    {
+                        userComments.comments.map((x, i) => {
+                            //need to sort descenents first
+                            return <IndividualComments tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
+                            createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
+                             />
+                        })
+                    }
                     {props.comment.descendents.map((x, i) => {
                         //need to sort descenents first
-                        return <IndividualComments comment={x} post={props.post} count={props.count + 1} key={x.id}
+                        return <IndividualComments tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
                         createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                          />
                     })}

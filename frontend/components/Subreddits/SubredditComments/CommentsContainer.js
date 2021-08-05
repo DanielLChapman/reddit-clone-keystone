@@ -11,7 +11,7 @@ function CommentsContainer(props) {
                     <>
                         <span>Comment as {user.username}</span>
                         <section className="comments-submission-container">
-                            <CommentsBox postid={props.post.id}/>
+                            <CommentsBox postid={props.post.id} returnFunction={props.returnFunction}/>
                         </section>
                     </>
                 )

@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import React from 'react';
+import React, { useState } from 'react';
 import Tree from '../../../lib/commentTree';
 import { CURRENT_USER_QUERY } from '../../User';
 import IndividualComments from './IndividualComments';
@@ -74,6 +74,8 @@ function CommentsDisplay(props) {
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 
+    
+
     return (
         <>
         <div className="comment-sorting">
@@ -81,9 +83,16 @@ function CommentsDisplay(props) {
         </div>
 
         <div className="comment-tree-beginning">
+            {
+                props.userComments.comments.map((x, i) => {
+                    //need to sort descenents first
+                    return <IndividualComments tree={tree} comment={x} post={props.post} count={1} key={x.id}
+                    createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
+                        />
+                })
+            }
             {queue.map((x, i) => {
-                console.log(x);
-                return <IndividualComments comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
+                return <IndividualComments tree={tree} comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
             })}
         </div>
         </>

@@ -27,6 +27,15 @@ const SUBMIT_POST_WITH_PARENT_MUTATION = gql`
         ) {
             id
             content
+            createdAt
+            parent {
+                id
+            }
+            user {
+                id
+                username
+            }
+
         }
     }
 `;
@@ -48,6 +57,14 @@ const SUBMIT_POST_WITHOUT_PARENT_MUTATION = gql`
         ) {
             id
             content
+            createdAt
+            parent {
+                id
+            }
+            user {
+                id
+                username
+            }
         }
     }
 `;
@@ -67,6 +84,7 @@ function CommentsBox(props) {
     
       const [createCommentWithParent, {data:parentdata, error: parenterror, loading: parentloading}] = useMutation(SUBMIT_POST_WITH_PARENT_MUTATION);
     
+      //NEED TO CREATE A COMMENTVOTE ON SUBMIT AS WELL
     return (
         <div>
     <form onSubmit={async (e) => {
@@ -82,6 +100,9 @@ function CommentsBox(props) {
                     parent: props.parentid || '',
                 }
             });
+
+            
+
         } else {
             res = await createComment({
                 variables: {
@@ -91,6 +112,10 @@ function CommentsBox(props) {
             });
 
             
+        }
+        console.log(props.returnFunction)
+        if (props.returnFunction) {
+            props.returnFunction(res.data.createComment);
         }
     
         //add to UI element up one level at top through some prop function

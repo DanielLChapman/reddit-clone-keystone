@@ -43,6 +43,8 @@ function SubredditPostForm(props) {
         <Form onSubmit={async (e) => {
             e.preventDefault();
 
+
+            //NEED TO CREATE A POSTVOTE
             const res = await createVariedPost({
                 variables: {
                     title: sanitizeString(inputs.title),

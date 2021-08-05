@@ -28,6 +28,10 @@ export default class Tree {
         this.root = new TreeNode('Root', null, 1, null);
     }
 
+    createNode = function(content, parentId, commentId, comment) {
+        return new TreeNode(content, parentId, commentId, comment);
+    }
+
     addNew = function(content, parentId, commentId, comment) {
         let parent;
         if (parentId === 1) {
