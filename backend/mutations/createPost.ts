@@ -37,8 +37,9 @@ async function createVariedPost(
     postslug = postslug.split(' ').join('_');
     postslug = postslug.substring(0, 20);
 
+    let newPost;
     if (type === "text") {
-        return await context.lists.Post.createOne({
+        newPost = await context.lists.Post.createOne({
             data: {
                 user: { connect: { id: sesh.itemId } },
                 subreddit: { connect: { id: subreddit_id}},
@@ -55,55 +56,64 @@ async function createVariedPost(
                 post_slug
             `,
         })
-    }
-
-    //generate type in frontend
-    let newPost;
-    try {
-        newPost = await context.lists.Post.createOne({
-            data: {
-                user: { connect: { id: sesh.itemId } },
-                subreddit: { connect: { id: subreddit_id}},
-                title: title,
-                post_slug: postslug,
-                type: type,
-                link: link,
-            },
-            resolveFields: graphql`
-                id
-                title
-                link
-                post_slug
-            `,
-        })
-    } catch(err) {
-        let error = err.message.toString().substring(0, 6);
-        switch (error) {
-            case 'E11000':
-                postslug = postslug + "_" + uuidv4().substring(0,12);
-                newPost = await context.lists.Post.createOne({
-                    data: {
-                        user: { connect: { id: sesh.itemId } },
-                        subreddit: { connect: { id: subreddit_id}},
-                        title: title,
-                        post_slug: postslug,
-                        type: type,
-                        link: link,
-                    },
-                    resolveFields: graphql`
-                        id
-                        title
-                        link
-                        post_slug
-                    `,
-                })
-                break;
-            default:
-
-                console.log(error);
-        }
-    }
+    } else {
+        try {
+            newPost = await context.lists.Post.createOne({
+                data: {
+                    user: { connect: { id: sesh.itemId } },
+                    subreddit: { connect: { id: subreddit_id}},
+                    title: title,
+                    post_slug: postslug,
+                    type: type,
+                    link: link,
+                },
+                resolveFields: graphql`
+                    id
+                    title
+                    link
+                    post_slug
+                `,
+            })
+        } catch(err) {
+            let error = err.message.toString().substring(0, 6);
+            switch (error) {
+                case 'E11000':
+                    postslug = postslug + "_" + uuidv4().substring(0,12);
+                    newPost = await context.lists.Post.createOne({
+                        data: {
+                            user: { connect: { id: sesh.itemId } },
+                            subreddit: { connect: { id: subreddit_id}},
+                            title: title,
+                            post_slug: postslug,
+                            type: type,
+                            link: link,
+                        },
+                        resolveFields: graphql`
+                            id
+                            title
+                            link
+                            post_slug
+                        `,
+                    })
+                    break;
+                default:
     
+                    console.log(error);
+            }
+        }
+        
+    }
+
+    let postvote = await context.lists.PostVote.createOne({
+        data: {
+            vflag: 'Upvote',
+            post: {
+                connect: {
+                    id: newPost.id
+                }
+            }
+        }
+    });
 
     return newPost;
     

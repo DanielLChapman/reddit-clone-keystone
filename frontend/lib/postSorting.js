@@ -16,7 +16,7 @@ export default function sortingPosts(posts, sortType) {
             unsortedPosts = posts.map((x) => {
         
                 //count votes
-                let score = 1;
+                let score = 0;
                 let numVotes = x.votes.length;
                 numVotes === 0 ? numVotes = 1 : '';
                 
@@ -29,7 +29,7 @@ export default function sortingPosts(posts, sortType) {
                 revisedScore === 0 ? revisedScore -= 1 : '';
             
                 let date = rawConvertDateFromNow(x.createdAt);
-                score = revisedScore/date;
+                score = Math.log( 5*revisedScore/(date/.25));
             
                 return {...x, score, total};
             })
@@ -38,5 +38,37 @@ export default function sortingPosts(posts, sortType) {
 
         default: 
             return posts;
+    }
+}
+
+export function sortingComments(comments, sortType) {
+    let unsortedComments = comments;
+    switch(sortType) {
+        case 'Best':
+            unsortedComments = comments.map((x) => {
+        
+                //count votes
+                let score = 0;
+                let numVotes = x.commentObject.votes.length;
+                numVotes === 0 ? numVotes = 1 : '';
+                
+                x.commentObject.votes.forEach((y) => {
+                    y.vflag === 'Upvote' ? score += 1 : score -= 1;
+                });
+            
+                let total = score;
+                let revisedScore = score/numVotes;
+                revisedScore === 0 ? revisedScore -= 1 : '';
+            
+                let date = rawConvertDateFromNow(x.commentObject.createdAt);
+                score = Math.log( 5*revisedScore/(date/.25));
+            
+                return {...x, score, total};
+            })
+
+            return unsortedComments.sort((a,b) => (a.score < b.score) ? 1 : -1);
+
+        default: 
+            return comments;
     }
 }

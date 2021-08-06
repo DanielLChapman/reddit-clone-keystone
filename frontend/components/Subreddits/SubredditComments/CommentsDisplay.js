@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import Tree from '../../../lib/commentTree';
+import sortingPosts, { sortingComments } from '../../../lib/postSorting';
 import { CURRENT_USER_QUERY } from '../../User';
 import IndividualComments from './IndividualComments';
 
@@ -61,6 +62,7 @@ function CommentsDisplay(props) {
     let root = tree.root;
     let queue = root.descendents;
     //need to sort by votes on comment
+    queue = sortingComments(queue, 'Best');
 
     const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
         refetchQueries: [{ query: CURRENT_USER_QUERY }],

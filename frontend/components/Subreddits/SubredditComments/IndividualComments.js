@@ -6,7 +6,7 @@ import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import { CURRENT_USER_QUERY, useUser } from '../../User';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { totalPostsVotes } from '../../../lib/postSorting';
+import { sortingComments, totalPostsVotes } from '../../../lib/postSorting';
 import CommentsBox from './CommentsSubmitBox';
 
 
@@ -61,6 +61,9 @@ function IndividualComments(props) {
            }
         )
     }
+
+    let descendents = sortingComments( props.comment.descendents, 'Best');
+    
     return (
         <div className="comments-threadline-container">
 
@@ -213,7 +216,7 @@ function IndividualComments(props) {
                              />
                         })
                     }
-                    {props.comment.descendents.map((x, i) => {
+                    {descendents.map((x, i) => {
                         //need to sort descenents first
                         return <IndividualComments tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
                         createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
