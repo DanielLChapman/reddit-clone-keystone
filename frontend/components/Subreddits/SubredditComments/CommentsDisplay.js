@@ -48,8 +48,9 @@ function CommentsDisplay(props) {
     const tree = new Tree;
     let currentNode = null;
     
+    //if props.user.comments, we can skip this
     if (props.post === undefined) return <div>Nothing to see here...</div>
-    if (props?.post?.comments.length === 0) return <div>Nothing yet...</div>
+    if (props?.post?.comments.length === 0 && props.userComments.comments.length === 0) return <div>Nothing yet...</div>
     //convert comments to tree
     props.post.comments.forEach((x) => {
         tree.addNew(
