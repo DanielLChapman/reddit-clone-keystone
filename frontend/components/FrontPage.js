@@ -98,7 +98,7 @@ function FrontPage(props) {
     let posts = data?.allPosts;
     //sorting posts by votes / posted times
 
-    posts = sortingPosts(posts, 'Best');
+    posts = sortingPosts(posts, 'New');
 
 
     return (

@@ -46,7 +46,7 @@ export const UPDATE_VOTE = gql`
 function PostLeftSide(props) {
     const user = useUser();
     const [post, setPost] = useState({
-        total: props?.post?.total || totalPostsVotes(props.post)
+        total: totalPostsVotes(props.post)
     });
 
     let upvoted = user?.postvotes.some((x) => {
