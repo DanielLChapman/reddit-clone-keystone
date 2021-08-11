@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import PostMain from './SmallPosts/PostMain';
 import { useUser } from './User';
 import { id_array  } from '../lib/allSubreddits'
 import {rawConvertDateFromNow} from '../lib/convertDateFromNow';
 import sortingPosts from '../lib/postSorting';
 import FilterBar from './FilterBar';
+import Dropdown from './Dropdown';
 
 export function arrayUnique(arrayInput) {
     var a = arrayInput.concat();
@@ -89,7 +90,8 @@ function FrontPage(props) {
             skip: 0,
         }
     });
-        
+
+    
     
 
     if(loading) return <div>Loading...</div>
@@ -100,12 +102,23 @@ function FrontPage(props) {
 
     posts = sortingPosts(posts, 'New');
 
+    //filterbar state
+    let [filterState, setFilterState] = useState({
+        li1: true,
+        li2: false,
+        li3: false,
+        li4: false
+    })
+
+    console.log(filterState);
+
 
     return (
         
         <div className="frontpage-content">
+            
             <section className="left-side">
-                <FilterBar />
+                <FilterBar filterState={filterState} setFilterState={setFilterState} />
                 {
                     posts && posts.map((x) => {
                         return <PostMain post={x} key={x.id} />

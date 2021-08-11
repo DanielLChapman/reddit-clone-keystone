@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import Tree from '../../../lib/commentTree';
 import sortingPosts, { sortingComments } from '../../../lib/postSorting';
+import Dropdown from '../../Dropdown';
 import { CURRENT_USER_QUERY } from '../../User';
 import IndividualComments from './IndividualComments';
 
@@ -45,6 +46,8 @@ const UPDATE_VOTE = gql`
 
 
 function CommentsDisplay(props) {
+    let options = ['Hot', 'Best', 'New', 'Top', 'Rising'];
+    const [dropValue, setDropValue] = useState('Hot');
     const tree = new Tree;
     let currentNode = null;
     
@@ -63,7 +66,7 @@ function CommentsDisplay(props) {
     let root = tree.root;
     let queue = root.descendents;
     //need to sort by votes on comment
-    queue = sortingComments(queue, 'Best');
+    queue = sortingComments(queue, dropValue);
 
     const [createPostVote, { data, error, loading }] = useMutation(CREATE_VOTE,{
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
@@ -78,11 +81,12 @@ function CommentsDisplay(props) {
     });
 
     
+        
 
     return (
         <>
         <div className="comment-sorting">
-            <span>Sort By Best</span>
+            <span>Sort By <Dropdown returnFunc={setDropValue} selected={dropValue} options={options} />    </span>
         </div>
 
         <div className="comment-tree-beginning">
