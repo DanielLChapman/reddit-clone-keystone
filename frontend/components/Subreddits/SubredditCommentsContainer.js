@@ -64,7 +64,7 @@ function SubredditCommentsContainer(props) {
             <SubredditTopBar user={user} post={data.Post} subreddit={props.subreddit}/>
             <section className="comment-container">
                 
-                <CommentsPage user={user} post={data.Post} subreddit={props.subreddit} />
+                <CommentsPage ownership={props.ownership} user={user} post={data.Post} subreddit={props.subreddit} />
             </section>
         </div>
     );

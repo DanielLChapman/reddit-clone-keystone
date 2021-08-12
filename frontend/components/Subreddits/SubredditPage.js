@@ -6,6 +6,7 @@ import Link from 'next/link';
 import SubredditContent from './SubredditContent';
 import { CURRENT_USER_QUERY } from '../User';
 import SubredditTopBar from './SubredditTopBar';
+import checkUserToSubreddit from '../../lib/checkUser';
 
 export const GET_SUBREDDIT_INFO = gql`
     query GET_SUBREDDIT_INFO($slug: String!) {
@@ -78,9 +79,11 @@ function SubredditPage(props) {
     
     
     if (loading) return <span>Loading...</span>
+
     if(error) return <span>Nothing To See Here</span>
 
-    
+    //lets define if the user is a moderator or owner here to pass down as props to the contentll
+    let ownership = checkUserToSubreddit(user, data.allSubreddits[0].moderators, data.allSubreddits[0].owner)
     return (
         <>
         {
@@ -93,7 +96,7 @@ function SubredditPage(props) {
             />
         }
         <div className="subreddit-content">
-                <SubredditContent slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
+                <SubredditContent ownership={ownership} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
                     
         </div>
         </>

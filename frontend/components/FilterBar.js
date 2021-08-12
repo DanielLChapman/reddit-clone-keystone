@@ -8,35 +8,24 @@ class FilterBar extends Component {
         super(props);
     }
 
-    toggleClass = (num) => {
-        let state = {
-            li1: false,
-            li2: false,
-            li3: false,
-            li4: false
-        };
-        state['li'+num] = true;
-        this.props.setFilterState({...state});
-    }
-
     render() {
         let style = {
             display: "none"
         };
-        if (this.props.filterState.li3) {
+        if (this.props.filterState === 'Top') {
             /*style= {
                 display: "inline-block"
             };*/
         }
         return (
             <section className="filter-bar"> 
-                <h5>Popular Posts</h5>
+                <h5>{this.props.filterState} Posts</h5>
                 <ul>
-                    <li className={this.props.filterState.li1 ? 'active' : null} onClick={() => this.toggleClass(1)}><FaHotjar /> Hot</li>
-                    <li className={this.props.filterState.li2 ? 'active' : null} onClick={() => this.toggleClass(2)}><FaBahai /> New</li>
-                    <li className={this.props.filterState.li3 ? 'active' : null} onClick={() => this.toggleClass(3)}><FaGopuram /> Top</li>
+                    <li aria-disabled={this.props.filterState === 'Best'} className={this.props.filterState === 'Best' ? 'active' : null} onClick={() => this.props.setFilterState('Best')}><FaHotjar /> Best</li>
+                    <li aria-disabled={this.props.filterState === 'New'} className={this.props.filterState === 'New' ? 'active' : null} onClick={() => this.props.setFilterState('New')}><FaBahai /> New</li>
+                    <li aria-disabled={this.props.filterState === 'Top'} className={this.props.filterState === 'Top' ? 'active' : null} onClick={() => this.props.setFilterState('Top')}><FaGopuram /> Top</li>
                     <li className="time-selector-for-filter-bar" style={style}>Today</li>
-                    <li className={this.props.filterState.li4 ? 'active' : null} onClick={() => this.toggleClass(4)}><FaChartLine /> Rising</li>
+                    <li aria-disabled={this.props.filterState === 'Hot'} className={this.props.filterState === 'Hot' ? 'active' : null} onClick={() => this.props.setFilterState('Hot')}><FaChartLine /> Hot</li>
                 </ul>
             </section>
         );

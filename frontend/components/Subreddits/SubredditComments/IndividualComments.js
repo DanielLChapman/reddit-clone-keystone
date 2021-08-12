@@ -62,7 +62,7 @@ function IndividualComments(props) {
         )
     }
 
-    let descendents = sortingComments( props.comment.descendents, 'Best');
+    let descendents = sortingComments( props.comment.descendents, props.sortOption);
     
     return (
         <div className="comments-threadline-container">

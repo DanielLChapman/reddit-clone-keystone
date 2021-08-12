@@ -92,8 +92,7 @@ function CommentsDisplay(props) {
         <div className="comment-tree-beginning">
             {
                 props.userComments.comments.map((x, i) => {
-                    //need to sort descenents first
-                    return <IndividualComments tree={tree} comment={x} post={props.post} count={1} key={x.id}
+                    return <IndividualComments tree={tree} comment={x} post={props.post} count={1} key={x.id} sortOption={dropValue}
                     createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                         />
                 })

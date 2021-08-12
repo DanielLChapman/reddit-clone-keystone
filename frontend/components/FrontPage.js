@@ -99,19 +99,12 @@ function FrontPage(props) {
 
     let posts = data?.allPosts;
     //sorting posts by votes / posted times
-
-    posts = sortingPosts(posts, 'New');
-
     //filterbar state
-    let [filterState, setFilterState] = useState({
-        li1: true,
-        li2: false,
-        li3: false,
-        li4: false
-    })
+    let [filterState, setFilterState] = useState(
+        'Best'
+    )
 
-    console.log(filterState);
-
+    //posts = sortingPosts(posts, filterState);
 
     return (
         

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useUser } from '../User';
 import gql from 'graphql-tag';
@@ -79,6 +79,9 @@ function SubredditHomePage(props) {
             id: props?.subreddit.id
         }
     });
+    if (userError) return <span>Nothing to see here!</span>
+    if (userLoading) return <span>Loading...</span>
+
     const {data, error, loading} = useQuery(GET_POSTS_FROM_SUBREDDIT, {
         variables: {
             id: props?.subreddit?.id,
@@ -88,16 +91,22 @@ function SubredditHomePage(props) {
 
     if (error) return <span>Nothing to see here!</span>
     if (loading) return <span>Loading....</span>
+    
 
-    let posts = data.allPosts;
+    let posts = data?.allPosts;
 
-    posts = sortingPosts(posts, 'Best');
+    let [filterState, setFilterState] = useState(
+        'Best'
+    )
+
+    posts ? posts = sortingPosts(posts, filterState) : '';
+
 
     return (
         <>
             <div className="subreddit-left">
                 {posts && posts.length > 0 && (
-                    <FilterBar />
+                    <FilterBar filterState={filterState} setFilterState={setFilterState}  />
                 )} 
                {
                     posts && posts.map((x) => {
@@ -135,6 +144,31 @@ function SubredditHomePage(props) {
                                 </Link>    
                             
                         </div>
+                    )
+                }
+                {
+                    props.ownership && (
+                        <>
+                            <Link href={`/r/${props.slug}/edit`}>
+                                <a>
+                                    <div className="block-link">
+                                        Edit Subreddit
+                                    </div>
+                                </a>
+                            </Link>
+                            {
+                                props.subreddit.owner.username === user.username && (
+                                    <Link href={`/r/${props.slug}/submit?selftext=true`}>
+                                        <a>
+                                                <div className="block-link">
+                                                    Delete subreddit
+                                                </div>
+                                            </a>
+                                        </Link>   
+                                )
+                            }
+                                
+                        </>
                     )
                 }
 
@@ -188,7 +222,7 @@ function SubredditHomePage(props) {
 
                     </section>
                 </section>
-        
+
             </div>
         </>
     )
