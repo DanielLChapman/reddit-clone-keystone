@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { useUser } from '../User';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import sortingPosts from '../../lib/postSorting';
 import PostMain from '../SmallPosts/PostMain';
 import FilterBar from '../FilterBar';
 import ReactMarkdown from 'react-markdown';
+import Router from 'next/router';
 
 export function createdAtConvert(dateString) {
     let d = new Date(dateString).toDateString();
@@ -27,6 +28,14 @@ export const COUNT_MEMBERS = gql`
             }
         ) {
             count
+        }
+    }
+`;
+
+export const DELETE_SUBREDDIT = gql`
+    mutation DELETE_SUBREDDIT($id: ID!) {
+        deleteSubreddit(id: $id) {
+            id
         }
     }
 `;
@@ -88,6 +97,8 @@ function SubredditHomePage(props) {
             skip: 0
         }
     }) 
+    const [deleteSubreddit, {data: deletedata, error: deleteerror, loading: deleteloading}] = useMutation(DELETE_SUBREDDIT);
+    
 
     if (error) return <span>Nothing to see here!</span>
     if (loading) return <span>Loading....</span>
@@ -136,7 +147,7 @@ function SubredditHomePage(props) {
                                 </Link>
                             
                                 <Link href={`/r/${props.slug}/submit?selftext=true`}>
-                                <a>
+                                    <a>
                                         <div className="block-link">
                                             Create a Text Post
                                         </div>
@@ -158,13 +169,29 @@ function SubredditHomePage(props) {
                             </Link>
                             {
                                 props.subreddit.owner.username === user.username && (
-                                    <Link href={`/r/${props.slug}/submit?selftext=true`}>
+                                    <div onClick={async (e) => {
+                                        e.preventDefault();
+
+                                        let x = confirm('Are You Sure?'); 
+
+                                        if (x) {
+                                            await deleteSubreddit({
+                                                variables: {
+                                                    id: props.subreddit.id
+                                                }
+                                            })
+                                            alert('Success')
+                                            
+                                        }
+
+                                        
+                                        }}>
                                         <a>
                                                 <div className="block-link">
                                                     Delete subreddit
                                                 </div>
                                             </a>
-                                        </Link>   
+                                    </div>   
                                 )
                             }
                                 

@@ -81,6 +81,9 @@ function SubredditPage(props) {
     if (loading) return <span>Loading...</span>
 
     if(error) return <span>Nothing To See Here</span>
+    if (data.allSubreddits.length === 0) {
+        return <span>Nothing to see here</span>
+    }
 
     //lets define if the user is a moderator or owner here to pass down as props to the contentll
     let ownership = checkUserToSubreddit(user, data.allSubreddits[0].moderators, data.allSubreddits[0].owner)

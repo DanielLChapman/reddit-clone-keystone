@@ -5,22 +5,33 @@ import useForm from '../lib/useForm';
 import Router from 'next/router';
 import Form from './styles/SubredditForm';
 import { useState } from 'react';
+import {GET_SUBREDDIT_INFO } from '../components/Subreddits/SubredditPage';
+import Link from 'next/link';
 
 //get subreddit info
 
 //able to change owner needs to be added
-/*
+
 const EDIT_SUBREDDIT_MUTATION = gql`
-    mutation CREATE_SUBREDDIT_MUTATION(
+    mutation EDIT_SUBREDDIT_MUTATION(
         $name: String!,
         $slug: String!,
         $description: String,
         $sidebar: String,
-        $title: String!
+        $title: String!,
+        $id: ID!
     ) {
-        
+        updateSubreddit(id: $id, data: {
+            name: $name,
+            slug: $slug,
+            description: $description
+            sidebar: $sidebar,
+            title: $title
+        }) {
+            id
+        }
     }
-`;*/
+`;
 
 function SubredditEdit(props) {
     const [isChecked, setIsChecked] = useState(props.subreddit.status === 'PUBLIC' ? true : false);
@@ -36,30 +47,37 @@ function SubredditEdit(props) {
         }
       });
 
-      //const [createSubreddit, {loading, data, error}] = useMutation(CREATE_SUBREDDIT_MUTATION);
+      const [updateSubreddit, {loading, data, error}] = useMutation(EDIT_SUBREDDIT_MUTATION);
 
     
+    if (error) return <div>Error</div>;
+    if (loading) return <span>Loading...</span>
     return (
         <div>
-
-            <Form
+            {
+                data && (
+                    <section className="success-form-message">
+                        Successfully updated. <Link href={`/r/${props.subreddit.slug}`}>View now </Link>
+                    </section>
+                )
+            }
+            
+            <Form 
             onSubmit={async (e) => {
                 e.preventDefault();
                 //form validation
 
-                /*const res = await createSubreddit({
+                const res = await updateSubreddit({
                     variables: {
+                        id: props.subreddit.id,
                         name: inputs.name,
                         description: inputs.description,
                         sidebar: inputs.sidebar,
                         title: inputs.title,
                         slug: inputs.name.toLowerCase()
                     }
-                })*/
+                })
 
-                Router.push({
-                    pathname: `/r/${inputs.name.toLowerCase()}`,
-                  });
 
             }}>
                 <fieldset>
