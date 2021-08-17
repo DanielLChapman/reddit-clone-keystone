@@ -51,6 +51,8 @@ const Form = styled.form`
     font-weight: 600;
     padding: 0.5rem 1.2rem;
     border-radius: 5px;
+    left: 5px;
+    position: relative;
     border:1px solid grey;
 
   }
@@ -60,6 +62,9 @@ const Form = styled.form`
   }
   .error-field {
       border:2px solid red;
+  }
+  textarea {
+    height:350px;
   }
 `;
 

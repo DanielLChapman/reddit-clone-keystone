@@ -5,6 +5,23 @@ import useForm from '../../lib/useForm';
 import Form from '../styles/SubredditSubmitForm';
 
 
+const CREATE_VOTE = gql`
+    mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
+        createPostVote(data: {
+            post: {
+                connect: {
+                    id: $post_id,
+                }
+            },
+            vflag: $vflag
+        }) {
+            id
+            vflag
+        }
+    }
+`;
+
+
 const SUBREDDIT_TEXT_POST_MUTATION = gql`
     mutation SUBREDDIT_TEXT_POST_MUTATION($title: String!, $content: String,  $subreddit_id: ID!, $type: String!, $link: String ) {
         createVariedPost(
@@ -33,6 +50,7 @@ function SubredditPostForm(props) {
         title: '',
       });
 
+
     const [createVariedPost, { data, error, loading}] = useMutation(
         SUBREDDIT_TEXT_POST_MUTATION
     );
@@ -54,6 +72,13 @@ function SubredditPostForm(props) {
                     type: 'text'
                 }
             });
+            /*
+            const voteres = await createPostVote({
+                variables: {
+                    post_id: res.createVa,
+                    vflag: 'Upvote'
+                }
+            });*/
 
             /*
 

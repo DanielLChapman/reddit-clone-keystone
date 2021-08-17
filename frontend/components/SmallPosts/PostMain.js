@@ -85,6 +85,7 @@ function PostMain(props) {
             </section>
             <section className="reddit-post-right-bottom-footer"> 
                 <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
+                <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span>
             </section>
 
         </section>

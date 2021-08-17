@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 function Dropdown(props) {
     /*
-        let options = ['hi', 'bye', 'sunrise'];
-        const [dropValue, setDropValue] = useState('hi');
+        let options = ['Hot', 'Best', 'New', 'Top', 'Rising'];
+        const [dropValue, setDropValue] = useState('Hot');
         <Dropdown returnFunc={setDropValue} selected={dropValue} options={options} />    
     */
     return (

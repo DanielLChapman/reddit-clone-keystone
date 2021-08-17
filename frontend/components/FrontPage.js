@@ -54,6 +54,9 @@ const GET_FRONT_PAGE_POSTS = gql`
                 id
                 slug
             }
+            comments {
+                id
+            }
         }
     }
 `;

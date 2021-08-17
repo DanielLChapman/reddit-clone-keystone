@@ -21,11 +21,11 @@ function CommentsMedia(props) {
                             <iframe className="small-post-youtube-video" width="560" height="315" src={`https://www.youtube.com/embed/${video_id}`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                             
                     </div>
-                    <a href={inputURL}>{inputURL}</a>
+                    <p><a href={inputURL}>{inputURL}</a></p>
                 </div>
                 )
         } else {
-            return <a href={inputURL}>{inputURL.substring(0, 20)}{inputURL.split('').length > 20 ? '...' : ''}</a>
+            return <p><a href={inputURL}>{inputURL.substring(0, 20)}{inputURL.split('').length > 20 ? '...' : ''}</a></p>
         }
     }
 

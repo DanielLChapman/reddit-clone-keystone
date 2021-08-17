@@ -21,6 +21,7 @@ function IndividualComments(props) {
     })
 
     let [reply, openReply] = useState(false);
+    let [edit, openEdit] = useState(false);
 
     let upvoted = user?.commentvotes?.some((x) => {
         if (x.comment.id === props?.comment?.id) {
@@ -82,8 +83,17 @@ function IndividualComments(props) {
                     <span>{convertDateFromNow(props?.comment.commentObject.createdAt)}</span> {/* future: edited or not */} {/* Flair */}
                 </section>
                 <section className="comment-content">
-                    <ReactMarkdown>{props.comment.content}
-                    </ReactMarkdown>
+                    {
+                        edit ? (
+                            <ReactMarkdown>{props.comment.content}
+                            </ReactMarkdown>
+
+                        ) : (
+                            <ReactMarkdown>{props.comment.content}
+                            </ReactMarkdown>
+                        )
+                    }
+                    
                 </section>
                 <section className="comment-bottom">
                     <section className="comment-arrows">
@@ -189,7 +199,10 @@ function IndividualComments(props) {
                 </section>
                 <span onClick={() => {
                     openReply(!reply)
-                }}>Reply</span> {/* Share */}
+                }}>Reply</span> 
+                <span onClick={() => {
+                    openReply(!reply)
+                }}>Edit</span>{/* Share */}
                 </section>
                 {
                     reply && (

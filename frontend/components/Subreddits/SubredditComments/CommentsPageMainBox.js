@@ -58,7 +58,7 @@ function CommentsInfo(props) {
              <section className="reddit-post-right-bottom">
                 <h6>{props.post.title}</h6>
                     {
-                        props.post.link === '' ? <ReactMarkdown>{props.post.content }</ReactMarkdown>: <p><CommentsMedia post={props.post} user={props.user} /></p>
+                        props.post.link === '' ? <ReactMarkdown>{props.post.content }</ReactMarkdown>: <CommentsMedia post={props.post} user={props.user} />
                     }
              </section>
              <section className="reddit-post-right-bottom-footer">
