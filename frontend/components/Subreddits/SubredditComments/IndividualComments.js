@@ -8,6 +8,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { sortingComments, totalPostsVotes } from '../../../lib/postSorting';
 import CommentsBox from './CommentsSubmitBox';
+import CommentsEditBox from './CommentsEditBox';
 
 
 
@@ -16,6 +17,7 @@ function IndividualComments(props) {
     let [total, setTotal] = useState({
         total: totalPostsVotes(props.comment.commentObject)
     });
+    let [content, setContent] = useState(props.comment.content);
     let [userComments, setUserComments] = useState({
         comments: []
     })
@@ -54,6 +56,11 @@ function IndividualComments(props) {
         return id.id;
     }
 
+    const updateContent = (newString) => {
+        setContent(newString);
+        openEdit(false);
+    }
+
     const addToParent = (res) => {
         let x = props.tree.createNode(res.content, res.parent.id, res.id, res);
         setUserComments(
@@ -85,11 +92,10 @@ function IndividualComments(props) {
                 <section className="comment-content">
                     {
                         edit ? (
-                            <ReactMarkdown>{props.comment.content}
-                            </ReactMarkdown>
+                            <CommentsEditBox commentid={props.comment.id} content={content} user={user} returnFunc={updateContent} />
 
                         ) : (
-                            <ReactMarkdown>{props.comment.content}
+                            <ReactMarkdown>{content}
                             </ReactMarkdown>
                         )
                     }
@@ -201,7 +207,7 @@ function IndividualComments(props) {
                     openReply(!reply)
                 }}>Reply</span> 
                 <span onClick={() => {
-                    openReply(!reply)
+                    openEdit(!edit)
                 }}>Edit</span>{/* Share */}
                 </section>
                 {
