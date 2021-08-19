@@ -58,6 +58,9 @@ function SubredditPostForm(props) {
     return (
         <div>
             {error}
+            {data && (
+                <span>Success</span>
+            )}
         <Form onSubmit={async (e) => {
             e.preventDefault();
 

@@ -44,21 +44,21 @@ export const UPDATE_VOTE = gql`
 `;
 
 function PostLeftSide(props) {
-    const user = useUser();
+    const user = props.user;
     const [post, setPost] = useState({
         total: totalPostsVotes(props.post)
     });
 
-    let upvoted = user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
+    let upvoted = user?.postvotes?.some((x) => {
+        if (x?.post?.id === props?.post?.id) {
             if (x.vflag === 'Upvote') {
                 return true
             }
         } 
     });
 
-    let downvoted = user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
+    let downvoted = user?.postvotes?.some((x) => {
+        if (x?.post?.id === props?.post?.id) {
             if (x.vflag === 'Downvote') {
                 return true
             }

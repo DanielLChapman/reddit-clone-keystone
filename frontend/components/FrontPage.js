@@ -117,7 +117,7 @@ function FrontPage(props) {
                 <FilterBar filterState={filterState} setFilterState={setFilterState} />
                 {
                     posts && posts.map((x) => {
-                        return <PostMain post={x} key={x.id} />
+                        return <PostMain post={x} key={x.id} user={user} />
                     })
                 }
             </section>

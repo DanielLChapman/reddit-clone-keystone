@@ -10,11 +10,12 @@ import { useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User';
 import { useUser } from '../User';
 import PostLeftSide from './PostLeftSide';
+import getPostVoteId from '../../lib/getPostId';
 import convertCommentCount from '../../lib/convertCommentCount';
 
 
 function checkClasses(classes) {
-    const substrings = ['subreddit-link', 'upvote-arrow-box', 'downvote-arrow-box'];
+    const substrings = ['subreddit-link', 'upvote-arrow-box', 'downvote-arrow-box', 'post-edit-link post-delete'];
     return substrings.includes(classes);
 }
 
@@ -54,15 +55,66 @@ export const UPDATE_VOTE = gql`
     }
 `;
 
+//Deleting posts wont delete other people's votes on that post on their account, but we will delete the users own vote on it.
+export const DELETE_POST = gql`
+    mutation DELETE_POST($id: ID!) {
+        deletePost(id: $id) {
+            id
+        }
+    }
+`;
+
+
 function PostMain(props) {
 
+    const [deletePost, {data, error, loading}] = useMutation(DELETE_POST);
+    const [deletePostVote, {data: datavote, error: errorvote, loading: loadingvote}] = useMutation(DELETE_VOTE);
+
+    const deletePostFunc = async () => {
+        let a = confirm('Are you sure?');
+        
+        if (a) {
+            //delete the post
+            let postvoteid = getPostVoteId(props.user, props.post.id);
+
+            console.log(postvoteid);
+            let res = await deletePost({
+                variables: {
+                    id: props.post.id
+                }
+            });
+
+            if (res.data.deletePost) {
+                //delete the postvote
+                //find the postvote id
+                let res2 = await deletePostVote({
+                    variables: {
+                        id: postvoteid
+                    }
+                });
+
+                if(res2.deletePostVote) {
+                    alert('success');
+                }
+            }
+
+            
+            
+           
+
+        }
+    }
+
+    let style = {
+        display: "none"
+    };
 
     return (
-        <section className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
-           window.location.href=`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`
+        <section style={data ? style : {display: "block"}} className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
+            window.location.href=`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`
         } /**/}}>
         <section className="reddit-post-left">
-            <PostLeftSide post={props.post} />
+            <PostLeftSide post={props.post} user={props.user} />
         </section>
         <section className="reddit-post-right">
             <section className="reddit-post-right-top">
@@ -86,6 +138,8 @@ function PostMain(props) {
             <section className="reddit-post-right-bottom-footer"> 
                 <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
                 <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span>
+                <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>
+                
             </section>
 
         </section>

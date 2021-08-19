@@ -12,10 +12,9 @@ export default function Header() {
     <div className="top-bear-container">
         <Meta />
         <div className="top-bar">
-            <Link href="/" >
-                <a className="website-icon">
+                <a href="/" className="website-icon">
                     <img src={`/icon.webp`} /><span>Reddit</span></a>
-            </Link>
+
             {// signed in only <Nav />
             }
             <div className="search-bar-main">
