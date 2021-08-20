@@ -65,10 +65,26 @@ export const DELETE_POST = gql`
 `;
 
 
-function PostMain(props) {
+const REMOVE_POST_MUTATION = gql`
+    mutation REMOVE_POST_MUTATION($id: ID!, $removed: String!) {
+        updatePost(
+            id: $id
+            data: {
+                removed: $removed
+            }) {
+            id
 
+        }
+    }
+`;
+
+function PostMain(props) {
+    
+    let [removed, updateRemoved] = useState(props?.post?.removed === 'True' || false);
+    
     const [deletePost, {data, error, loading}] = useMutation(DELETE_POST);
     const [deletePostVote, {data: datavote, error: errorvote, loading: loadingvote}] = useMutation(DELETE_VOTE);
+    const [updatePost, {data:removedata, error:removeerror, loading: removeloading}] = useMutation(REMOVE_POST_MUTATION);
 
     const deletePostFunc = async () => {
         let a = confirm('Are you sure?');
@@ -77,7 +93,6 @@ function PostMain(props) {
             //delete the post
             let postvoteid = getPostVoteId(props.user, props.post.id);
 
-            console.log(postvoteid);
             let res = await deletePost({
                 variables: {
                     id: props.post.id
@@ -104,10 +119,32 @@ function PostMain(props) {
 
         }
     }
+    const removePostFunc = async () => {
+        let a = confirm('Are you sure?');
+        
+        if (a) {
+            
+            let val = removed;
+            let newVal;
+            !val ? newVal = 'True' : newVal = 'False'
+            //update post
+            let res = await updatePost({
+                variables: {
+                    id: props.post.id,
+                    removed: newVal
+                }
+            });
+
+            if (res.data.updatePost) {
+                updateRemoved(!val);
+            }
+        }
+    }
 
     let style = {
         display: "none"
     };
+
 
     return (
         <section style={data ? style : {display: "block"}} className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
@@ -131,14 +168,23 @@ function PostMain(props) {
                 <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
             </section>
             <section className="reddit-post-right-bottom">
+
                 {
+                    removed ? '[REMOVED]' : 
                     props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />
                  }
             </section>
             <section className="reddit-post-right-bottom-footer"> 
                 <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
-                <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span>
+                {
+                    props?.post?.link === '' ?<span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
+                }
                 <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>
+                {
+                    props?.ownership && props?.post?.user?.username !== props?.user?.username && (
+                        <span onClick={removePostFunc} className="post-edit-link post-delete">{removed ? 'Bring Back': 'Remove'}</span>
+                    )
+                } 
                 
             </section>
 

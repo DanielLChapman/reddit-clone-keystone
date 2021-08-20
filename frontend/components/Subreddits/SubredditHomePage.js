@@ -56,7 +56,7 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
                 title
                 user {
                     id
-                    name
+                    username
                 }
                 createdAt
                 votes {
@@ -65,6 +65,7 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
                 post_slug
                 link
                 type
+                removed
                 subreddit {
                     name
                     id
@@ -121,7 +122,10 @@ function SubredditHomePage(props) {
                 )} 
                {
                     posts && posts.map((x) => {
-                        return <PostMain post={x} key={x.id} />
+                        if (!x.removed || x.removed === 'False') {
+                            return <PostMain ownership={props.ownership} post={x} key={x.id} user={user} />
+                        }
+                        
                     })
                 }
                 {

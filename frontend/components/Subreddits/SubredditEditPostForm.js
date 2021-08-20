@@ -29,6 +29,10 @@ function SubredditEditPostForm(props) {
         UPDATE_POST_MUTATION
     );
 
+    if (props.post.link !== '') {
+        return <span>Nothing To Edit Here</span>
+    }
+
 
     return (
         <div className="form-moving">

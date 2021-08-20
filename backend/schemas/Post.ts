@@ -39,6 +39,17 @@ export const Post = list({
     comments: relationship({
       ref: 'Comment.post',
       many: true,
-    })
+    }),
+    removed: select({
+      options: [
+        { label: 'True', value: 'True' },
+        { label: 'False', value: 'False' },
+      ],
+      defaultValue: 'False',
+      ui: {
+        displayMode: 'segmented-control',
+        createView: { fieldMode: 'hidden' },
+      },
+  }),
   },
 });

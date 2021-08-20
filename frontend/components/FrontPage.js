@@ -42,6 +42,7 @@ const GET_FRONT_PAGE_POSTS = gql`
             id
             username
             }
+            removed
             createdAt
             votes {
             vflag
@@ -117,7 +118,10 @@ function FrontPage(props) {
                 <FilterBar filterState={filterState} setFilterState={setFilterState} />
                 {
                     posts && posts.map((x) => {
-                        return <PostMain post={x} key={x.id} user={user} />
+                        if (!x.removed || x.removed === 'False') {
+                            return <PostMain post={x} key={x.id} user={user} />
+                        }
+                        
                     })
                 }
             </section>

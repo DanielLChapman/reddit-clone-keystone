@@ -51,14 +51,14 @@ function SubredditTopBar(props) {
     });
 
     let upvoted = props.user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
+        if (x?.post?.id === props?.post?.id) {
             if (x.vflag === 'Upvote') {
                 return true
             }
         } 
     })
     let downvoted = props.user?.postvotes.some((x) => {
-        if (x.post.id === props?.post?.id) {
+        if (x?.post?.id === props?.post?.id) {
             if (x.vflag === 'Downvote') {
                 return true
             }
