@@ -7,9 +7,10 @@ import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
 import convertCommentCount from '../../../lib/convertCommentCount';
 import convertDateFromNow from '../../../lib/convertDateFromNow';
+import getPostVoteId from '../../../lib/getPostId';
 import { totalPostsVotes } from '../../../lib/postSorting';
 import PostLeftSide from '../../SmallPosts/PostLeftSide';
-import { CURRENT_USER_QUERY } from '../../User';
+
 import CommentsMedia from './CommentsPageMedia';
 
 
@@ -28,8 +29,97 @@ const COMMENT_COUNT = gql`
     }
 `;
 
+const DELETE_VOTE = gql`
+    mutation DELETE_VOTE($id: ID!) {
+        deletePostVote(id: $id) {
+            id
+        }
+    }
+`;
+
+const DELETE_POST = gql`
+    mutation DELETE_POST($id: ID!) {
+        deletePost(id: $id) {
+            id
+        }
+    }
+`;
+
+const REMOVE_POST_MUTATION = gql`
+    mutation REMOVE_POST_MUTATION($id: ID!, $removed: String!) {
+        updatePost(
+            id: $id
+            data: {
+                removed: $removed
+            }) {
+            id
+
+        }
+    }
+`;
 
 function CommentsInfo(props) {
+    let [removed, updateRemoved] = useState(props?.post?.removed === 'True' || false);
+    const [updatePost, {data:removedata, error:removeerror, loading: removeloading}] = useMutation(REMOVE_POST_MUTATION);
+    const [deletePost, {data:deletedata, error:deleteerror, loading:deleteloading}] = useMutation(DELETE_POST);
+    const [deletePostVote, {data: datavote, error: errorvote, loading: loadingvote}] = useMutation(DELETE_VOTE);
+
+    console.log(props);
+
+    const deletePostFunc = async () => {
+        let a = confirm('Are you sure?');
+        
+        if (a) {
+            //delete the post
+            let postvoteid = getPostVoteId(props.user, props.post.id);
+
+            let res = await deletePost({
+                variables: {
+                    id: props.post.id
+                }
+            });
+
+            if (res.data.deletePost) {
+                //delete the postvote
+                //find the postvote id
+                let res2 = await deletePostVote({
+                    variables: {
+                        id: postvoteid
+                    }
+                });
+
+                if(res2.deletePostVote) {
+                    alert('success');
+                }
+            }
+
+            
+            
+           
+
+        }
+    }
+    const removePostFunc = async () => {
+        let a = confirm('Are you sure?');
+        
+        if (a) {
+            
+            let val = removed;
+            let newVal;
+            !val ? newVal = 'True' : newVal = 'False'
+            //update post
+            let res = await updatePost({
+                variables: {
+                    id: props.post.id,
+                    removed: newVal
+                }
+            });
+
+            if (res.data.updatePost) {
+                updateRemoved(!val);
+            }
+        }
+    }
 
     const {data, error, loading} = useQuery(COMMENT_COUNT, {
         variables: {
@@ -56,13 +146,27 @@ function CommentsInfo(props) {
                  <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
              </section>
              <section className="reddit-post-right-bottom">
-                <h6>{props.post.title}</h6>
-                    {
+                <h6>{removed ? '[REMOVED]' : props.post.title}</h6>
+                    {   
+                        removed ? '[REMOVED]' :
                         props.post.link === '' ? <ReactMarkdown>{props.post.content }</ReactMarkdown>: <CommentsMedia post={props.post} user={props.user} />
                     }
              </section>
              <section className="reddit-post-right-bottom-footer">
                  <a className="subreddit-link" href={`/r/${props?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(data._allCommentsMeta.count)} Comments</a>
+                 {
+                    props?.post?.user?.username === props?.user?.username && props?.post?.link === '' ? <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
+                }
+                {
+                    props?.post?.user?.username === props?.user?.username && (
+                        <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>     
+                    )
+                }
+                {
+                    props?.ownership && props?.post?.user?.username === props?.user?.username && (
+                        <span onClick={removePostFunc} className="post-edit-link post-delete">{removed ? 'Bring Back': 'Remove'}</span>
+                    )
+                }    
              </section>
  
          </section>

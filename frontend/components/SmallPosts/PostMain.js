@@ -65,7 +65,7 @@ export const DELETE_POST = gql`
 `;
 
 
-const REMOVE_POST_MUTATION = gql`
+export const REMOVE_POST_MUTATION = gql`
     mutation REMOVE_POST_MUTATION($id: ID!, $removed: String!) {
         updatePost(
             id: $id
@@ -177,11 +177,16 @@ function PostMain(props) {
             <section className="reddit-post-right-bottom-footer"> 
                 <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
                 {
-                    props?.post?.link === '' ?<span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
+                    props?.post?.user?.username === props?.user?.username && props?.post?.link === '' ? <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
                 }
-                <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>
                 {
-                    props?.ownership && props?.post?.user?.username !== props?.user?.username && (
+                    props?.post?.user?.username === props?.user?.username && (
+                        <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>     
+                    )
+                }
+                
+                {
+                    props?.ownership && props?.post?.user?.username === props?.user?.username && (
                         <span onClick={removePostFunc} className="post-edit-link post-delete">{removed ? 'Bring Back': 'Remove'}</span>
                     )
                 } 

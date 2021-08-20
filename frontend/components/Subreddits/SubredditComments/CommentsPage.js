@@ -25,10 +25,10 @@ function CommentsPage(props) {
     return (
         <section className="comment-page-container">
             <section className="comment-page-left">
-                <CommentsInfo user={props.user} post={props.post} subreddit={props.subreddit} />
-                <CommentsContainer post={props.post} returnFunction={addToParent} />
+                <CommentsInfo ownership={props.ownership} user={props.user} post={props.post} subreddit={props.subreddit} />
+                <CommentsContainer ownership={props.ownership} post={props.post} returnFunction={addToParent} />
                 
-                <CommentsDisplay post={props.post} sortedComments={null} userComments={userComments}/>
+                <CommentsDisplay ownership={props.ownership} post={props.post} sortedComments={null} userComments={userComments}/>
             </section>
             <section className="comment-page-right">
 

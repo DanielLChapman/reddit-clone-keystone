@@ -68,8 +68,6 @@ export const UNSUBSCRIBE_TO_SUBREDDIT = gql`
 `;
 
 function SubredditPage(props) {
-    const user = useUser();
-
     const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
         variables: {
             slug: props.slug
@@ -85,9 +83,6 @@ function SubredditPage(props) {
         return <span>Nothing to see here</span>
     }
 
-    console.log(props);
-    //lets define if the user is a moderator or owner here to pass down as props to the contentll
-    let ownership = checkUserToSubreddit(user, data.allSubreddits[0].moderators, data.allSubreddits[0].owner)
     return (
         <>
         {
@@ -100,7 +95,7 @@ function SubredditPage(props) {
             />
         }
         <div className="subreddit-content">
-                <SubredditContent ownership={ownership} selftext={props.selftext} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
+                <SubredditContent selftext={props.selftext} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
                     
         </div>
         </>

@@ -26,6 +26,7 @@ const GET_POST_INFO = gql`
         }
         post_slug
         link
+        removed
         type
         comments {
             id
