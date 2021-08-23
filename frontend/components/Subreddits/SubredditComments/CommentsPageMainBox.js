@@ -64,7 +64,6 @@ function CommentsInfo(props) {
     const [deletePost, {data:deletedata, error:deleteerror, loading:deleteloading}] = useMutation(DELETE_POST);
     const [deletePostVote, {data: datavote, error: errorvote, loading: loadingvote}] = useMutation(DELETE_VOTE);
 
-    console.log(props);
 
     const deletePostFunc = async () => {
         let a = confirm('Are you sure?');
@@ -146,10 +145,28 @@ function CommentsInfo(props) {
                  <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
              </section>
              <section className="reddit-post-right-bottom">
-                <h6>{removed ? '[REMOVED]' : props.post.title}</h6>
+                <h6>{removed ? props.ownership ? `[REMOVED] ${props.post.title}` : '[REMOVED]' : props.post.title}</h6>
                     {   
-                        removed ? '[REMOVED]' :
-                        props.post.link === '' ? <ReactMarkdown>{props.post.content }</ReactMarkdown>: <CommentsMedia post={props.post} user={props.user} />
+                        //if removed
+                        removed ?  
+                            //check if the user is an owner or moderator of the subreddit
+                            props.ownership ? 
+                                //if so, show removed and then the actual content
+                                    props.post.link === '' ? 
+                                        <ReactMarkdown>{props.post.content }</ReactMarkdown>
+                                    : 
+                                        <CommentsMedia post={props.post} user={props.user} />
+                                
+                                : 
+                                //else show removed
+                                '[REMOVED]' 
+                            :
+                            //otherwise if its not removed, show the original content
+                            props.post.link === '' ? 
+                                <ReactMarkdown>
+                                    {props.post.content }
+                                </ReactMarkdown>
+                            : <CommentsMedia post={props.post} user={props.user} />
                     }
              </section>
              <section className="reddit-post-right-bottom-footer">
