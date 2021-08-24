@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import Tree from '../../../lib/commentTree';
 import sortingPosts, { sortingComments } from '../../../lib/postSorting';
@@ -80,11 +81,28 @@ function CommentsDisplay(props) {
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 
+    let style = {
+        position: 'relative',
+        cursor: 'pointer',
+        left: '40px',
+        top: '-15px',
+        textTransform: 'lowercase',
+        fontSize: '15px'
     
+    }    
+
+    console.log(props);
         
 
     return (
         <>
+        {
+            props.showLinkToGoBackToAllComments && (
+                <Link href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}`}>
+                    <h6 style={style}>View all comments</h6>
+                </Link>
+            )
+        }
         <div className="comment-sorting">
             <span>Sort By <Dropdown returnFunc={setDropValue} selected={dropValue} options={options} />    </span>
         </div>

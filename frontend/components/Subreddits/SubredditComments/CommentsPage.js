@@ -25,7 +25,7 @@ function CommentsPage(props) {
                 <CommentsInfo propstyle={props.propstyle} ownership={props.ownership} user={props.user} post={props.post} subreddit={props.subreddit} />
                 <CommentsContainer ownership={props.ownership} post={props.post} returnFunction={addToParent} />
                 
-                <CommentsDisplay ownership={props.ownership} post={props.post} sortedComments={null} userComments={userComments}/>
+                <CommentsDisplay showLinkToGoBackToAllComments={props.showLinkToGoBackToAllComments} ownership={props.ownership} post={props.post} sortedComments={null} userComments={userComments}/>
             </section>
             <section className="comment-page-right">
 

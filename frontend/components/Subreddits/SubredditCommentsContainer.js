@@ -153,11 +153,11 @@ function SubredditCommentsContainer(props) {
     let style = {
         display: 'block'
     }
+    let showLinkToGoBackToAllComments = false;
 
     if (props.commentArray) {
-        console.log(post);
-        console.log(props.commentArray);
         post.comments = props.commentArray;
+        showLinkToGoBackToAllComments = true;
         style = {
             display: 'none'
         }
@@ -168,7 +168,7 @@ function SubredditCommentsContainer(props) {
             <SubredditTopBar user={user} post={post} subreddit={props.subreddit}/>
             <section className="comment-container" >
                 
-                <CommentsPage propstyle={style} ownership={props.ownership} user={user} post={post} subreddit={props.subreddit} />
+                <CommentsPage showLinkToGoBackToAllComments={showLinkToGoBackToAllComments} propstyle={style} ownership={props.ownership} user={user} post={post} subreddit={props.subreddit} />
             </section>
         </div>
     );
