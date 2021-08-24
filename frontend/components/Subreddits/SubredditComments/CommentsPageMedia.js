@@ -29,9 +29,8 @@ function CommentsMedia(props) {
         }
     }
 
-
     return (
-        <section className="comment-page-media">
+        <section className="comment-page-media" style={props.propstyle}>
             {getMediaCode(props?.post?.link)}
         </section>
     );

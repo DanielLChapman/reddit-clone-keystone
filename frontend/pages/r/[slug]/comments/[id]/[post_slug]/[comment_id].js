@@ -1,55 +1,7 @@
+import { gql, useQuery } from '@apollo/client';
 import React from 'react';
-import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import { FaLongArrowAltUp, FaLongArrowAltDown } from 'react-icons/fa';
-import { useMutation, useQuery } from '@apollo/client';
-import { CREATE_VOTE, DELETE_VOTE, UPDATE_VOTE } from '../SmallPosts/PostMain';
-import { CURRENT_USER_QUERY, useUser } from '../User';
-import CommentsPage from './SubredditComments/CommentsPage';
-import SubredditTopBar from './SubredditComments/CommentsPageTopBar';
-
-const GET_POST_INFO = gql`
-    query GET_POST_INFO($id: ID!) {
-        Post( where: { id: $id } )
-    {
-        id
-        content
-        title
-        user {
-            id
-            name
-            username
-        }
-        createdAt
-        votes {
-            vflag
-        }
-        post_slug
-        link
-        removed
-        subreddit {
-            slug
-        }
-        type
-        comments {
-            id
-            parent {
-                id
-            }
-            content
-            createdAt
-            user {
-                id
-                username
-            }
-            votes {
-                vflag
-            }
-        }
-
-    }
-    }
-`;
+import SubredditContent from '../../../../../../components/Subreddits/SubredditContent';
+import { GET_SUBREDDIT_INFO } from '../../../../../../components/Subreddits/SubredditPage';
 
 const GET_SPECIFIC_COMMENTS = gql`
     query GET_SPECIFIC_COMMENTS($id: ID!) {
@@ -135,49 +87,44 @@ const GET_SPECIFIC_COMMENTS = gql`
     }
 `;
 
-function SubredditCommentsContainer(props) {
-    const user = useUser();
+function IndividualComments(props) {
 
-    const {data, error, loading} = useQuery(GET_POST_INFO, {
+    const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
         variables: {
-            id: props.postid,
+            slug: props.query.slug
         }
     });
 
-    
+    if (error) return <span>Error... Please try again later</span>
+    if (loading) return <span>Loading....</span>
 
-    if (error) return <span>Error...</span>
-    if (loading) return <span>Loading...</span>
-
-    let post = {...data?.Post};
-    let style = {
-        display: 'block'
-    }
-
-    if (props.commentArray) {
-        console.log(post);
-        console.log(props.commentArray);
-        post.comments = props.commentArray;
-        style = {
-            display: 'none'
+    const {data:commentsData, error: commentsError, loading: commentsLoading} = useQuery(GET_SPECIFIC_COMMENTS, {
+        variables: {
+            id: props.query.comment_id
         }
-    }
+    });
+
+    if (commentsLoading) return <span>Loading....</span>
+    if (commentsError) return <span>Error... Please try again later</span>
+
+    let comments = commentsData.Comment;
+    let commentArray = [{...comments}];
+    commentArray[0].parent = '1';
+    delete commentArray[0].children;
+
+    let queue = [...comments.children];
+    while(queue.length > 0) {
+        let x = queue.shift();
+        queue = [...queue, ...x.children];
+        commentArray.push(x);
+    };
+
 
     return (
-        <div className="comment-page">
-            <SubredditTopBar user={user} post={post} subreddit={props.subreddit}/>
-            <section className="comment-container" >
-                
-                <CommentsPage propstyle={style} ownership={props.ownership} user={user} post={post} subreddit={props.subreddit} />
-            </section>
+        <div>
+            <SubredditContent type="permalinkedcomments" commentid={props.query.comment_id} commentArray={commentArray} slug={props.query.slug} postslug={props.query.post_slug} postid={props.query.id} subreddit={data.allSubreddits[0]}/>
         </div>
     );
 }
 
-// SubredditCommentsContainer.propTypes = {
-//     subreddit: PropTypes.object.isRequired,
-//     postid: PropTypes.string.isRequired,
-
-// }
-
-export default SubredditCommentsContainer;
+export default IndividualComments;

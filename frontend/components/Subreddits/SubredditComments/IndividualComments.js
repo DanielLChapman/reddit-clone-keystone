@@ -42,7 +42,7 @@ function IndividualComments(props) {
     });
 
     if (props.count > 5) {
-        return <Link href="#" className="continue-this-thread"><a>Continue this thread...</a></Link>
+        return <Link href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}/${props.comment?.parent}`} className="continue-this-thread"><a>Continue this thread...</a></Link>
     }
 
     const getPostVoteId = () => {
@@ -71,7 +71,6 @@ function IndividualComments(props) {
     }
 
     let descendents = sortingComments( props.comment.descendents, props.sortOption);
-    
     return (
         <div className="comments-threadline-container">
 
@@ -208,7 +207,8 @@ function IndividualComments(props) {
                 }}>Reply</span> 
                 <span onClick={() => {
                     openEdit(!edit)
-                }}>Edit</span>{/* Share */}
+                }}>Edit</span>
+                <span><a href={`/r/${props.post?.subreddit?.slug}/comments/${props.post.id}/${props.post.post_slug}/${props.comment.id}`}>Permalink</a></span>{/* Share */}
                 </section>
                 {
                     reply && (

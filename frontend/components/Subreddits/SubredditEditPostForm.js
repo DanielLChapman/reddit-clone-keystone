@@ -19,6 +19,11 @@ const UPDATE_POST_MUTATION = gql`
     }
 `;
 
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return (str.length > 300) ? str.substr(0, 300-1) + '&hellip;' : str;
+}
+
 function SubredditEditPostForm(props) {
     const { inputs, handleChange, resetForm } = useForm({
         content: props.post.content || '',
@@ -51,7 +56,7 @@ function SubredditEditPostForm(props) {
             //NEED TO CREATE A POSTVOTE
             const res = await updatePost({
                 variables: {
-                    content: inputs.content,
+                    content: sanitizeString(inputs.content),
                     id: props.post.id
                 }
             });

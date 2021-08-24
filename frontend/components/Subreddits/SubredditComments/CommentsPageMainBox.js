@@ -129,6 +129,8 @@ function CommentsInfo(props) {
     if (error) return <span>Err...</span>
     if (loading) return <div>Loading...</div>
 
+    
+
     return (
         <section className="reddit-post">
          <section className="reddit-post-left">
@@ -153,9 +155,9 @@ function CommentsInfo(props) {
                             props.ownership ? 
                                 //if so, show removed and then the actual content
                                     props.post.link === '' ? 
-                                        <ReactMarkdown>{props.post.content }</ReactMarkdown>
+                                        <div style={props.propstyle}><ReactMarkdown >{props.post.content }</ReactMarkdown></div>
                                     : 
-                                        <CommentsMedia post={props.post} user={props.user} />
+                                        <CommentsMedia propstyle={props.propstyle} post={props.post} user={props.user} />
                                 
                                 : 
                                 //else show removed
@@ -163,10 +165,10 @@ function CommentsInfo(props) {
                             :
                             //otherwise if its not removed, show the original content
                             props.post.link === '' ? 
-                                <ReactMarkdown>
+                                <div style={props.propstyle}><ReactMarkdown >
                                     {props.post.content }
-                                </ReactMarkdown>
-                            : <CommentsMedia post={props.post} user={props.user} />
+                                </ReactMarkdown></div>
+                            : <CommentsMedia propstyle={props.propstyle} post={props.post} user={props.user} />
                     }
              </section>
              <section className="reddit-post-right-bottom-footer">

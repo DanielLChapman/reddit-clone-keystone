@@ -27,6 +27,11 @@ function SubredditContent(props) {
                 return <SubredditCommentsContainer ownership={ownership || false} slug={props.slug} subreddit={props.subreddit} postslug={props.postslug} postid={props.postid}/>
             }
             return <span>Something was missing here</span>
+        case 'permalinkedcomments':
+            if (props.slug && props.subreddit && props.postslug && props.postid && props.commentid && props.commentArray) {
+                return <SubredditCommentsContainer commentid={props.commentid} commentArray={props.commentArray} ownership={ownership || false} slug={props.slug} subreddit={props.subreddit} postslug={props.postslug} postid={props.postid}/>
+            }
+            return <span>Something was missing here!</span>
         case 'form':
             if (props.selftext && props.selftext === "true") {
                 return (

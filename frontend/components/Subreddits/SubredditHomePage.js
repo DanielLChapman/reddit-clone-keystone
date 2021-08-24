@@ -84,6 +84,14 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
 
 function SubredditHomePage(props) {
     const user = useUser();
+    const {data, error, loading} = useQuery(GET_POSTS_FROM_SUBREDDIT, {
+        variables: {
+            id: props?.subreddit?.id,
+            skip: 0
+        }
+    }) 
+    if (error) return <span>Nothing to see here!</span>
+    if (loading) return <span>Loading....</span>
     const {data: userData, error: userError, loading: userLoading} = useQuery(COUNT_MEMBERS, {
         variables: {
             id: props?.subreddit.id
@@ -92,17 +100,11 @@ function SubredditHomePage(props) {
     if (userError) return <span>Nothing to see here!</span>
     if (userLoading) return <span>Loading...</span>
 
-    const {data, error, loading} = useQuery(GET_POSTS_FROM_SUBREDDIT, {
-        variables: {
-            id: props?.subreddit?.id,
-            skip: 0
-        }
-    }) 
+    
     const [deleteSubreddit, {data: deletedata, error: deleteerror, loading: deleteloading}] = useMutation(DELETE_SUBREDDIT);
     
 
-    if (error) return <span>Nothing to see here!</span>
-    if (loading) return <span>Loading....</span>
+    
     
 
     let posts = data?.allPosts;

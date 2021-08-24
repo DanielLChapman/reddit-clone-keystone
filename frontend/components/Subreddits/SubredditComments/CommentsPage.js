@@ -13,19 +13,16 @@ function CommentsPage(props) {
     const addToParent = (res) => {
         const tree = new Tree;
         let x = tree.createNode(res.content, 1, res.id, res);
-        console.log(x);
         setUserComments(
            {
                comments: [x, ...userComments.comments]
            }
         )
     }
-
-    
     return (
         <section className="comment-page-container">
             <section className="comment-page-left">
-                <CommentsInfo ownership={props.ownership} user={props.user} post={props.post} subreddit={props.subreddit} />
+                <CommentsInfo propstyle={props.propstyle} ownership={props.ownership} user={props.user} post={props.post} subreddit={props.subreddit} />
                 <CommentsContainer ownership={props.ownership} post={props.post} returnFunction={addToParent} />
                 
                 <CommentsDisplay ownership={props.ownership} post={props.post} sortedComments={null} userComments={userComments}/>
