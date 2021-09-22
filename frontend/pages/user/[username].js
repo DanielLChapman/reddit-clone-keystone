@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { useUser } from '../../components/User';
 import Comments from '../../components/UserPage/Comments';
+import sortingPosts from '../../lib/postSorting';
 
 //delete comment
 const DELETE_COMMENT = gql`
@@ -81,7 +82,7 @@ const GET_USER_PAGE = gql`
     }
 `;
 
-function UserNamePage(props) {
+const UserNamePage = (props) => {
     let user = useUser();
     let owner = false;
 
@@ -102,30 +103,28 @@ function UserNamePage(props) {
     if (error) return <span>Error</span>
     if (loading) return <span>Loading...</span>
 
-    if (data.allUsers.length === 0) return <span>Error... User Not Found</span>
+    if (data?.allUsers.length === 0) return <span>Error... User Not Found</span>
 
-    let postArray = [...data.allUsers[0].comments, ...data.allUsers[0].posts].reverse();
+    let postArray = sortingPosts( [...data.allUsers[0].comments, ...data.allUsers[0].posts], 'New');
     //combine all posts and comments
-
-    
 
     //get the users karma
     let postVotes = 0;
     let commentVotes = 0;
     
-    data.allUsers[0].posts.forEach((q) => {
+    data?.allUsers[0].posts.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? postVotes += 1 : postVotes -= 1;
       })
     });
     //count up comment votes
-    data.allUsers[0].comments.forEach((q) => {
+    data?.allUsers[0].comments.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? commentVotes += 1 : commentVotes -= 1;
       })
     });
 
-    let displayUser = data.allUsers[0];
+    let displayUser = data?.allUsers[0];
     
     const [deleteCommentFunction, { data: data_delete_comment, error: error_delete_comment, loading: loading_delete_comment }] = useMutation(DELETE_COMMENT);
 
@@ -148,7 +147,6 @@ function UserNamePage(props) {
                     {/* filter for removed comments and postsones unless they are the owner */}
                     {
                     postArray.map((x, i) => {
-                        console.log(x.__typename === 'Comment')
                         if (x.__typename === 'Comment') {
                             
                             return <div key={i} id={i} onClick={() => {

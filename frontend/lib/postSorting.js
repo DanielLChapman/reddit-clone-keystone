@@ -54,7 +54,9 @@ export default function sortingPosts(posts, sortType) {
     
                 return unsortedPosts.sort((a,b) => (a.score < b.score) ? 1 : -1);
             case 'New':
-                let posts = [...unsortedPosts].reverse();
+                let posts = [...unsortedPosts].sort((a, b) => {
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                });
                 
                 return posts;
             case 'Top':

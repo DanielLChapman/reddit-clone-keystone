@@ -5,22 +5,10 @@ function LeftSide(props) {
     return (
         <>
          {/*upvote, downvote and current score*/}
-         <FaLongArrowAltUp className={`upvote-arrow ${props.upvoted? 'upvote-arrow-colored' : ''}`}   />
-         <div onClick={async () => {
-                if (props.user) {
-             }
-             
-         }}></div>
-         <br />
+         <div><FaLongArrowAltUp className={`upvote-arrow ${props.upvoted? 'upvote-arrow-colored' : ''}`}   /></div>
+         <div>
          <FaLongArrowAltDown className={`downvote-arrow ${props.downvoted ? 'downvote-arrow-colored' : ''}`} />
-         <div onClick={async () => {
-                if (props.user) {
-
-                }
-             }
-             
-         }></div>
-         
+         </div>
         </>
     );
 }

@@ -32,9 +32,6 @@ function Comments(props) {
                     id: id
                 }
             });
-
-            console.log(a);
-    
             if (a?.data?.deleteComment?.id) {
                 setDeleted(true);
             }

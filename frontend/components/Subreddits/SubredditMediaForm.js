@@ -65,8 +65,6 @@ function SubredditMediaForm(props) {
                 }
             });
 
-            console.log(res);
-
             /*
 
             Router.push({

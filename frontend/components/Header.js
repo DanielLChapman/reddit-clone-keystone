@@ -11,7 +11,6 @@ import convertCommentCount from '../lib/convertCommentCount';
 export default function Header(props) {
     const user = useUser();
 
-    console.log(props);
     return (
     <div className="top-bear-container">
         <Meta />

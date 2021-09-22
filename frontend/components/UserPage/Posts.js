@@ -8,4 +8,5 @@ function Posts(props) {
     );
 }
 
+
 export default Posts;

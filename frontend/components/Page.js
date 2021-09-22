@@ -37,7 +37,6 @@ const InnerStyles = styled.div`
 `;
 
 export default function Page(props) {
-  console.log(props);
   return (
     <div>
       <Head>

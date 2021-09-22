@@ -1,5 +1,7 @@
 .user-page {
-    
+    .comment-user-page {
+        margin-bottom: 15px;
+    }
     border: 1px solid black;
     
     width: 100%;
@@ -87,13 +89,14 @@
         }
         .reddit-post-left {
             width: 35px;
+            min-width: 35px;
             position:relative;
             left:-5px;
             .downvote-arrow {
                 position: relative;
-                top: -65px;
                 
             }
+
         }
     }   
     section.user-post-top {
@@ -123,6 +126,21 @@
 
     .reddit-post-right-bottom {
         margin-bottom: 5px;
+        min-height: 35px;
+    }
+
+    .reddit-post-right-bottom-footer a, .reddit-post-right-bottom-footer span{
+        color:#888;
+        text-transform: lowercase;
+        margin-right: 5px;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover{
+            text-decoration: none;
+        }
+        &:visited {
+            color: #888;
+        }
     }
     
 }

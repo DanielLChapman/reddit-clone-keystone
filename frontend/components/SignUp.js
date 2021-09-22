@@ -44,7 +44,6 @@ function SignUp(props) {
       case_username: inputs.username.toLowerCase()
     }
 
-    console.log(variables);
     
     const res = await signup({
       variables: {
@@ -55,7 +54,6 @@ function SignUp(props) {
         case_username: inputs.username.toLowerCase()
       }
     }).catch(console.log(error));
-    console.log(res);
     resetForm();
   };
 

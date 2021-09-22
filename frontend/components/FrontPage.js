@@ -124,7 +124,7 @@ function FrontPage(props) {
                         
                     })
                 }
-            </section>
+            </section> 
             <section className="right-side">
                 { user && (
                         <Link href="/subreddits/create">Create Your Own Subreddit</Link>
