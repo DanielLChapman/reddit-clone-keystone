@@ -1,0 +1,130 @@
+.user-page {
+    
+    border: 1px solid black;
+    
+    width: 100%;
+    position: absolute;
+    left: 0%;
+    top: 48px;
+    height: auto;
+    overflow: scroll;
+    background: white;
+    .link-bar {
+        width: 100%;
+        height: 55px;
+        text-align: center;
+        border-bottom:1px solid black;
+        background-color: white;
+        text-transform: uppercase;
+        padding-top: 5px;
+        font-weight: 500;
+        span, a {
+            text-decoration: none;
+            color: black;
+            
+            &:hover {
+                border-bottom:2px solid black;
+                color: lightblue;
+            }
+        }
+        .active {
+            border-bottom: 2px solid black;
+            color: lightblue;
+        }
+    }
+    .user-page-flex {
+        display: block;
+        justify-content: flex-start;
+        width: 100%;
+        min-height: 100vh;
+        .left, .right {
+            height: 100%;
+        }
+        .left {
+            min-height: 100vh;
+            padding-left:15px;
+        }
+        .right {
+            min-width: 300px;
+            float:right;
+            width: 300px;
+            min-height:500px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border:1px solid black;
+            span {
+                font-size: 14px;
+            }
+            .user-info-hightlight {
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+    }
+    .user-reddit-post {
+        display: flex;
+        
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        a {
+            color:blue 
+         }
+         .user-page-user-link {
+             color:darkblue;
+             font-weight: 700;
+         }
+         a:visited {
+             color: rgb(85, 26, 139) !important;
+         }
+         .user-page-user-link:visited {
+             color: rgb(82, 0, 158) !important;
+         }
+        .reddit-post-right {
+            font-size: 12px;
+            left:-5px;
+            position: relative;
+        }
+        .reddit-post-left {
+            width: 35px;
+            position:relative;
+            left:-5px;
+            .downvote-arrow {
+                position: relative;
+                top: -65px;
+                
+            }
+        }
+    }   
+    section.user-post-top {
+        font-size: 13px;
+        outline: none;
+        margin-right: .4em;
+
+        padding: 0px;
+        padding-right:15px;
+        overflow: hidden;
+        unicode-bidi: isolate;
+        line-height: normal;
+        a {
+           color:blue 
+        }
+        .user-page-user-link {
+            color:darkblue;
+            font-weight: 700;
+        }
+        a:visited {
+            color: rgb(85, 26, 139) !important;
+        }
+        .user-page-user-link:visited {
+            color: rgb(82, 0, 158) !important;
+        }
+    }
+
+    .reddit-post-right-bottom {
+        margin-bottom: 5px;
+    }
+    
+}
+
+

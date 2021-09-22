@@ -36,7 +36,8 @@ const InnerStyles = styled.div`
   margin-top:30px;
 `;
 
-export default function Page({ children }) {
+export default function Page(props) {
+  console.log(props);
   return (
     <div>
       <Head>
@@ -44,7 +45,7 @@ export default function Page({ children }) {
       </Head>
       <GlobalStyles />
       <Header />
-      <InnerStyles>{children}</InnerStyles>
+      <InnerStyles>{props.children}</InnerStyles>
     </div>
   );
 }

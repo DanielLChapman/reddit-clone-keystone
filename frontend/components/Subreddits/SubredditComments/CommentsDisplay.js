@@ -6,6 +6,7 @@ import Tree from '../../../lib/commentTree';
 import sortingPosts, { sortingComments } from '../../../lib/postSorting';
 import Dropdown from '../../Dropdown';
 import { CURRENT_USER_QUERY } from '../../User';
+import { GET_POST_INFO } from '../SubredditCommentsContainer';
 import IndividualComments from './IndividualComments';
 
 
@@ -40,6 +41,14 @@ const UPDATE_VOTE = gql`
         updateCommentVote(id: $id, data: {
             vflag: $vflag
         }) {
+            id
+        }
+    }
+`;
+
+const DELETE_COMMENT = gql`
+    mutation DELETE_COMMENT($id: ID!) {
+        deleteComment(id: $id) {
             id
         }
     }
@@ -81,6 +90,8 @@ function CommentsDisplay(props) {
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
     });
 
+    const [deleteCommentFunction, { data: data_delete_comment, error: error_delete_comment, loading: loading_delete_comment }] = useMutation(DELETE_COMMENT);
+
     let style = {
         position: 'relative',
         cursor: 'pointer',
@@ -90,9 +101,16 @@ function CommentsDisplay(props) {
         fontSize: '15px'
     
     }    
-
-    console.log(props);
+    
+    function deleteComment({variables}) {
+        deleteCommentFunction({
+            variables: {
+                id: variables.id
+            }
+        });
         
+    }
+
 
     return (
         <>
@@ -112,11 +130,11 @@ function CommentsDisplay(props) {
                 props.userComments.comments.map((x, i) => {
                     return <IndividualComments tree={tree} comment={x} post={props.post} count={1} key={x.id} sortOption={dropValue}
                     createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
-                        />
+                    deleteComment={deleteComment}   />
                 })
             }
             {queue.map((x, i) => {
-                return <IndividualComments tree={tree} comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
+                return <IndividualComments deleteComment={deleteComment} tree={tree} comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
             })}
         </div>
         </>

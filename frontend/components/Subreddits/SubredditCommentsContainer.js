@@ -8,7 +8,7 @@ import { CURRENT_USER_QUERY, useUser } from '../User';
 import CommentsPage from './SubredditComments/CommentsPage';
 import SubredditTopBar from './SubredditComments/CommentsPageTopBar';
 
-const GET_POST_INFO = gql`
+export const GET_POST_INFO = gql`
     query GET_POST_INFO($id: ID!) {
         Post( where: { id: $id } )
     {

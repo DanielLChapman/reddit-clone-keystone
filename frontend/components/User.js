@@ -8,6 +8,16 @@ export const CURRENT_USER_QUERY = gql`
         username
         email
         name
+        posts {
+          votes {
+            vflag
+          }
+        }
+        comments {
+          votes {
+            vflag
+          }
+        }
         moderating {
           id
           slug
@@ -44,7 +54,36 @@ export const CURRENT_USER_QUERY = gql`
 `;
 
 export function useUser() {
-  const { data } = useQuery(CURRENT_USER_QUERY);
 
-  return data?.authenticatedItem;
+  const { data } = useQuery(CURRENT_USER_QUERY);
+  let test = {...data};
+
+  
+  if (test.authenticatedItem) {
+    let x = Object.assign({}, test.authenticatedItem);
+    //count up post votes
+    let postVotes = 0;
+    let commentVotes = 0;
+    
+    x.posts.forEach((q) => {
+      q.votes.forEach((y) => {
+        y.vflag === 'Upvote' ? postVotes += 1 : postVotes -= 1;
+      })
+    });
+    //count up comment votes
+    x.comments.forEach((q) => {
+      q.votes.forEach((y) => {
+        y.vflag === 'Upvote' ? commentVotes += 1 : commentVotes -= 1;
+      })
+    });
+
+    x.postVotes = postVotes;
+    x.commentVotes = commentVotes;
+
+    return x;
+  } else {
+    return data?.authenticatedItem;
+  }
+
+  
 }

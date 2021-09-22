@@ -20,13 +20,15 @@ function IndividualComments(props) {
     let [content, setContent] = useState(props.comment.content);
     let [userComments, setUserComments] = useState({
         comments: []
-    })
+    });
+
+    let [deleted, setDeleted] = useState(false);
 
     let [reply, openReply] = useState(false);
     let [edit, openEdit] = useState(false);
 
     let upvoted = user?.commentvotes?.some((x) => {
-        if (x.comment.id === props?.comment?.id) {
+        if (x?.comment?.id === props?.comment?.id) {
             if (x.vflag === 'Upvote') {
                 return true
             }
@@ -34,7 +36,7 @@ function IndividualComments(props) {
     });
 
     let downvoted = user?.commentvotes?.some((x) => {
-        if (x.comment.id === props?.comment?.id) {
+        if (x?.comment?.id === props?.comment?.id) {
             if (x.vflag === 'Downvote') {
                 return true
             }
@@ -71,8 +73,9 @@ function IndividualComments(props) {
     }
 
     let descendents = sortingComments( props.comment.descendents, props.sortOption);
+
     return (
-        <div className="comments-threadline-container">
+        <div className="comments-threadline-container" style={deleted ? {display: 'none'} : {}}>
 
             <div className="threadline">
                 
@@ -208,6 +211,22 @@ function IndividualComments(props) {
                 <span onClick={() => {
                     openEdit(!edit)
                 }}>Edit</span>
+                {
+                    props?.comment?.commentObject.user.username === user.username && (
+                        <span onClick={() => {
+                            let a = confirm('Are you sure you want to delete this comment?');
+                            if (a) {
+                                
+                                props.deleteComment({
+                                    variables: {
+                                        id: props?.comment?.commentObject.id
+                                    }
+                                });
+                                setDeleted(true);
+                            }
+                        }}>Delete</span>
+                    )
+                }
                 <span><a href={`/r/${props.post?.subreddit?.slug}/comments/${props.post.id}/${props.post.post_slug}/${props.comment.id}`}>Permalink</a></span>{/* Share */}
                 </section>
                 {
@@ -230,14 +249,14 @@ function IndividualComments(props) {
                     {
                         userComments.comments.map((x, i) => {
                             //need to sort descenents first
-                            return <IndividualComments tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
+                            return <IndividualComments deleteComment={props.deleteComment} tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
                             createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                              />
                         })
                     }
                     {descendents.map((x, i) => {
                         //need to sort descenents first
-                        return <IndividualComments tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
+                        return <IndividualComments deleteComment={props.deleteComment} tree={props.tree} comment={x} post={props.post} count={props.count + 1} key={x.id}
                         createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                          />
                     })}
