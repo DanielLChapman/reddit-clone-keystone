@@ -116,9 +116,9 @@ function CommentsDisplay(props) {
         <>
         {
             props.showLinkToGoBackToAllComments && (
-                <Link href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}`}>
+                <a href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}`}>
                     <h6 style={style}>View all comments</h6>
-                </Link>
+                </a>
             )
         }
         <div className="comment-sorting">

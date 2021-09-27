@@ -44,7 +44,7 @@ function IndividualComments(props) {
     });
 
     if (props.count > 5) {
-        return <Link href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}/${props.comment?.parent}`} className="continue-this-thread"><a>Continue this thread...</a></Link>
+        return <a href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}/${props.comment?.parent}`} className="continue-this-thread">Continue this thread...</a>
     }
 
     const getPostVoteId = () => {
@@ -85,9 +85,7 @@ function IndividualComments(props) {
             
                 <section className='comment-top'>
                     <span>Posted by&nbsp;
-                        <Link href={`/user/${props?.comment?.commentObject.user.username}`}>
-                            <a  className="subreddit-link">u/{props?.comment?.commentObject.user?.username}</a>
-                        </Link>
+                            <a href={`/user/${props?.comment?.commentObject.user.username}`} className="subreddit-link">u/{props?.comment?.commentObject.user?.username}</a>
                     </span> &nbsp;· &nbsp;
                     <span>{convertDateFromNow(props?.comment.commentObject.createdAt)}</span> {/* future: edited or not */} {/* Flair */}
                 </section>

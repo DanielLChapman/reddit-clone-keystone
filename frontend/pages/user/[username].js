@@ -3,12 +3,22 @@ import gql from 'graphql-tag';
 import React, { useState } from 'react';
 import { useUser } from '../../components/User';
 import Comments from '../../components/UserPage/Comments';
+import Posts from '../../components/UserPage/Posts';
 import sortingPosts from '../../lib/postSorting';
 
 //delete comment
 const DELETE_COMMENT = gql`
     mutation DELETE_COMMENT($id: ID!) {
         deleteComment(id: $id) {
+            id
+        }
+    }
+`;
+
+//delete comment
+const DELETE_POST = gql`
+    mutation DELETE_POST($id: ID!) {
+        deletePost(id: $id) {
             id
         }
     }
@@ -127,6 +137,7 @@ const UserNamePage = (props) => {
     let displayUser = data?.allUsers[0];
     
     const [deleteCommentFunction, { data: data_delete_comment, error: error_delete_comment, loading: loading_delete_comment }] = useMutation(DELETE_COMMENT);
+    const [deletePostFunction, { data: data_delete_post, error: error_delete_post, loading: loading_delete_post }] = useMutation(DELETE_COMMENT);
 
 
     return (
@@ -153,7 +164,9 @@ const UserNamePage = (props) => {
                                 setActive(i);
                             }} className={`comment-user-page ${active === i ? 'active' : ''}`}><Comments deleteFunction={deleteCommentFunction} username={props.query.username} user={user} comment={x} /></div>
                         } else {
-                            return 'hi';
+                            return <div key={i} id={i} onClick={() => {
+                                setActive(i);
+                            }} className={`comment-user-page ${active === i ? 'active' : ''}`}><Posts deleteFunction={deletePostFunction} username={props.query.username} user={user} post={x} /></div>;
                         }
                     })
                 }

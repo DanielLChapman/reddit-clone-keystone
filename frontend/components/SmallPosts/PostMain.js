@@ -155,14 +155,12 @@ function PostMain(props) {
         </section>
         <section className="reddit-post-right">
             <section className="reddit-post-right-top">
-                <Link href={`/r/${props?.post?.subreddit?.slug}`}>
+                <a href={`/r/${props?.post?.subreddit?.slug}`}>
                     <a><b className="subreddit-link">r/{props?.post?.subreddit?.name}</b></a>
-                </Link>
+                </a>
                 <span>&nbsp;•&nbsp;</span>
                 <span>Posted by&nbsp;
-                    <Link href={`/user/${props?.post?.user?.username}`}>
-                    <a  className="subreddit-link">u/{props?.post?.user?.username}</a>
-                </Link>
+                    <a  href={`/user/${props?.post?.user?.username}`} className="subreddit-link">u/{props?.post?.user?.username}</a>
                 </span>
                 &nbsp;
                 <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>

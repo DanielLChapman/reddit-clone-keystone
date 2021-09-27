@@ -196,9 +196,9 @@ function SubredditTopBar(props) {
                 {props.post?.title.length > 20 ? '...' : ''}
             </section>
             <section className="post-close">
-                <Link href={`/r/${props.subreddit.slug}`}>
+                <a href={`/r/${props.subreddit.slug}`}>
                     <a>&times; Close</a>
-                </Link>
+                </a>
             </section>
         </div>
     ); 

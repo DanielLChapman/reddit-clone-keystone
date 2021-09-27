@@ -57,7 +57,7 @@ function SubredditEdit(props) {
             {
                 data && (
                     <section className="success-form-message">
-                        Successfully updated. <Link href={`/r/${props.subreddit.slug}`}>View now </Link>
+                        Successfully updated. <a href={`/r/${props.subreddit.slug}`}>View now </a>
                     </section>
                 )
             }

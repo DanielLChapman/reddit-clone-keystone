@@ -42,7 +42,7 @@ export default function Header(props) {
                 
                 <div>
                     <ul>
-                        {user && <li><Link href={`/user/${user.username}`}>Profile</Link></li>}
+                        {user && <li><a href={`/user/${user.username}`}>Profile</a></li>}
 
                         {user && (
                             <li>

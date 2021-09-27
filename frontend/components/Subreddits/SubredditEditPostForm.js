@@ -45,7 +45,7 @@ function SubredditEditPostForm(props) {
                 error && <span>Error</span>
             }
             {
-                data && <span>Success. <Link href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}`}>Click here to go back</Link></span>
+                data && <span>Success. <a href={`/r/${props.post.subreddit.slug}/comments/${props.post.id}/${props.post.post_slug}`}>Click here to go back</a></span>
             }
 
            <h4 className='form-edit-title'>{props.post.title}</h4>

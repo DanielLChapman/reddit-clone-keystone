@@ -139,9 +139,7 @@ function CommentsInfo(props) {
          <section className="reddit-post-right">
              <section className="reddit-post-right-top">
                  <span>Posted by&nbsp;
-                     <Link href={`/user/${props?.post?.user?.username}`}>
-                     <a  className="subreddit-link">u/{props?.post?.user?.username}</a>
-                 </Link>
+                     <a href={`/user/${props?.post?.user?.username}`} className="subreddit-link">u/{props?.post?.user?.username}</a>
                  </span>
                  &nbsp;
                  <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>

@@ -46,13 +46,13 @@ function Comments(props) {
     return (
         <section style={style} className=" user-page-comments" >
             <section className="user-post-top">
-                <Link href={`/r/${post?.subreddit.slug}/comments/${post?.id}/${post?.post_slug}`}>
+                <a href={`/r/${post?.subreddit.slug}/comments/${post?.id}/${post?.post_slug}`}>
                     {post?.title}
-                </Link>
+                </a>
                 <span>&nbsp;&nbsp;by&nbsp;</span>
-                <Link href={`/user/${post.user.username}`}>
+                <a href={`/user/${post.user.username}`}>
                     <a className="user-page-user-link">{post.user.username}</a>
-                </Link>
+                </a>
                 <span>&nbsp;in&nbsp;</span>
                 <a href={`/r/${post?.subreddit.slug}`}>
                     {post?.subreddit.name}
@@ -64,11 +64,11 @@ function Comments(props) {
                 </section>
                 <section className="reddit-post-right">
                     <section className="reddit-post-right-top">
-                        <Link href={`/user/${props.username}`}>
-                            <a className="user-page-user-link">
+         
+                            <a href={`/user/${props.username}`} className="user-page-user-link">
                                 {props.username}
                             </a>
-                        </Link>
+               
                         &nbsp;&nbsp;<b>{totalPostsVotes(comment)} points</b>
                         &nbsp;&nbsp;<span style={{color: 'grey'}}>{convertDateFromNow(comment.createdAt)}</span>
                         {
