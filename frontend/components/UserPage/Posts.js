@@ -11,6 +11,7 @@ import convertCommentCount from '../../lib/convertCommentCount';
 
 function Posts(props) {
     let post = props.post;
+    console.log(post);
     let user = props.user
 
     let [edit, setEdit] = useState(false);
@@ -43,9 +44,9 @@ function Posts(props) {
                 <section className="reddit-post-left">
                     <LeftSide upvoted={false} downvoted={false} user={props.user} />
                 </section>
-                <section className="reddit-post-right">
+                <section className="reddit-post-right reddit-post-userpage-right">
                     <section className="reddit-post-right-thumbnail">
-
+                        <img src="https://via.placeholder.com/40" />
                     </section>
                     <section className="reddit-post-right-main">
                         <section className="reddit-post-right-top">

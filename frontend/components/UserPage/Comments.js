@@ -50,9 +50,9 @@ function Comments(props) {
                     {post?.title}
                 </a>
                 <span>&nbsp;&nbsp;by&nbsp;</span>
-                <a href={`/user/${post.user.username}`}>
-                    <a className="user-page-user-link">{post.user.username}</a>
-                </a>
+          
+                    <a href={`/user/${post.user.username}`} className="user-page-user-link">{post.user.username}</a>
+      
                 <span>&nbsp;in&nbsp;</span>
                 <a href={`/r/${post?.subreddit.slug}`}>
                     {post?.subreddit.name}

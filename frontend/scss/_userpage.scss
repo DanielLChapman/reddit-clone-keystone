@@ -142,6 +142,14 @@
             color: #888;
         }
     }
+
+    .reddit-post-userpage-right {
+        display: flex;
+        .reddit-post-right-thumbnail {
+            transform: translateY(25%);
+            width: 60px;
+        }
+    }
     
 }
 
