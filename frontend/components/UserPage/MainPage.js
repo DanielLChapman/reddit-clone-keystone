@@ -4,6 +4,7 @@ import React from 'react';
 import sortingPosts from '../../lib/postSorting';
 import Comments from './Comments';
 import Posts from './Posts';
+import Link from 'next/link';
 
 //delete comment
 const DELETE_COMMENT = gql`
@@ -50,13 +51,13 @@ function MainPage(props) {
     let postVotes = 0;
     let commentVotes = 0;
     
-    allUsers.posts.forEach((q) => {
+    allUsers?.posts.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? postVotes += 1 : postVotes -= 1;
       })
     });
     //count up comment votes
-    allUsers.comments.forEach((q) => {
+    allUsers?.comments.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? commentVotes += 1 : commentVotes -= 1;
       })
@@ -71,10 +72,12 @@ function MainPage(props) {
     return (
         <div className="user-page">
             <section className="link-bar">
-                
+                <span><Link href={`/user/${displayUser.username}`}><a className={sortType === 'overview' ? 'active' : ''}>Overview</a></Link></span>
+                <span><Link href={`/user/${displayUser.username}/submitted`}><a className={sortType === 'submitted' ? 'active' : ''}>Posts</a></Link></span>
+                <span><Link href={`/user/${displayUser.username}/comments`}><a className={sortType === 'comments' ? 'active' : ''}>Comments</a></Link></span>
             </section>
             <div className="user-page-flex">
-                <section className="right user-info">
+                <section className="right user-info" style={postArray[0].__typename === 'Comment' ? {top: '-6px'} : {}}>
     
                     <span style={{width: '300px', display: 'block'}}><span className="user-info-hightlight">{displayUser.username}</span></span>
                     <span style={{width: '300px', display: 'block'}}><span className="user-info-hightlight">{postVotes}</span> post karma</span>

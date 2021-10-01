@@ -2,7 +2,6 @@
     .comment-user-page {
         margin-bottom: 15px;
     }
-    border: 1px solid black;
     
     width: 100%;
     position: absolute;
@@ -13,19 +12,24 @@
     background: white;
     .link-bar {
         width: 100%;
-        height: 55px;
+        height: 35px;
         text-align: center;
-        border-bottom:1px solid black;
         background-color: white;
         text-transform: uppercase;
-        padding-top: 5px;
+        padding-top: 0px;
         font-weight: 500;
+        font-size: 16px;
+        border-bottom: 1px solid lightgray;
+        margin-bottom: 10px;
         span, a {
             text-decoration: none;
             color: black;
+            margin-left:15px;
+            margin-top: -5px;
+            margin-right: 15px;
+            
             
             &:hover {
-                border-bottom:2px solid black;
                 color: lightblue;
             }
         }
@@ -49,10 +53,10 @@
         .right {
             min-width: 300px;
             float:right;
+            position: relative;
             width: 300px;
             min-height:500px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            border:1px solid black;
             span {
                 font-size: 14px;
             }

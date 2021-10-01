@@ -11,7 +11,7 @@ import convertCommentCount from '../../lib/convertCommentCount';
 
 function Posts(props) {
     let post = props.post;
-    console.log(post);
+
     let user = props.user
 
     let [edit, setEdit] = useState(false);
