@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
 import { CURRENT_USER_QUERY } from './User';
+import { useState } from 'react';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -23,8 +24,14 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 
 function SignUp(props) {
+  let [submitError, setError] = useState('');
+
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
     password: '',
@@ -44,7 +51,12 @@ function SignUp(props) {
       case_username: inputs.username.toLowerCase()
     }
 
-    
+    if (inputs.password.length < 8) {
+      setError('Password required to be a minimum of 8 characters');
+      return;
+    }
+
+    let errorMessage;
     const res = await signup({
       variables: {
         email: inputs.email,
@@ -53,13 +65,26 @@ function SignUp(props) {
         name: inputs.name,
         case_username: inputs.username.toLowerCase()
       }
-    }).catch(console.log(error));
+    }).catch((error) => {
+      //let a = error.graphQLErrors[0].message.splice(0,6);
+      errorMessage = error.graphQLErrors[0]
+      let a = error.graphQLErrors[0].message.substring(0, 6);
+      let b = Object.keys(errorMessage.extensions.exception.keyValue)[0];
+      if (a === 'E11000') {
+        return setError(`${capitalize(b)} is already taken, please choose a new one`);
+      }
+    });
+    if (errorMessage) {
+      console.log('here');
+      return;
+    } 
     resetForm();
   };
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <h2>Sign Up For An Account</h2>
+      {submitError ? <div>{submitError}</div> : <></>}
       <fieldset>
         {data?.createUser && (
           <p>

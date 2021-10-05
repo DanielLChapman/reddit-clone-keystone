@@ -16,6 +16,9 @@
     .subreddit-left, .left-side {
         width: 69%;
         margin-right:1%;
+        @media screen and (max-width: 870px) {
+            width: 100%;
+        }
     }
     .subreddit-right, .right-side {
         width: 29%;
@@ -37,6 +40,9 @@
             text-decoration: none;
         }
         position: relative;
+        @media screen and (max-width: 870px) {
+            display: none;
+        }
     }
 }
 

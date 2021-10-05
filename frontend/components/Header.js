@@ -46,9 +46,13 @@ export default function Header(props) {
 
                         {user && (
                             <li>
-                            <span style={{float: 'left'}}>Karma</span>  <span style={{float: 'right'}}>{convertCommentCount(  user.postVotes + user.commentVotes)}</span>
-                        </li>
+                                <span style={{float: 'left'}}>Karma</span>  <span style={{float: 'right'}}>{convertCommentCount(  user.postVotes + user.commentVotes)}</span>
+                                <br />
+                            </li>
                         )}
+    
+                        {user && <li><a href={`/subreddits/create`}>Create Subreddit</a></li>}
+
 
                     </ul>
                     {!user && <button type="submit" className="signup-button" style={{top: '-1px'}}>

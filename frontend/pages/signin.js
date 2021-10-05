@@ -14,7 +14,7 @@ export default function SignInPage() {
     <GridStyles>
       <SignIn />
       <SignUp />
-      <RequestReset />
+      {/*<RequestReset />*/}
     </GridStyles>
   );
 }
