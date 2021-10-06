@@ -50,7 +50,7 @@
         cursor: pointer;
         .reddit-post-right-top {
             width: calc(100% - 10px);
-            height: 20px;
+            min-height: 20px;
             margin-top: 5px;
             padding-left: 10px;
             font-size: 11px;

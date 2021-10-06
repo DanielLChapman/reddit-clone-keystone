@@ -8,8 +8,10 @@
     border: 1px solid  #ccc;
     height: 60px;
     padding-left: 15px;
-        border-radius: 5px;
-
+    border-radius: 5px;
+    @media screen and (max-width: 550px) {
+        display: none;
+    }
     h5 {
         text-align: left;
         color: #1a1a1b;
@@ -52,5 +54,26 @@
             margin-left: 10px;
             margin-right: -10px;
         }
+    }
+}
+
+.filter-dropdown {
+    display: none;
+    @media screen and (max-width: 550px) {
+        display: block;
+    }
+    font-family: 'Roboto', sans-serif;
+    max-width: 100%;
+    width: 100%;
+    background: white;
+    border: 1px solid  #ccc;
+    height: 60px;
+    padding-left: 15px;
+    border-radius: 5px;
+    select {
+        width: 95%;
+        border-radius: 5px;
+        height: 35px;
+        padding: 5px;
     }
 }

@@ -150,51 +150,50 @@ function PostMain(props) {
         <section style={data ? style : {display: "block"}} className="reddit-post" onClick={(e) => {if(!checkClasses(e.target.className)) {
             window.location.href=`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`
         } /**/}}>
-        <section className="reddit-post-left">
-            <PostLeftSide post={props.post} user={props.user} />
+            <section className="reddit-post-left">
+                <PostLeftSide post={props.post} user={props.user} />
+            </section>
+            <section className="reddit-post-right">
+                <section className="reddit-post-right-top">
+                    <a href={`/r/${props?.post?.subreddit?.slug}`}>
+                        <b className="subreddit-link">r/{props?.post?.subreddit?.name}</b>
+                    </a>
+                    <span>&nbsp;•&nbsp;</span>
+                    <span>Posted by&nbsp;
+                        <a  href={`/user/${props?.post?.user?.username}`} className="subreddit-link">u/{props?.post?.user?.username}</a>
+                    </span>
+                    &nbsp;
+                    <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
+                </section>
+                <section className="reddit-post-right-bottom">
+
+                    {
+                        removed ? '[REMOVED]' : 
+                        props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />
+                    }
+                </section>
+                <section className="reddit-post-right-bottom-footer"> 
+                    <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
+                    {
+                        props?.post?.user?.username === props?.user?.username && props?.post?.link === '' ? <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
+                    }
+                    {
+                        props?.post?.user?.username === props?.user?.username && (
+                            <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>     
+                        )
+                    }
+                    
+                    {
+                        props?.ownership && props?.post?.user?.username === props?.user?.username && (
+                            <span onClick={removePostFunc} className="post-edit-link post-delete">{removed ? 'Bring Back': 'Remove'}</span>
+                        )
+                    } 
+                    
+                </section>
+
+            </section>
         </section>
-        <section className="reddit-post-right">
-            <section className="reddit-post-right-top">
-                <a href={`/r/${props?.post?.subreddit?.slug}`}>
-                    <a><b className="subreddit-link">r/{props?.post?.subreddit?.name}</b></a>
-                </a>
-                <span>&nbsp;•&nbsp;</span>
-                <span>Posted by&nbsp;
-                    <a  href={`/user/${props?.post?.user?.username}`} className="subreddit-link">u/{props?.post?.user?.username}</a>
-                </span>
-                &nbsp;
-                <span>Posted {convertDateFromNow(props?.post?.createdAt)}</span>
-            </section>
-            <section className="reddit-post-right-bottom">
-
-                {
-                    removed ? '[REMOVED]' : 
-                    props?.post?.link === '' ? <TextPost post={props?.post} />: <MediaPost post={props?.post} />
-                 }
-            </section>
-            <section className="reddit-post-right-bottom-footer"> 
-                <a className="subreddit-link" href={`/r/${props?.post?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(props?.post?.comments?.length || 0)} Comments</a>
-                {
-                    props?.post?.user?.username === props?.user?.username && props?.post?.link === '' ? <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
-                }
-                {
-                    props?.post?.user?.username === props?.user?.username && (
-                        <span onClick={deletePostFunc} className="post-edit-link post-delete">Delete</span>     
-                    )
-                }
-                
-                {
-                    props?.ownership && props?.post?.user?.username === props?.user?.username && (
-                        <span onClick={removePostFunc} className="post-edit-link post-delete">{removed ? 'Bring Back': 'Remove'}</span>
-                    )
-                } 
-                
-            </section>
-
-        </section>
-
-    </section>
-    );
+    )
 }
 
 PostMain.propType = {

@@ -108,7 +108,7 @@ function FrontPage(props) {
         'Best'
     )
 
-    //posts = sortingPosts(posts, filterState);
+    posts = sortingPosts(posts, filterState);
 
     return (
         
@@ -116,6 +116,7 @@ function FrontPage(props) {
             
             <section className="left-side">
                 <FilterBar filterState={filterState} setFilterState={setFilterState} />
+                
                 {
                     posts && posts.map((x) => {
                         if (!x.removed || x.removed === 'False') {
@@ -127,7 +128,7 @@ function FrontPage(props) {
             </section> 
             <section className="right-side">
                 { user && (
-                        <Link href="/subreddits/create">Create Your Own Subreddit</Link>
+                        <a href="/subreddits/create">Create Your Own Subreddit</a>
                     )
                 }
 
