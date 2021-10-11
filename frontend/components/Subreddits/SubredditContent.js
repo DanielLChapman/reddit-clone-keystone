@@ -19,7 +19,7 @@ function SubredditContent(props) {
     switch(props.type) {
         case 'Home': 
             if (props.slug && props.subreddit) {
-                return <SubredditHomePage ownership={ownership || false} slug={props.slug} id={props.subreddit.id} subreddit={props.subreddit}/>
+                return <SubredditHomePage right={props.right} ownership={ownership || false} slug={props.slug} id={props.subreddit.id} subreddit={props.subreddit}/>
             }
             return <span>Something was missing here</span>
         case 'comment':

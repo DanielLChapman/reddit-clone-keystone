@@ -13,14 +13,18 @@
     ". .";*/
     display: flex;
     height:100%;
+    
+    
     @media screen and (max-width: 870px) {
         width: 100%;
+        flex-direction: column-reverse;
     }
     .subreddit-left, .left-side {
         width: 69%;
         margin-right:1%;
         @media screen and (max-width: 870px) {
             width: 100%;
+            margin-right: 0%;
         }
     }
     .subreddit-right, .right-side {
@@ -30,6 +34,14 @@
         @media screen and (max-width: 870px) {
             display: none;
         }
+        
+    }
+    .subreddit-right {
+        @media screen and (max-width: 870px) {
+            width: 100%;
+            left: 0%;
+        }
+
     }
     .subreddit-left, .subreddit-right, .left-side, .right-side {
         vertical-align: top;
@@ -41,7 +53,7 @@
         height: auto;
     }
     .subreddit-right {
-        top:16px;
+        top:1px;
         a {
             text-decoration: none;
         }
@@ -119,6 +131,14 @@
     left: -2rem;
     position: relative;
     top: -15px;
+    .subreddit-right-mobile-view {
+        display: none;
+        @media screen and (max-width: 870px) {
+            width: 100% !important;
+            display: block !important;
+            left: 4% !important;
+        }
+    }
     .subreddit-top-bar-content {
         position: absolute;
         width: 80%;

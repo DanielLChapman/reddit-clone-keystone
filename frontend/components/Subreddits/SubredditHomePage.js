@@ -104,7 +104,7 @@ function SubredditHomePage(props) {
     const [deleteSubreddit, {data: deletedata, error: deleteerror, loading: deleteloading}] = useMutation(DELETE_SUBREDDIT);
     
 
-    
+    console.log(props.right);
     
 
     let posts = data?.allPosts;
@@ -140,7 +140,7 @@ function SubredditHomePage(props) {
 
 
             </div>
-            <div className="subreddit-right">
+            <div className="subreddit-right" style={props.right ? {display: 'block'} : {}}>
                 { user && (
                         <div>
                             

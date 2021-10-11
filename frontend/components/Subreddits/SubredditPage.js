@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '../User';
 import Link from 'next/link';
 import SubredditContent from './SubredditContent';
@@ -74,6 +74,8 @@ function SubredditPage(props) {
         }
     });
 
+    let [openRight, setOpenRight] = useState(false);
+
     
     
     if (loading) return <span>Loading...</span>
@@ -92,10 +94,13 @@ function SubredditPage(props) {
                 slug={props.slug}
                 subscribe={() => {subscribe}}
                 unsubscribe={() => {unsubscribe}}
+                openRight={(e) => {setOpenRight(e)}}
+                right={openRight}
             />
         }
         <div className="subreddit-content">
-                <SubredditContent selftext={props.selftext} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
+            
+                <SubredditContent right={openRight} selftext={props.selftext} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
                     
         </div>
         </>

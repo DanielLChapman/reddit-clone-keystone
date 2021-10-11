@@ -57,6 +57,11 @@ function SubredditTopBar(props) {
                             <span>
                                 r/{props.slug}
                             </span>
+                            <span className="subreddit-right-mobile-view" onClick={() => {
+                                props.openRight(!props.right)
+                            }}>
+                                &nbsp;{props.right ? 'Close' : 'View'} Right Side
+                            </span>
                         </section>
                         
                     </section>

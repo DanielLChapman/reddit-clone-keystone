@@ -50,6 +50,14 @@
         background: #edeff1;
         border-left: 0px solid white;
         padding-left: 40px;
+        @media screen and (max-width: 670px) {
+            width: 50vw;
+        }
+        @media screen and (max-width: 425px) {
+            width: 40vw;
+        }
+        
+
     }
     
     .searchTerm:focus{
