@@ -5,6 +5,7 @@ import sortingPosts from '../../lib/postSorting';
 import Comments from './Comments';
 import Posts from './Posts';
 import Link from 'next/link';
+import capitalize, { uniqBy } from '../../lib/capitalize';
 
 //delete comment
 const DELETE_COMMENT = gql`
@@ -82,7 +83,19 @@ function MainPage(props) {
                     <span style={{width: '300px', display: 'block'}}><span className="user-info-hightlight">{displayUser.username}</span></span>
                     <span style={{width: '300px', display: 'block'}}><span className="user-info-hightlight">{postVotes}</span> post karma</span>
                     <span style={{width: '300px', display: 'block'}}><span className="user-info-hightlight">{commentVotes}</span> comment karma</span>
-
+                    <br />
+                    {displayUser.moderating.length > 0 || displayUser.owner.length > 0 ? (<>
+                        <span style={{width: '300px', display: 'block'}}>
+                            <span className="user-info-hightlight">Moderating</span> 
+                        </span>
+                        
+                        {uniqBy([...displayUser.owner, ...displayUser.moderating], 'name').map((x, i) => (
+                            <span key={i} style={{width: '300px', display: 'block'}}><a href={`/r/${x.slug}`}>{capitalize(x.name)}</a></span>
+                        ))
+                        }
+                        
+                        </>
+                    ) : {}}
 
                 </section>
                 <section className="left post-side">
