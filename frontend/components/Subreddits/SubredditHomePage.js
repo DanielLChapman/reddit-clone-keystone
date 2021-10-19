@@ -76,6 +76,15 @@ export const GET_POSTS_FROM_SUBREDDIT = gql`
                 }
             
         }
+        _allUsersMeta(
+            where: {
+                subreddits_some: {
+                    id: $id
+                }
+            }
+        ) {
+            count
+        }
     }
 
 
@@ -90,28 +99,15 @@ function SubredditHomePage(props) {
             skip: 0
         }
     }) 
-    if (error) return <span>Nothing to see here!</span>
-    if (loading) return <span>Loading....</span>
-    const {data: userData, error: userError, loading: userLoading} = useQuery(COUNT_MEMBERS, {
-        variables: {
-            id: props?.subreddit.id
-        }
-    });
-    if (userError) return <span>Nothing to see here!</span>
-    if (userLoading) return <span>Loading...</span>
-
-    
-    const [deleteSubreddit, {data: deletedata, error: deleteerror, loading: deleteloading}] = useMutation(DELETE_SUBREDDIT);
-    
-
-    console.log(props.right);
-    
-
-    let posts = data?.allPosts;
-
+    const [deleteSubreddit] = useMutation(DELETE_SUBREDDIT);
     let [filterState, setFilterState] = useState(
         'Best'
     )
+
+    if (error) return <span>Nothing to see here!</span>
+    if (loading) return <span>Loading....</span>
+    
+    let posts = data?.allPosts;
 
     posts ? posts = sortingPosts(posts, filterState) : '';
 
@@ -215,7 +211,7 @@ function SubredditHomePage(props) {
                         
                     </section>
                     <section className="subreddit-members">
-                        {userData._allUsersMeta.count}
+                        {data._allUsersMeta.count}
                         <br />
                         Members
                     </section>

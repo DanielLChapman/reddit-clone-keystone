@@ -9,17 +9,12 @@ import TopBarDropdown from './TopBarDropdown';
 import convertCommentCount from '../lib/convertCommentCount';
 import { useState } from 'react';
 import router from 'next/router';
+import Search from './Search';
 
 
 export default function Header(props) {
     const user = useUser();
-    let [search, updateSearch] = useState('');
-
-    function searchFunc() {
-        router.push(`/search/${search}`);
-        
-    }
-
+    
     return (
     <div className="top-bear-container">
         <Meta />
@@ -27,20 +22,7 @@ export default function Header(props) {
                 <a href="/" className="website-icon">
                     <img src={`/icon.webp`} /><span>Reddit</span></a>
             <div className="search-bar-main">
-                <div className="search">
-                    <button type="submit" className="searchButton" onClick={searchFunc}>
-                        <i className="fa fa-search"></i>
-                    </button>
-                    <input type="text" className="searchTerm" value={search} placeholder="Search" onChange={(e) => {
-                        updateSearch(e.target.value);
-                    }} onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            searchFunc();
-                        }
-                       
-                    }} />
-                    
-                </div>
+                <Search />
             </div> 
 
 

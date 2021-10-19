@@ -1,9 +1,10 @@
 import React from 'react';
+import SearchPage from '../../components/SearchPage/SearchPage';
 
 function SearchTermPage(props) {
     return (
         <div>
-            hi
+            <SearchPage query={props.query.search_terms} />
         </div>
     );
 }
