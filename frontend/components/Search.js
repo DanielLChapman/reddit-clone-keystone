@@ -5,14 +5,14 @@ import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import capitalize from '../lib/capitalize';
 import bestMatch from '../lib/getEditDistance';
 
 
 const SEARCH_QUERY = gql`
     query SEARCH_QUERY($searchTerm: String!) {
-        allSubreddits(
-            where: 
-                    {name_contains_i: $searchTerm},
+        getSearchResults(
+            searchTerm: $searchTerm,
         ) {
             id
             title
@@ -46,36 +46,39 @@ function Search(props) {
     `;
 
     const DropDownItem = styled.div`
+        border-bottom: 1px solid lightgray;
+        background: ${(props) => (props.highlighted ? '#f7f7f7' : 'white')};
+        padding: .5rem;
+        transition: all 0.2s;
+        ${(props) => (props.highlighted ? 'padding-left: 2rem;' : null)};
+        display: flex;
+        align-items: center;
+        font-size: .95rem;
+        border-left: 10px solid
+        ${(props) => (props.highlighted ? 'lightgray' : 'white')};
+  `;
 
-    `;
+    let items = data?.getSearchResults || [];
+    //sort by most accurate
 
-    const items = data?.allSubreddits || [];
 
-    const { inputValue, getMenuProps, getInputProps, getComboboxProps,isOpen, highlightedIndex ,getItemProps} = useCombobox({
+    const { inputValue, getMenuProps, getInputProps, getComboboxProps,isOpen, highlightedIndex ,getItemProps, selectedItem} = useCombobox({
         items,
         onInputValueChange() {
             findItemsDebounced({
                 variables: {
                     searchTerm: inputValue
                 }
-            })
+            });
+            
         },
         onSelectedItemChange({selectedItem}) {
-            console.log('here')
             router.push(`/r/${selectedItem.slug}`);
         },
         itemToString: (item) => item?.name || '',
     });
 
     
-    //sort by most accurate
-
-    let sortedItems = bestMatch(items, inputValue, 'title').reverse();
-
-    //get top 5
-    if (sortedItems.length > 5) {
-        sortedItems = sortedItems.slice(0, 5);
-    }
 
     return (
         <div className="search">
@@ -98,15 +101,17 @@ function Search(props) {
             
             <DropDown {...getMenuProps()}>
                 {isOpen && 
-                    sortedItems.map((item, index) => (
+                    items.map((item, index) => {
+
+                        return (
                             <DropDownItem
                                 {...getItemProps({ item, index })}
                                 key={item.id}
                                 highlighted={index === highlightedIndex}
                             >
-                                {item.name}
+                                {capitalize( item.slug)}
                             </DropDownItem>
-                    )
+                    )}
                         
                     )
                 }
