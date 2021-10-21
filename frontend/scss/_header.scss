@@ -8,7 +8,15 @@
 .top-bar {
     height: 48px;
     background: white;
-    border-bottom: 1px solid #dae0e6
+    border-bottom: 1px solid #dae0e6;
+    display:flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    .website-icon {
+        min-width: 150px;
+        position: relative;
+    }
 }
 
 .website-icon span {
@@ -34,13 +42,16 @@
 .top-bar {
 
     .search {
-        width: 100%;
+        width:  40vw;
         position: relative;
         display: flex;
+        input {
+            top: -5px;
+        }
     }
     
     .searchTerm {
-        width: 100%;
+        width: 25vw;
         border-right: none;
         padding: 5px;
         height: 25px;
@@ -50,6 +61,7 @@
         background: #edeff1;
         border-left: 0px solid white;
         padding-left: 40px;
+        position:relative;
         @media screen and (max-width: 670px) {
             width: 50vw;
         }
@@ -67,7 +79,7 @@
     .searchButton {
         width: 40px;
         height: 25px;
-        background: #edeff1;
+        background: transparent;
         text-align: center;
         border-radius: 0 5px 5px 0;
         cursor: pointer;
@@ -78,27 +90,26 @@
         border-right: 0px solid white;
         font-size: 20px;
         opacity: 50%;
+        top: 9px;
+        z-index: 10;
     }
     
     /*Resize the wrap to see the search bar change!*/
     .search-bar-main{
         width: 40vw;
-        min-width: 300px;
+        margin: 0 auto;
         position: relative;
-        top: -38px;
-        left: 50%;
-        transform: translate(-60%, 0%);
     }
     .signin-login-button-container {
-        position: absolute;
         top: -6px;
         right: 35px;
+        position: relative;
+        
     };
     .top-bar-dropdown {
         width: 125px;
         right: -35px;
         top: 6px;
-        border: 1px solid black;
         position: absolute;
         font-size: 13px;
         height: 48px;
@@ -158,10 +169,12 @@
     }
 
     .signin-login-dropdown {
-        position: absolute;
+        margin-left: auto;
         top: -5px;
-        right: -8px;
         margin-right: 20px;
+        position: relative;
+        min-width:150px;
+        text-align: right;
         .signin-login-window-username {
             font-size: 14px;
             font-weight: 700px;
@@ -190,6 +203,7 @@
             position: absolute;
             top: 52px;
             right: -25px;
+            text-align: left;
             width: 220px;
             min-height: 50px;
             height: auto;
@@ -234,28 +248,40 @@
         
     
 
-    @media screen and (max-width: 1024px) {
-        .search-bar-main{
-            left: 41vw;
+    @media screen and (max-width: 870px) {
+        .search-bar-main, .search, .dropdown-window, .searchTerm {
+            width: 300px;
+        }
+        .dropdown-window {
+            left: 19px;
         }
     }
 
     @media screen and (max-width: 747px) {
+        .website-icon {
+            width: 75px;
+        }
         .website-icon span {
             display: none;
-        }
-        .search-bar-main{
-            left: 35vw;
-            top: -35px;
         }
     }
 
     @media screen and (max-width: 650px) {
-        .search-bar-main {
-            transform: initial;
-            left: 50px;
-            width: 75%;
+        .search-bar-main, .search, .dropdown-window, .searchTerm {
+            width: 150px;
         }
+        .dropdown-window {
+            font-size: 12px;
+        }
+        .searchButton {
+            right: -28px;
+        }
+
+        .search-bar-main {
+            left: -76px;
+            margin:initial;
+        }
+
         .signin-login-button-container {
             display: none;
         }
@@ -263,4 +289,17 @@
             display: block;
         }
     }
+
+    @media screen and (max-width: 475px) {
+
+        .signin-login-dropdown {
+            left: -76px;
+        }
+        
+    }
+}
+
+.dropdown-opened {
+    border:1px solid black;
+    border-radius: 2px;
 }

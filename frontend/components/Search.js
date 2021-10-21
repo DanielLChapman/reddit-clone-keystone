@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import capitalize from '../lib/capitalize';
 import bestMatch from '../lib/getEditDistance';
+import { DropDown, DropDownItem } from './styles/Dropdown';
 
 
 const SEARCH_QUERY = gql`
@@ -36,28 +37,6 @@ function Search(props) {
 
     resetIdCounter();
 
-    const DropDown = styled.div`
-        border:1px solid black;
-        background: white;
-        width: 91.5%;
-        left: 38px;
-        top:55px;
-        position:absolute;
-    `;
-
-    const DropDownItem = styled.div`
-        border-bottom: 1px solid lightgray;
-        background: ${(props) => (props.highlighted ? '#f7f7f7' : 'white')};
-        padding: .5rem;
-        transition: all 0.2s;
-        ${(props) => (props.highlighted ? 'padding-left: 2rem;' : null)};
-        display: flex;
-        align-items: center;
-        font-size: .95rem;
-        border-left: 10px solid
-        ${(props) => (props.highlighted ? 'lightgray' : 'white')};
-  `;
-
     let items = data?.getSearchResults || [];
     //sort by most accurate
 
@@ -82,7 +61,9 @@ function Search(props) {
 
     return (
         <div className="search">
-            <button type="submit" className="searchButton">
+            <button type="submit" className="searchButton" onClick={(e) => {
+                router.push(`/search/${inputValue}`)
+            }}>
                 <i className="fa fa-search"></i>
             </button>
             <div  {...getComboboxProps()} >
@@ -99,7 +80,7 @@ function Search(props) {
                 }} />*/}
             </div>
             
-            <DropDown {...getMenuProps()}>
+            <DropDown {...getMenuProps()} className={`dropdown-window ${isOpen ? 'dropdown-opened':'dropdown-not-opened'}`}>
                 {isOpen && 
                     items.map((item, index) => {
 
@@ -109,7 +90,7 @@ function Search(props) {
                                 key={item.id}
                                 highlighted={index === highlightedIndex}
                             >
-                                {capitalize( item.slug)}
+                                r/{capitalize( item.slug)}
                             </DropDownItem>
                     )}
                         
