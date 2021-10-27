@@ -9,7 +9,9 @@
     "start": "next start -p 7777",
     "test": "NODE_ENV=test jest --watch",
     "build:sass": "node-sass -r --output-style compressed scss/main.scss -o public",
-    "watch:sass": "npm run build:sass && npm run build:sass -- -w"
+    "watch:sass": "npm run build:sass && npm run build:sass -- -w",
+    "heroku-postbuild": "next build",
+    "preinstall": "npx npm-force-resolutions"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +30,7 @@
     "concurrently": "^6.1.0",
     "date-fns": "^2.16.1",
     "downshift": "^6.1.7",
+    "enzyme": "^3.11.0",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "graphql-upload": "^11.0.0",
@@ -50,7 +53,7 @@
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
     "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
+    "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.3.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",

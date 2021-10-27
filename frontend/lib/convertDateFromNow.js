@@ -7,7 +7,7 @@ export default function convertDateFromNow(date) {
     let calculatedSeconds = Math.abs((today - convertedDate)/1000);
 
     if (calculatedSeconds >= 31556952) {
-        return `${Math.floor(calculatedSeconds/31556952)} year${Math.floor(calculatedSeconds/31556952) >= 2 ? 's': ''}  ago`;
+        return `${Math.floor(calculatedSeconds/31556952)} year${Math.floor(calculatedSeconds/31556952) >= 2 ? 's': ''} ago`;
     } else if (calculatedSeconds >= 2592000) {
         return `${Math.floor(calculatedSeconds/2592000)} month${Math.floor(calculatedSeconds/2592000) >= 2 ? 's': ''} ago`;
     } else if (calculatedSeconds >= 86400) {
@@ -15,7 +15,7 @@ export default function convertDateFromNow(date) {
     } else if (calculatedSeconds >= 3600) {
         return `${Math.floor(calculatedSeconds/3600)} hour${Math.floor(calculatedSeconds/3600) >= 2 ? 's': ''} ago`
     } 
-    return `${Math.floor(calculatedSeconds/60)} minute${Math.floor(calculatedSeconds/60) >= 2 ? 's': ''} ago`
+    return `${Math.floor(calculatedSeconds/60)} minute${(Math.floor(calculatedSeconds/60) >= 2 || Math.floor(calculatedSeconds/60) === 0)? 's': ''} ago`
 }
 
 export function rawConvertDateFromNow(date) {
