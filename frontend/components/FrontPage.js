@@ -23,7 +23,7 @@ export function arrayUnique(arrayInput) {
 } 
 
 // get front page posts, sorted by some algorithm (upvotes / time posted for now)
-const GET_FRONT_PAGE_POSTS = gql`
+export const GET_FRONT_PAGE_POSTS = gql`
     query GET_FRONT_PAGE_POSTS($subreddits: [ID]!, $skip: Int) {
         allPosts(
             
@@ -65,17 +65,20 @@ const GET_FRONT_PAGE_POSTS = gql`
 function FrontPage(props) {
     const user = useUser();
     let subreddits;
+    let [filterState, setFilterState] = useState(
+        'Best'
+    )
     if (user?.subreddits) {
-        subreddits = user.subreddits.map((x) => {
+        subreddits = user?.subreddits.map((x) => {
             return x.id
         });
 
         //get moderating and owning
-        let moderatingsubs = user.moderating.map((x) => {
+        let moderatingsubs = user?.moderating.map((x) => {
             return x.id;
         })
 
-        let ownersubs = user.owner.map((x) => {
+        let ownersubs = user?.owner.map((x) => {
             return x.id
         });
 
@@ -98,21 +101,23 @@ function FrontPage(props) {
     
     
 
-    if(loading) return <div>Loading...</div>
-    if(error) return <div>{error.error}</div>
+    if(loading) {
+        return <div>Loading...</div>
+    }
+    if(error) {
+        return <div data-testid="graphql-error">{error.message}</div>
+    }
 
     let posts = data?.allPosts;
     //sorting posts by votes / posted times
     //filterbar state
-    let [filterState, setFilterState] = useState(
-        'Best'
-    )
+   
 
     posts = sortingPosts(posts, filterState);
 
     return (
         
-        <div className="frontpage-content">
+        <div className="frontpage-content" data-testid="frontPage">
             
             <section className="left-side">
                 <FilterBar filterState={filterState} setFilterState={setFilterState} />

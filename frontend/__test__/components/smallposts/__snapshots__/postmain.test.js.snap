@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostMain /> renders and matches the snapshop 1`] = `
+<div>
+  <section
+    class="reddit-post"
+    style="display: block;"
+  >
+    <section
+      class="reddit-post-left"
+    >
+      <svg
+        class="upvote-arrow "
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 256 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+        />
+      </svg>
+      <div
+        aria-disabled="false"
+        class="upvote-arrow-box"
+      />
+      <br />
+      <span>
+        0
+      </span>
+      <br />
+      <svg
+        class="upvote-arrow "
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        stroke-width="0"
+        viewBox="0 0 256 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+        />
+      </svg>
+      <div
+        aria-disabled="false"
+        class="downvote-arrow-box"
+      />
+    </section>
+    <section
+      class="reddit-post-right"
+    >
+      <section
+        class="reddit-post-right-top"
+      >
+        <a
+          href="/r/illum saepe ut assumenda sint quia sed"
+        >
+          <b
+            class="subreddit-link"
+          >
+            r/
+            ipsa tempora aut sint aperiam occaecati illum
+          </b>
+        </a>
+        <span>
+           • 
+        </span>
+        <span>
+          Posted by 
+          <a
+            class="subreddit-link"
+            href="/user/Mrs. Gideon Block"
+          >
+            u/
+            Mrs. Gideon Block
+          </a>
+        </span>
+         
+        <span>
+          Posted 
+          0 minutes ago
+        </span>
+      </section>
+      <section
+        class="reddit-post-right-bottom"
+      >
+        <h4>
+          Facilis corporis sed veritatis.
+        </h4>
+        <section
+          class="reddit-post-right-bottom-description "
+        >
+          <span>
+            <p>
+              Praesentium magnam fugiat error molestiae laborum est.
+            </p>
+          </span>
+        </section>
+      </section>
+      <section
+        class="reddit-post-right-bottom-footer"
+      >
+        <a
+          class="subreddit-link"
+          href="/r/illum saepe ut assumenda sint quia sed/comments/7760116b-dd26-46da-a05a-a010e05cef40/explicabo dolores ipsam laboriosam non itaque voluptas"
+        >
+          0
+           Comments
+        </a>
+        
+      </section>
+    </section>
+  </section>
+</div>
+`;

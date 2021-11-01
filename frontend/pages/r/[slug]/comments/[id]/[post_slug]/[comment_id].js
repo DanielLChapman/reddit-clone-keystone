@@ -3,7 +3,7 @@ import React from 'react';
 import SubredditContent from '../../../../../../components/Subreddits/SubredditContent';
 import { GET_SUBREDDIT_INFO } from '../../../../../../components/Subreddits/SubredditPage';
 
-const GET_SPECIFIC_COMMENTS = gql`
+export const GET_SPECIFIC_COMMENTS = gql`
     query GET_SPECIFIC_COMMENTS($id: ID!) {
         Comment (
             where: {
