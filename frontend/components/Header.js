@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faArrowDown} from '@fortawesome/free-solid-svg-icons'
 import SignOut from './Signout';
 import { useUser } from './User';
-import TopBarDropdown from './TopBarDropdown';
 import convertCommentCount from '../lib/convertCommentCount';
 import { useState } from 'react';
 import router from 'next/router';

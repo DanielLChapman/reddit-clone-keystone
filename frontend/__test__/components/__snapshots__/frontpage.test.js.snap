@@ -20,6 +20,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
           <li
             aria-disabled="true"
             class="active"
+            data-testid="best-filter-bar"
           >
             <svg
               fill="currentColor"
@@ -56,6 +57,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
           </li>
           <li
             aria-disabled="false"
+            data-testid="top-filter-bar"
           >
             <svg
               fill="currentColor"

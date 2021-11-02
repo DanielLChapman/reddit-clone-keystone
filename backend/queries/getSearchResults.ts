@@ -20,7 +20,13 @@ async function getSearchResults(
     //perform search on subreddits
     let subreddits = await context.lists.Subreddit.findMany({
         where: {
-            name_contains_i: searchTerm
+            AND: [
+                {name_contains_i: searchTerm},
+                {status: 'PUBLIC'}
+                //some way to throw an id in here to see if you are the owner or moderating a private sub
+                //{OR: [{status: 'PUBLIC'}]},
+            ]
+            
         },
         resolveFields: graphql`
             id

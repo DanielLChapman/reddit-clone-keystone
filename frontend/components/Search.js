@@ -10,7 +10,7 @@ import bestMatch from '../lib/getEditDistance';
 import { DropDown, DropDownItem } from './styles/Dropdown';
 
 
-const SEARCH_QUERY = gql`
+export const SEARCH_QUERY = gql`
     query SEARCH_QUERY($searchTerm: String!) {
         getSearchResults(
             searchTerm: $searchTerm,
@@ -38,6 +38,8 @@ function Search(props) {
     resetIdCounter();
 
     let items = data?.getSearchResults || [];
+
+    console.log(items);
     //sort by most accurate
 
 
