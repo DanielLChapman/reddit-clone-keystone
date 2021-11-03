@@ -38,8 +38,6 @@ function Search(props) {
     resetIdCounter();
 
     let items = data?.getSearchResults || [];
-
-    console.log(items);
     //sort by most accurate
 
 

@@ -5,7 +5,7 @@ import Form from './styles/Form';
 import { CURRENT_USER_QUERY } from './User';
 import { useState } from 'react';
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
     $name: String!
     $email: String!
@@ -67,9 +67,16 @@ function SignUp(props) {
       }
     }).catch((error) => {
       //let a = error.graphQLErrors[0].message.splice(0,6);
+
       errorMessage = error.graphQLErrors[0]
-      let a = error.graphQLErrors[0].message.substring(0, 6);
-      let b = Object.keys(errorMessage.extensions.exception.keyValue)[0];
+      let a;
+      let b;
+      try {
+        a = error.graphQLErrors[0].message.substring(0, 6);
+        b = Object.keys(errorMessage.extensions.exception.keyValue)[0];
+      } catch(e) {
+        console.log(error.graphQLErrors[0]);
+      }
       if (a === 'E11000') {
         return setError(`${capitalize(b)} is already taken, please choose a new one`);
       }
@@ -77,7 +84,7 @@ function SignUp(props) {
     if (errorMessage) {
       console.log('here');
       return;
-    } 
+    }
     resetForm();
   };
 
@@ -87,7 +94,7 @@ function SignUp(props) {
       {submitError ? <div>{submitError}</div> : <></>}
       <fieldset>
         {data?.createUser && (
-          <p>
+          <p data-testid="success-signup-message">
             Signed Up With {data.createUser.email} - Please Go Ahead And Sign In
           </p>
         )}

@@ -1,5 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client';
-import gql from 'graphql-tag';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { useUser } from '../User';
 import Link from 'next/link';
@@ -8,27 +7,25 @@ import { CURRENT_USER_QUERY } from '../User';
 import SubredditTopBar from './SubredditTopBar';
 import checkUserToSubreddit from '../../lib/checkUser';
 
-export const GET_SUBREDDIT_INFO = gql`
-    query GET_SUBREDDIT_INFO($slug: String!) {
-        allSubreddits(where: {
-            slug: $slug
-        }) {
-            id
-            name
-            title
-            slug
-            sidebar
-            description
-            status
-            owner {
-                username
-            }
-            moderators {
-                username
-            }
-            createdAt
+export const GET_SUBREDDIT_INFO= gql`
+  query GetSubreddit($slug: String!) {
+    Subreddit(slug: $slug) {
+        id
+        name
+        title
+        slug
+        sidebar
+        description
+        status
+        owner {
+            username
         }
+        moderators {
+            username
+        }
+        createdAt
     }
+  }
 `;
 
 export const SUBSCRIBE_TO_SUBREDDIT = gql`
@@ -67,40 +64,39 @@ export const UNSUBSCRIBE_TO_SUBREDDIT = gql`
     }
 `;
 
-function SubredditPage(props) {
-    const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
+
+function SubredditPage({type, slug, selftext}) {
+    let [openRight, setOpenRight] = useState(false);
+    const {loading, error, data} = useQuery(GET_SUBREDDIT_INFO, {
         variables: {
-            slug: props.slug
+            slug: slug
         }
     });
 
-    let [openRight, setOpenRight] = useState(false);
+    if (loading) {return <span>Loading...</span>}
 
-    
-    
-    if (loading) return <span>Loading...</span>
+    if(error) {console.log(error); return <span>Nothing to see here</span>}
 
-    if(error) return <span>Nothing To See Here</span>
-    if (data.allSubreddits.length === 0) {
-        return <span>Nothing to see here</span>
-    }
+    if (!data.Subreddit) return <span>Nothing Found</span>
+
+    let Subreddit = data.Subreddit;
 
     return (
         <>
         {
-           props.type && props.type === 'Home' && <SubredditTopBar 
-                type={props.type}
-                subreddit={data?.allSubreddits[0]}
-                slug={props.slug}
+           type && type === 'Home' && <SubredditTopBar 
+                type={type}
+                subreddit={Subreddit}
+                slug={slug}
                 subscribe={() => {subscribe}}
                 unsubscribe={() => {unsubscribe}}
                 openRight={(e) => {setOpenRight(e)}}
                 right={openRight}
             />
         }
-        <div className="subreddit-content">
+        <div className="subreddit-content" data-testid="subreddit-content">
             
-                <SubredditContent right={openRight} selftext={props.selftext} slug={props.slug} subreddit={data?.allSubreddits[0]} type={props.type} /> 
+                <SubredditContent right={openRight} selftext={selftext} slug={slug} subreddit={Subreddit} type={type} /> 
                     
         </div>
         </>

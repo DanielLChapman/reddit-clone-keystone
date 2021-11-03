@@ -34,7 +34,7 @@ const fakeSubreddit = (overrides) => (
         rules: casual.string,
         description: casual.string,
         status: 'PUBLIC',
-        ownder: fakeUser(),
+        owner: fakeUser(),
         moderators: [],
         subscriber: [],
         posts: [],

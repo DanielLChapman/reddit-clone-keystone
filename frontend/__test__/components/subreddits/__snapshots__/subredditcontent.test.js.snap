@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It switches subreddit content based on props renders an error with no props 1`] = `
+<div>
+  <span>
+    Something went wrong...
+  </span>
+</div>
+`;
+
+exports[`It switches subreddit content based on props renders the home (through subreddit page) 1`] = `
+<div>
+  <section
+    class="subreddit-top-bar"
+  >
+    <section
+      class="subreddit-top-bar-content"
+    >
+      <section
+        class="subreddit-top-bar-name"
+      >
+        <h1>
+          reprehenderit soluta non omnis consequatur enim quia
+        </h1>
+        <button>
+          Join
+        </button>
+      </section>
+      <span>
+        r/
+        omnis adipisci eius laborum eius aut illo
+      </span>
+      <span
+        class="subreddit-right-mobile-view"
+      >
+         
+        View
+         Right Side
+      </span>
+    </section>
+  </section>
+  <div
+    class="subreddit-content"
+    data-testid="subreddit-content"
+  >
+    <span>
+      Nothing to see here!
+    </span>
+  </div>
+</div>
+`;

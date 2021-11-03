@@ -14,7 +14,11 @@ import checkUserToSubreddit from '../../lib/checkUser';
 function SubredditContent(props) {
     let user = useUser();
 
-    let ownership = checkUserToSubreddit(user, props.subreddit.moderators, props.subreddit.owner);
+    let ownership = false;
+
+    if (user) {
+        ownership = checkUserToSubreddit(user, props.subreddit.moderators, props.subreddit.owner);
+    }
 
     switch(props.type) {
         case 'Home': 
