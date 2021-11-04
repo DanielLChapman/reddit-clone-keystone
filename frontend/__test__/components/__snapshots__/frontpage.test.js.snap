@@ -126,6 +126,467 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
           </option>
         </select>
       </div>
+      <section
+        class="reddit-post"
+        style="display: block;"
+      >
+        <section
+          class="reddit-post-left"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="upvote-arrow-box"
+          />
+          <br />
+          <span>
+            0
+          </span>
+          <br />
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="downvote-arrow-box"
+          />
+        </section>
+        <section
+          class="reddit-post-right"
+        >
+          <section
+            class="reddit-post-right-top"
+          >
+            <a
+              href="/r/illum animi vel provident dicta perferendis dolorum"
+            >
+              <b
+                class="subreddit-link"
+              >
+                r/
+                illo dolorum ab aliquam id sit delectus
+              </b>
+            </a>
+            <span>
+               • 
+            </span>
+            <span>
+              Posted by 
+              <a
+                class="subreddit-link"
+                href="/user/Ms. Nigel Russel"
+              >
+                u/
+                Ms. Nigel Russel
+              </a>
+            </span>
+             
+            <span>
+              Posted 
+              0 minutes ago
+            </span>
+          </section>
+          <section
+            class="reddit-post-right-bottom"
+          >
+            <div>
+              <h4>
+                Facilis corporis sed veritatis.
+              </h4>
+              <section
+                class="media-output-small-post"
+              >
+                <a
+                  href="www.google.com"
+                >
+                  www.google.com
+                  
+                </a>
+              </section>
+            </div>
+          </section>
+          <section
+            class="reddit-post-right-bottom-footer"
+          >
+            <a
+              class="subreddit-link"
+              href="/r/illum animi vel provident dicta perferendis dolorum/comments/6558f567-7011-46bc-b266-ca805ab010e0/doloremque maiores esse atque et non explicabo"
+            >
+              0
+               Comments
+            </a>
+            
+          </section>
+        </section>
+      </section>
+      <section
+        class="reddit-post"
+        style="display: block;"
+      >
+        <section
+          class="reddit-post-left"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="upvote-arrow-box"
+          />
+          <br />
+          <span>
+            0
+          </span>
+          <br />
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="downvote-arrow-box"
+          />
+        </section>
+        <section
+          class="reddit-post-right"
+        >
+          <section
+            class="reddit-post-right-top"
+          >
+            <a
+              href="/r/quia dolores quisquam aut consequatur sint provident"
+            >
+              <b
+                class="subreddit-link"
+              >
+                r/
+                qui dignissimos dolore qui voluptatem cumque nihil
+              </b>
+            </a>
+            <span>
+               • 
+            </span>
+            <span>
+              Posted by 
+              <a
+                class="subreddit-link"
+                href="/user/Miss Elvis Kunde"
+              >
+                u/
+                Miss Elvis Kunde
+              </a>
+            </span>
+             
+            <span>
+              Posted 
+              0 minutes ago
+            </span>
+          </section>
+          <section
+            class="reddit-post-right-bottom"
+          >
+            <div>
+              <h4>
+                Omnis necessitatibus maiores ullam quae.
+              </h4>
+              <section
+                class="media-output-small-post"
+              >
+                <img
+                  alt="Omnis necessitatibus maiores ullam quae."
+                  src="https://cdn.fileinfo.com/img/ss/sm/png_79.jpg"
+                />
+              </section>
+            </div>
+          </section>
+          <section
+            class="reddit-post-right-bottom-footer"
+          >
+            <a
+              class="subreddit-link"
+              href="/r/quia dolores quisquam aut consequatur sint provident/comments/0e1357d8-0caf-4a1c-b4cc-9df5a67b9b1b/libero odit aut labore qui aut inventore"
+            >
+              0
+               Comments
+            </a>
+            
+          </section>
+        </section>
+      </section>
+      <section
+        class="reddit-post"
+        style="display: block;"
+      >
+        <section
+          class="reddit-post-left"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="upvote-arrow-box"
+          />
+          <br />
+          <span>
+            0
+          </span>
+          <br />
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="downvote-arrow-box"
+          />
+        </section>
+        <section
+          class="reddit-post-right"
+        >
+          <section
+            class="reddit-post-right-top"
+          >
+            <a
+              href="/r/similique blanditiis in eum ut dignissimos aspernatur"
+            >
+              <b
+                class="subreddit-link"
+              >
+                r/
+                animi non quis quis nobis repudiandae aliquam
+              </b>
+            </a>
+            <span>
+               • 
+            </span>
+            <span>
+              Posted by 
+              <a
+                class="subreddit-link"
+                href="/user/Mrs. Carlos Ledner"
+              >
+                u/
+                Mrs. Carlos Ledner
+              </a>
+            </span>
+             
+            <span>
+              Posted 
+              0 minutes ago
+            </span>
+          </section>
+          <section
+            class="reddit-post-right-bottom"
+          >
+            <div>
+              <h4>
+                Sunt possimus earum animi quis expedita et optio.
+              </h4>
+              <section
+                class="media-output-small-post"
+              >
+                <img
+                  alt="Sunt possimus earum animi quis expedita et optio."
+                  src="https://cdn.fileinfo.com/img/ss/sm/png_79.jpg"
+                />
+              </section>
+            </div>
+          </section>
+          <section
+            class="reddit-post-right-bottom-footer"
+          >
+            <a
+              class="subreddit-link"
+              href="/r/similique blanditiis in eum ut dignissimos aspernatur/comments/30456910-7485-4b4a-8dfc-931a85a82113/ut corrupti voluptatem quia dolores dolor voluptates"
+            >
+              0
+               Comments
+            </a>
+            
+          </section>
+        </section>
+      </section>
+      <section
+        class="reddit-post"
+        style="display: block;"
+      >
+        <section
+          class="reddit-post-left"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="upvote-arrow-box"
+          />
+          <br />
+          <span>
+            0
+          </span>
+          <br />
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+          <div
+            aria-disabled="false"
+            class="downvote-arrow-box"
+          />
+        </section>
+        <section
+          class="reddit-post-right"
+        >
+          <section
+            class="reddit-post-right-top"
+          >
+            <a
+              href="/r/at quae autem eligendi nihil quis eveniet"
+            >
+              <b
+                class="subreddit-link"
+              >
+                r/
+                aut aut sunt enim rem qui hic
+              </b>
+            </a>
+            <span>
+               • 
+            </span>
+            <span>
+              Posted by 
+              <a
+                class="subreddit-link"
+                href="/user/Ms. Percival Hickle"
+              >
+                u/
+                Ms. Percival Hickle
+              </a>
+            </span>
+             
+            <span>
+              Posted 
+              0 minutes ago
+            </span>
+          </section>
+          <section
+            class="reddit-post-right-bottom"
+          >
+            <h4>
+              Et ut voluptatem quia.
+            </h4>
+            <section
+              class="reddit-post-right-bottom-description "
+            >
+              <span>
+                <p>
+                  Eum velit aperiam voluptas.
+                </p>
+              </span>
+            </section>
+          </section>
+          <section
+            class="reddit-post-right-bottom-footer"
+          >
+            <a
+              class="subreddit-link"
+              href="/r/at quae autem eligendi nihil quis eveniet/comments/6c0922d6-74e8-48b0-a6bb-dd03b127fd3a/perferendis in dolorem repudiandae possimus dignissimos esse"
+            >
+              0
+               Comments
+            </a>
+            
+          </section>
+        </section>
+      </section>
     </section>
     <section
       class="right-side"

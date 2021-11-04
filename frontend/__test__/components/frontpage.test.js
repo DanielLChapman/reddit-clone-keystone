@@ -8,8 +8,30 @@ import wait from 'waait';
 
 let fakePosts = [fakeLinkPost(), fakeMediaPost(), fakeMediaPost(), fakeTextPost()];
 let fakeSubreddits = fakePosts.map((x) => {
-    return x.subreddit.id;
+    return {
+        id: x.id,
+        content: x.content || '',
+        title: x.title,
+        user: {
+            id:x.user.id,
+            username:x.user.username
+        },
+        removed: x.removed,
+        createdAt: x.createdAt,
+        votes: [],
+        post_slug: x.post_slug,
+        link: x.link || '',
+        type: x.type,
+        subreddit: {
+            name: x.subreddit.name,
+            id: x.subreddit.id,
+            slug: x.subreddit.slug,
+        },
+        comments: []
+    }
 });
+
+
 
 const mocks = [
     {
@@ -24,7 +46,7 @@ const mocks = [
       // Return this data
       result: {
         data: {
-            allPosts: fakePosts,
+            allPosts: [...fakeSubreddits],
         },
       },
     },
@@ -49,6 +71,7 @@ describe('<PostMain />', () => {
           );
           // Wait for the test ID to show up
           await screen.findByTestId('frontPage');
+     
           expect(container).toMatchSnapshot();
     });
 
