@@ -1,6 +1,204 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`It switches subreddit content based on props renders a perma-linked comment 1`] = `
+<div>
+  <span>
+    Something was missing here!
+  </span>
+</div>
+`;
+
+exports[`It switches subreddit content based on props renders a specific post 1`] = `
+<div>
+  <div
+    class="comment-page"
+  >
+    <div
+      class="comment-top-bar"
+    >
+      <section
+        class="comment-arrows"
+      >
+        <svg
+          class="upvote-arrow "
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 256 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+          />
+        </svg>
+        <span>
+          0
+        </span>
+        <svg
+          class="downvote-arrow "
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 256 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+          />
+        </svg>
+      </section>
+      <section
+        class="post-title"
+      >
+        Mollitia iste itaque
+        ...
+      </section>
+      <section
+        class="post-close"
+      >
+        <a
+          href="/r/voluptate in sunt occaecati nulla aut sunt"
+        >
+          × Close
+        </a>
+      </section>
+    </div>
+    <section
+      class="comment-container"
+    >
+      <section
+        class="comment-page-container"
+      >
+        <section
+          class="comment-page-left"
+        >
+          <section
+            class="reddit-post"
+          >
+            <section
+              class="reddit-post-left"
+            >
+              <svg
+                class="upvote-arrow "
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 256 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+                />
+              </svg>
+              <div
+                aria-disabled="false"
+                class="upvote-arrow-box"
+              />
+              <br />
+              <span>
+                0
+              </span>
+              <br />
+              <svg
+                class="upvote-arrow "
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                stroke-width="0"
+                viewBox="0 0 256 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+                />
+              </svg>
+              <div
+                aria-disabled="false"
+                class="downvote-arrow-box"
+              />
+            </section>
+            <section
+              class="reddit-post-right"
+            >
+              <section
+                class="reddit-post-right-top"
+              >
+                <span>
+                  Posted by 
+                  <a
+                    class="subreddit-link"
+                    href="/user/Dr. Jayne Walker"
+                  >
+                    u/
+                    Dr. Jayne Walker
+                  </a>
+                </span>
+                 
+                <span>
+                  Posted 
+                  0 minutes ago
+                </span>
+              </section>
+              <section
+                class="reddit-post-right-bottom"
+              >
+                <h6>
+                  Mollitia iste itaque omnis.
+                </h6>
+                <div
+                  style="display: block;"
+                >
+                  <p>
+                    Rem similique temporibus aliquam sed sapiente soluta corporis commodi.
+                  </p>
+                </div>
+              </section>
+              <section
+                class="reddit-post-right-bottom-footer"
+              >
+                <a
+                  class="subreddit-link"
+                  href="/r/voluptate in sunt occaecati nulla aut sunt/comments/6b1588f4-b56b-4c68-896e-9d13d38d97d6/est unde rem similique et maxime quia"
+                >
+                  0
+                   Comments
+                </a>
+                
+              </section>
+            </section>
+          </section>
+          <section
+            class="comments-container"
+          />
+          <div>
+            Nothing yet...
+          </div>
+        </section>
+        <section
+          class="comment-page-right"
+        />
+      </section>
+    </section>
+  </div>
+</div>
+`;
+
 exports[`It switches subreddit content based on props renders an error with no props 1`] = `
+<div>
+  <span>
+    Something went wrong...
+  </span>
+</div>
+`;
+
+exports[`It switches subreddit content based on props renders an error with the wrong props 1`] = `
 <div>
   <span>
     Something went wrong...
@@ -47,5 +245,107 @@ exports[`It switches subreddit content based on props renders the home (through 
       Nothing to see here!
     </span>
   </div>
+</div>
+`;
+
+exports[`It switches subreddit content based on props tries to renders a different form without self text with being logged in 1`] = `
+<div>
+  <div>
+    <form
+      class="SubredditSubmitForm__Form-sc-4m25ol-0 dSAjAw"
+    >
+      <fieldset>
+        <label
+          for="title"
+        >
+          Title 
+          <br />
+          <input
+            id="title"
+            name="title"
+            required=""
+            type="text"
+            value=""
+          />
+        </label>
+        <label
+          for="link"
+        >
+          Link 
+          <br />
+          <input
+            id="link"
+            name="link"
+            required=""
+            type="text"
+            value=""
+          />
+        </label>
+        <button
+          type="submit"
+        >
+          Create Link/Media Post
+        </button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`It switches subreddit content based on props tries to renders a different form without self text without being logged in 1`] = `
+<div>
+  <span>
+    You Must Be Logged In
+  </span>
+</div>
+`;
+
+exports[`It switches subreddit content based on props tries to renders a form with self text with being logged in 1`] = `
+<div>
+  <div>
+    <form
+      class="SubredditSubmitForm__Form-sc-4m25ol-0 dSAjAw"
+    >
+      <fieldset>
+        <label
+          for="title"
+        >
+          Title 
+          <br />
+          <input
+            id="title"
+            name="title"
+            required=""
+            type="text"
+            value=""
+          />
+        </label>
+        <label
+          for="content"
+        >
+          Text: 
+          <br />
+          <textarea
+            id="content"
+            name="content"
+            placeholder=""
+          />
+        </label>
+        <button
+          type="submit"
+        >
+          Create Text Post
+        </button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`It switches subreddit content based on props tries to renders a form with self text without being logged in 1`] = `
+<div>
+  <span>
+    You Must Be Logged In
+  </span>
 </div>
 `;

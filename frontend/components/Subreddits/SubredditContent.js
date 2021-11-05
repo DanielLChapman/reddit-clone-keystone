@@ -37,14 +37,19 @@ function SubredditContent(props) {
             }
             return <span>Something was missing here!</span>
         case 'form':
-            if (props.selftext && props.selftext === "true") {
+            if (user) {
+                if (props.selftext && props.selftext === "true") {
+                    return (
+                        <SubredditPostForm slug={props.slug} id={props.subreddit.id} />
+                    )
+                }
                 return (
-                    <SubredditPostForm slug={props.slug} id={props.subreddit.id} />
+                    <SubredditMediaForm slug={props.slug} id={props.subreddit.id} />
                 )
             }
-            return (
-                <SubredditMediaForm slug={props.slug} id={props.subreddit.id} />
-            )
+
+            return <span>You Must Be Logged In</span>
+            
         default: 
             return (
                 <span>Something went wrong...</span>

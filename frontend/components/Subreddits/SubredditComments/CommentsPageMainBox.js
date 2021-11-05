@@ -15,7 +15,7 @@ import CommentsMedia from './CommentsPageMedia';
 
 
 //These give errors on importing from postmain, but not when copy+pasted. Not sure why
-const COMMENT_COUNT = gql`
+/* export const COMMENT_COUNT = gql`
     query COMMENT_COUNT($post_id: ID!) {
         _allCommentsMeta(
             where: {
@@ -27,7 +27,8 @@ const COMMENT_COUNT = gql`
             count
         }
     }
-`;
+`; */
+//not necessary if we have all the comments from the post;
 
 const DELETE_VOTE = gql`
     mutation DELETE_VOTE($id: ID!) {
@@ -119,17 +120,7 @@ function CommentsInfo(props) {
             }
         }
     }
-
-    const {data, error, loading} = useQuery(COMMENT_COUNT, {
-        variables: {
-            post_id: props.post.id
-        }
-    });
-
-    if (error) return <span>Err...</span>
-    if (loading) return <div>Loading...</div>
-
-    
+    let count = props.post.comments.length;
 
     return (
         <section className="reddit-post">
@@ -170,7 +161,7 @@ function CommentsInfo(props) {
                     }
              </section>
              <section className="reddit-post-right-bottom-footer">
-                 <a className="subreddit-link" href={`/r/${props?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(data._allCommentsMeta.count)} Comments</a>
+                 <a className="subreddit-link" href={`/r/${props?.subreddit.slug}/comments/${props?.post?.id}/${props?.post?.post_slug}`}>{convertCommentCount(count || 0)} Comments</a>
                  {
                     props?.post?.user?.username === props?.user?.username && props?.post?.link === '' ? <span className="post-edit-link"><a href={`/user/post/${props?.post?.id}/edit`}>Edit</a></span> : ''
                 }

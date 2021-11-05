@@ -197,7 +197,7 @@ function SubredditTopBar(props) {
             </section>
             <section className="post-close">
                 <a href={`/r/${props.subreddit.slug}`}>
-                    <a>&times; Close</a>
+                    &times; Close
                 </a>
             </section>
         </div>

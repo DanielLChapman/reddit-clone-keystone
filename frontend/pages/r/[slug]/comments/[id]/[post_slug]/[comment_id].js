@@ -14,6 +14,24 @@ export const GET_SPECIFIC_COMMENTS = gql`
             parent {
                 id
             }
+            post {
+                subreddit {
+                    id
+                    name
+                    title
+                    slug
+                    sidebar
+                    description
+                    status
+                    owner {
+                        username
+                    }
+                    moderators {
+                        username
+                    }
+                    createdAt
+                }
+            }
             content
             createdAt
             user {
@@ -89,14 +107,14 @@ export const GET_SPECIFIC_COMMENTS = gql`
 
 function IndividualComments(props) {
 
-    const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
+/*     const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
         variables: {
             slug: props.query.slug
         }
     });
 
     if (error) return <span>Error... Please try again later</span>
-    if (loading) return <span>Loading....</span>
+    if (loading) return <span>Loading....</span> */
 
     const {data:commentsData, error: commentsError, loading: commentsLoading} = useQuery(GET_SPECIFIC_COMMENTS, {
         variables: {
@@ -119,10 +137,12 @@ function IndividualComments(props) {
         commentArray.push(x);
     };
 
+    let subreddit = commentsData.Comment.post.subreddit;
+
 
     return (
         <div>
-            <SubredditContent type="permalinkedcomments" commentid={props.query.comment_id} commentArray={commentArray} slug={props.query.slug} postslug={props.query.post_slug} postid={props.query.id} subreddit={data.allSubreddits[0]}/>
+            <SubredditContent type="permalinkedcomments" commentid={props.query.comment_id} commentArray={commentArray} slug={props.query.slug} postslug={props.query.post_slug} postid={props.query.id} subreddit={subreddit}/>
         </div>
     );
 }

@@ -9,7 +9,7 @@ import checkUserToSubreddit from '../../lib/checkUser';
 
 export const GET_SUBREDDIT_INFO= gql`
   query GetSubreddit($slug: String!) {
-    Subreddit(slug: $slug) {
+    allSubreddits(where: {slug: $slug}) {
         id
         name
         title
@@ -77,9 +77,9 @@ function SubredditPage({type, slug, selftext}) {
 
     if(error) {console.log(error); return <span>Nothing to see here</span>}
 
-    if (!data.Subreddit) return <span>Nothing Found</span>
+    if (!data.allSubreddits.length === 0) return <span>Nothing Found</span>
 
-    let Subreddit = data.Subreddit;
+    let Subreddit = data.allSubreddits[0];
 
     return (
         <>
