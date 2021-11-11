@@ -13,7 +13,7 @@ import Search from './Search';
 
 export default function Header(props) {
     const user = useUser();
-    
+
     return (
     <div className="top-bear-container">
         <Meta />

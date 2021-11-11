@@ -34,6 +34,49 @@ exports[`It correctrly displays the search area with a dropdown renders the empt
     <div
       aria-labelledby="downshift-0-label"
       class="Dropdown__DropDown-sc-1liqluw-0 TgajO dropdown-window dropdown-not-opened"
+      data-testid="search-bar-results"
+      id="downshift-0-menu"
+      role="listbox"
+    />
+  </div>
+</div>
+`;
+
+exports[`It correctrly displays the search area with a dropdown renders the search bar with mocks for lazyQuery 1`] = `
+<div>
+  <div
+    class="search"
+  >
+    <button
+      class="searchButton"
+      type="submit"
+    >
+      <i
+        class="fa fa-search"
+      />
+    </button>
+    <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-owns="downshift-0-menu"
+      role="combobox"
+    >
+      <input
+        aria-autocomplete="list"
+        aria-controls="downshift-0-menu"
+        aria-labelledby="downshift-0-label"
+        autocomplete="off"
+        class="searchTerm"
+        id="search"
+        placeholder="Search"
+        type="search"
+        value=""
+      />
+    </div>
+    <div
+      aria-labelledby="downshift-0-label"
+      class="Dropdown__DropDown-sc-1liqluw-0 TgajO dropdown-window dropdown-not-opened"
+      data-testid="search-bar-results"
       id="downshift-0-menu"
       role="listbox"
     />

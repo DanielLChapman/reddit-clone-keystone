@@ -9,16 +9,12 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { GET_POST_INFO } from '../../../components/Subreddits/SubredditCommentsContainer';
 //import Signup, { SIGNUP_MUTATION } from '../../components/SignUp';
+import { signedInMocksWithPosts, signedInMocks } from '../../helpers/generalMocks';
 
 const fakeSubredditObj = fakeSubreddit();
 const fakePostObj = fakeTextPost();
 
-const signedInMocks = [
-    {
-      request: { query: CURRENT_USER_QUERY },
-      result: { data: { authenticatedItem: fakeUser() } },
-    },
-  ];
+
 
 const mocks = [
       {request: {
@@ -232,5 +228,6 @@ describe('It switches subreddit content based on props', () => {
 
         expect(container).toMatchSnapshot();
         expect(container).not.toEqual(container2);
+
     })
 })

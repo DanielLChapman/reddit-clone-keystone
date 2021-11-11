@@ -80,7 +80,7 @@ function Search(props) {
                 }} />*/}
             </div>
             
-            <DropDown {...getMenuProps()} className={`dropdown-window ${isOpen ? 'dropdown-opened':'dropdown-not-opened'}`}>
+            <DropDown data-testid="search-bar-results" {...getMenuProps()} className={`dropdown-window ${isOpen ? 'dropdown-opened':'dropdown-not-opened'}`}>
                 {isOpen && 
                     items.map((item, index) => {
 

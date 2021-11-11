@@ -54,14 +54,14 @@ exports[`It switches subreddit content based on props renders a specific post 1`
       <section
         class="post-title"
       >
-        Mollitia iste itaque
+        Possimus earum animi
         ...
       </section>
       <section
         class="post-close"
       >
         <a
-          href="/r/voluptate in sunt occaecati nulla aut sunt"
+          href="/r/eius dolorem amet quia quia aut sint"
         >
           × Close
         </a>
@@ -134,10 +134,10 @@ exports[`It switches subreddit content based on props renders a specific post 1`
                   Posted by 
                   <a
                     class="subreddit-link"
-                    href="/user/Dr. Jayne Walker"
+                    href="/user/Mrs. Palma Marks"
                   >
                     u/
-                    Dr. Jayne Walker
+                    Mrs. Palma Marks
                   </a>
                 </span>
                  
@@ -150,13 +150,13 @@ exports[`It switches subreddit content based on props renders a specific post 1`
                 class="reddit-post-right-bottom"
               >
                 <h6>
-                  Mollitia iste itaque omnis.
+                  Possimus earum animi quis expedita et optio.
                 </h6>
                 <div
                   style="display: block;"
                 >
                   <p>
-                    Rem similique temporibus aliquam sed sapiente soluta corporis commodi.
+                    Velit voluptate necessitatibus excepturi et qui sunt nesciunt provident.
                   </p>
                 </div>
               </section>
@@ -165,7 +165,7 @@ exports[`It switches subreddit content based on props renders a specific post 1`
               >
                 <a
                   class="subreddit-link"
-                  href="/r/voluptate in sunt occaecati nulla aut sunt/comments/6b1588f4-b56b-4c68-896e-9d13d38d97d6/est unde rem similique et maxime quia"
+                  href="/r/eius dolorem amet quia quia aut sint/comments/95b4a3df-d831-4a85-a821-032af032630d/aliquid ea animi architecto accusantium vel enim"
                 >
                   0
                    Comments
@@ -218,7 +218,7 @@ exports[`It switches subreddit content based on props renders the home (through 
         class="subreddit-top-bar-name"
       >
         <h1>
-          reprehenderit soluta non omnis consequatur enim quia
+          modioccaecatiillumlaborumquoseumvoluptate
         </h1>
         <button>
           Join
@@ -226,7 +226,7 @@ exports[`It switches subreddit content based on props renders the home (through 
       </section>
       <span>
         r/
-        omnis adipisci eius laborum eius aut illo
+        in fugit in rerum libero odit aut
       </span>
       <span
         class="subreddit-right-mobile-view"

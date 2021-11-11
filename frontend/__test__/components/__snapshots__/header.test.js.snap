@@ -54,6 +54,7 @@ exports[`It insures the header contains the necessary information has a logo, se
           <div
             aria-labelledby="downshift-0-label"
             class="Dropdown__DropDown-sc-1liqluw-0 TgajO dropdown-window dropdown-not-opened"
+            data-testid="search-bar-results"
             id="downshift-0-menu"
             role="listbox"
           />
@@ -126,6 +127,145 @@ exports[`It insures the header contains the necessary information has a logo, se
             >
               Sign In
             </a>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`It insures the header contains the necessary information renders a different drop down when logged in  1`] = `
+<div>
+  <div
+    class="top-bear-container"
+  >
+    <div
+      class="top-bar"
+    >
+      <a
+        class="website-icon"
+        href="/"
+      >
+        <img
+          src="/icon.webp"
+        />
+        <span>
+          Reddit
+        </span>
+      </a>
+      <div
+        class="search-bar-main"
+      >
+        <div
+          class="search"
+        >
+          <button
+            class="searchButton"
+            type="submit"
+          >
+            <i
+              class="fa fa-search"
+            />
+          </button>
+          <div
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-owns="downshift-0-menu"
+            role="combobox"
+          >
+            <input
+              aria-autocomplete="list"
+              aria-controls="downshift-0-menu"
+              aria-labelledby="downshift-0-label"
+              autocomplete="off"
+              class="searchTerm"
+              id="search"
+              placeholder="Search"
+              type="search"
+              value=""
+            />
+          </div>
+          <div
+            aria-labelledby="downshift-0-label"
+            class="Dropdown__DropDown-sc-1liqluw-0 TgajO dropdown-window dropdown-not-opened"
+            data-testid="search-bar-results"
+            id="downshift-0-menu"
+            role="listbox"
+          />
+        </div>
+      </div>
+      <section
+        class="signin-login-dropdown"
+      >
+        <label
+          for="signin-login-window"
+        >
+          <span
+            class="signin-login-window-username"
+          >
+            Ms. Josue McCullough
+          </span>
+          <span
+            style="top: 0px; position: relative;"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-w-14 fa-arrow-down "
+              data-icon="arrow-down"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 448 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+        </label>
+        <input
+          id="signin-login-window"
+          name="signin-login-window"
+          type="checkbox"
+        />
+        <div>
+          <ul>
+            <li>
+              <a
+                href="/user/Ms. Josue McCullough"
+              >
+                Profile
+              </a>
+            </li>
+            <li>
+              <span
+                style="float: left;"
+              >
+                Karma
+              </span>
+                
+              <span
+                style="float: right;"
+              >
+                0
+              </span>
+              <br />
+            </li>
+            <li>
+              <a
+                href="/subreddits/create"
+              >
+                Create Subreddit
+              </a>
+            </li>
+          </ul>
+          <button
+            type="button"
+          >
+            Sign Out
           </button>
         </div>
       </section>

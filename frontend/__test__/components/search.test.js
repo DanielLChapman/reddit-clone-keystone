@@ -24,7 +24,14 @@ const mocks = [
       result: () => {
         return {
           data: {
-            getSearchResults: fakeSubreddits
+            getSearchResults: [
+                {   id: fakeSubreddits.id,
+                    title: fakeSubreddits.title,
+                    subscriber: [],
+                    slug: fakeSubreddits.slug,
+                    name: fakeSubreddits.name,
+                },
+            ]
           },
         }
       },
@@ -54,9 +61,8 @@ describe('It correctrly displays the search area with a dropdown', () => {
           expect(container).toMatchSnapshot();
     });
 
-/*
 
-lodash debounce issues
+
 
     it('renders the search bar with mocks for lazyQuery', async () => {
         const { container, debug } = render(
@@ -66,16 +72,9 @@ lodash debounce issues
 
           );
 
-          let input = container.querySelector('.searchTerm');
-        
+          await screen.findByTestId('search-bar-results');
+    
 
-         await act(async () => {
-            /* fire events that update state 
-            userEvent.type(input, 't');
-            jest.advanceTimersByTime(350)
-          }); 
-
-
-         debug();
-    })*/
+          expect(container).toMatchSnapshot();
+    })
 })

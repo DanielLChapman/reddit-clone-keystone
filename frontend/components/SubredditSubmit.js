@@ -7,7 +7,7 @@ import Form from './styles/SubredditForm';
 
 
 //NEED TO SET OWNER HERE
-const CREATE_SUBREDDIT_MUTATION = gql`
+export const CREATE_SUBREDDIT_MUTATION = gql`
     mutation CREATE_SUBREDDIT_MUTATION(
         $name: String!,
         $slug: String!,
@@ -94,6 +94,7 @@ function SubredditSubmitForm(props) {
                             name="name"
                             className={inputs.errors.name === 'true' ? 'error-field' : ''}
                             value={inputs.name}
+                            placeholder="name"
                             onChange={handleChange}
                         />
                     </label>
@@ -104,6 +105,7 @@ function SubredditSubmitForm(props) {
                             type="text"
                             id="title"
                             name="title"
+                            placeholder="title"
                             value={inputs.title}
                             onChange={handleChange}
                         />

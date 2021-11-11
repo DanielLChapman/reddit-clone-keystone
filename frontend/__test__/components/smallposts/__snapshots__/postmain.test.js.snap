@@ -64,7 +64,7 @@ exports[`<PostMain /> renders and matches the snapshop 1`] = `
             class="subreddit-link"
           >
             r/
-            ipsa tempora aut sint aperiam occaecati illum
+            ipsatemporaautsintaperiamoccaecatiillum
           </b>
         </a>
         <span>

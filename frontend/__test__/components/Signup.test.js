@@ -8,7 +8,10 @@ import { fakeUser } from '../../lib/testUtils';
 import { act } from 'react-dom/test-utils';
 
 const me = fakeUser();
+
 const password = 'wesswess1';
+
+
 const mocks = [
   // Mutation Mock
   {

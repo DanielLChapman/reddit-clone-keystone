@@ -188,7 +188,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
                 class="subreddit-link"
               >
                 r/
-                illo dolorum ab aliquam id sit delectus
+                illodolorumabaliquamidsitdelectus
               </b>
             </a>
             <span>
@@ -305,7 +305,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
                 class="subreddit-link"
               >
                 r/
-                qui dignissimos dolore qui voluptatem cumque nihil
+                quidignissimosdolorequivoluptatemcumquenihil
               </b>
             </a>
             <span>
@@ -420,7 +420,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
                 class="subreddit-link"
               >
                 r/
-                animi non quis quis nobis repudiandae aliquam
+                animinonquisquisnobisrepudiandaealiquam
               </b>
             </a>
             <span>
@@ -535,7 +535,7 @@ exports[`<PostMain /> renders out the given posts on the front page 1`] = `
                 class="subreddit-link"
               >
                 r/
-                aut aut sunt enim rem qui hic
+                autautsuntenimremquihic
               </b>
             </a>
             <span>

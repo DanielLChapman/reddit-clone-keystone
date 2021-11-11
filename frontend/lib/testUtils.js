@@ -27,7 +27,7 @@ const fakeSubreddit = (overrides) => (
     {
         __typename: 'Subreddit',
         id: casual.uuid,
-        name: casual.string,
+        name: casual.string.replace(/\s/g, ''),
         title: casual.string,
         slug: casual.string,
         sidebar: casual.string,
