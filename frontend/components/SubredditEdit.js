@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 //able to change owner needs to be added
 
-const EDIT_SUBREDDIT_MUTATION = gql`
+export const EDIT_SUBREDDIT_MUTATION = gql`
     mutation EDIT_SUBREDDIT_MUTATION(
         $name: String!,
         $slug: String!,

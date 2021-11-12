@@ -59,19 +59,21 @@ export function useUser() {
   let test = {...data};
 
   
+  
   if (test.authenticatedItem) {
+
     let x = Object.assign({}, test.authenticatedItem);
     //count up post votes
     let postVotes = 0;
     let commentVotes = 0;
     
-    x.posts.forEach((q) => {
+    x?.posts?.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? postVotes += 1 : postVotes -= 1;
       })
     });
     //count up comment votes
-    x.comments.forEach((q) => {
+    x?.comments?.forEach((q) => {
       q.votes.forEach((y) => {
         y.vflag === 'Upvote' ? commentVotes += 1 : commentVotes -= 1;
       })

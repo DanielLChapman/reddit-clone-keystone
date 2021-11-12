@@ -10,19 +10,22 @@ function SubredditEditPage(props) {
     const user = useUser();
 
     let boolPass = false;
+
+    
+
     if (user) {
         if (!boolPass) {
-            boolPass = user.owner.some((x) => {
+            boolPass = user?.owner?.some((x) => {
                 return x.slug === props.query.slug
             })
         }
 
         if (!boolPass) {
-            boolPass = user.moderating.some((x) => {
+            boolPass = user?.moderating?.some((x) => {
                 return x.slug === props.query.slug
             })
         }
-    }
+    };
 
     const {data, error, loading} = useQuery(GET_SUBREDDIT_INFO, {
         variables: {

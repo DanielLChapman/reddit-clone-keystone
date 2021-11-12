@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a subreddit submit page and submits successfully does not load unless signed in 1`] = `
+<div>
+  <div>
+    <form
+      class="Form-sc-1tx35ym-0 etUUQp"
+      method="POST"
+    >
+      <h2>
+        Sign Into Your Account
+      </h2>
+      <fieldset>
+        <label
+          for="email"
+        >
+          Email
+          <input
+            autocomplete="email"
+            name="email"
+            placeholder="Your Email Address"
+            type="email"
+            value=""
+          />
+        </label>
+        <label
+          for="password"
+        >
+          Password
+          <input
+            autocomplete="password"
+            name="password"
+            placeholder="Password"
+            type="password"
+            value=""
+          />
+        </label>
+        <button
+          type="submit"
+        >
+          Sign In
+        </button>
+      </fieldset>
+    </form>
+    <style>
+                      body, html{                background-color:white;                }            
+    </style>
+  </div>
+</div>
+`;
+
+exports[`it renders a subreddit submit page and submits successfully loads when signed in 1`] = `
+<div>
+  <div>
+    <div>
+      <form
+        class="SubredditForm__Form-q7oa8i-0 kqHjhW"
+      >
+        <fieldset>
+          <label
+            for="title"
+          >
+            Title 
+            <br />
+            <input
+              id="title"
+              name="title"
+              required=""
+              type="text"
+              value="sit saepe assumenda deserunt consequatur itaque et"
+            />
+          </label>
+          <label
+            for="description"
+          >
+            Description 
+            <br />
+            <textarea
+              id="description"
+              name="description"
+              placeholder="description"
+            >
+              quidem voluptatibus libero aut autem ut ullam
+            </textarea>
+          </label>
+          <label
+            for="sidebar"
+          >
+            Sidebar 
+            <br />
+            <textarea
+              id="sidebar"
+              name="sidebar"
+              placeholder="sidebar"
+            >
+              labore qui aut inventore aut eveniet beatae
+            </textarea>
+          </label>
+          <label
+            class="form-checkbox"
+            for="status"
+          >
+            Status: 
+            Public
+            <br />
+            <input
+              checked=""
+              name="status"
+              type="checkbox"
+            />
+          </label>
+          <button
+            type="submit"
+          >
+            Edit 
+          </button>
+        </fieldset>
+      </form>
+    </div>
+    <style>
+                      body, html{                background-color:white;                }            
+    </style>
+  </div>
+</div>
+`;
+
+exports[`it renders a subreddit submit page and submits successfully loads when signed in, but not with the correct permissions 1`] = `
+<div>
+  <div>
+    <div>
+      <span>
+        You dont have the required permission for this.
+      </span>
+    </div>
+    <style>
+                      body, html{                background-color:white;                }            
+    </style>
+  </div>
+</div>
+`;
