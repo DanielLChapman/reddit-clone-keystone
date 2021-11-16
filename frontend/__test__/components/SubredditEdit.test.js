@@ -9,7 +9,6 @@ import  Router  from 'next/router';
 import SubredditEditPage from '../../pages/r/[slug]/edit';
 import { GET_SUBREDDIT_INFO } from '../../components/Subreddits/SubredditPage';
 import { CURRENT_USER_QUERY } from '../../components/User';
-import { username } from 'casual';
 import { EDIT_SUBREDDIT_MUTATION } from '../../components/SubredditEdit';
 
 const subreddit = fakeSubreddit();
@@ -30,7 +29,7 @@ const mocks = [
       },
       result: () => {
         return {
-      data: { allSubreddit: [{ 
+      data: { allSubreddits: [{ 
 
           id: subreddit.id,
           name: subreddit.name,

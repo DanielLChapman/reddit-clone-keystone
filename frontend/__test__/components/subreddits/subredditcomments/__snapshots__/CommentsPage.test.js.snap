@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It accurately displays the comment page renders a post page 1`] = `
+<div>
+  <div>
+    <div
+      class="comment-page"
+    >
+      <div
+        class="comment-top-bar"
+      >
+        <section
+          class="comment-arrows"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <span>
+            0
+          </span>
+          <svg
+            class="downvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+        </section>
+        <section
+          class="post-title"
+        >
+          Facilis corporis sed
+          ...
+        </section>
+        <section
+          class="post-close"
+        >
+          <a
+            href="/r/ipsatemporaautsintaperiamoccaecatiillum"
+          >
+            × Close
+          </a>
+        </section>
+      </div>
+      <section
+        class="comment-container"
+      >
+        <section
+          class="comment-page-container"
+        >
+          <section
+            class="comment-page-left"
+          >
+            <section
+              class="reddit-post"
+            >
+              <section
+                class="reddit-post-left"
+              >
+                <svg
+                  class="upvote-arrow "
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 256 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+                  />
+                </svg>
+                <div
+                  aria-disabled="false"
+                  class="upvote-arrow-box"
+                />
+                <br />
+                <span>
+                  0
+                </span>
+                <br />
+                <svg
+                  class="upvote-arrow "
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 256 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+                  />
+                </svg>
+                <div
+                  aria-disabled="false"
+                  class="downvote-arrow-box"
+                />
+              </section>
+              <section
+                class="reddit-post-right"
+              >
+                <section
+                  class="reddit-post-right-top"
+                >
+                  <span>
+                    Posted by 
+                    <a
+                      class="subreddit-link"
+                      href="/user/Mrs. Gideon Block"
+                    >
+                      u/
+                      Mrs. Gideon Block
+                    </a>
+                  </span>
+                   
+                  <span>
+                    Posted 
+                    0 minutes ago
+                  </span>
+                </section>
+                <section
+                  class="reddit-post-right-bottom"
+                >
+                  <h6>
+                    Facilis corporis sed veritatis.
+                  </h6>
+                  <div
+                    style="display: block;"
+                  >
+                    <p>
+                      Praesentium magnam fugiat error molestiae laborum est.
+                    </p>
+                  </div>
+                </section>
+                <section
+                  class="reddit-post-right-bottom-footer"
+                >
+                  <a
+                    class="subreddit-link"
+                    href="/r/ipsatemporaautsintaperiamoccaecatiillum/comments/7760116b-dd26-46da-a05a-a010e05cef40/explicabo dolores ipsam laboriosam non itaque voluptas"
+                  >
+                    0
+                     Comments
+                  </a>
+                  
+                </section>
+              </section>
+            </section>
+            <section
+              class="comments-container"
+            />
+            <div>
+              Nothing yet...
+            </div>
+          </section>
+          <section
+            class="comment-page-right"
+          />
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`It accurately displays the comment page renders a post page with comment box if logged in 1`] = `
+<div>
+  <div>
+    <div
+      class="comment-page"
+    >
+      <div
+        class="comment-top-bar"
+      >
+        <section
+          class="comment-arrows"
+        >
+          <svg
+            class="upvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+            />
+          </svg>
+          <span>
+            0
+          </span>
+          <svg
+            class="downvote-arrow "
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 256 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+            />
+          </svg>
+        </section>
+        <section
+          class="post-title"
+        >
+          Facilis corporis sed
+          ...
+        </section>
+        <section
+          class="post-close"
+        >
+          <a
+            href="/r/ipsatemporaautsintaperiamoccaecatiillum"
+          >
+            × Close
+          </a>
+        </section>
+      </div>
+      <section
+        class="comment-container"
+      >
+        <section
+          class="comment-page-container"
+        >
+          <section
+            class="comment-page-left"
+          >
+            <section
+              class="reddit-post"
+            >
+              <section
+                class="reddit-post-left"
+              >
+                <svg
+                  class="upvote-arrow "
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 256 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M88 166.059V468c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12V166.059h46.059c21.382 0 32.09-25.851 16.971-40.971l-86.059-86.059c-9.373-9.373-24.569-9.373-33.941 0l-86.059 86.059c-15.119 15.119-4.411 40.971 16.971 40.971H88z"
+                  />
+                </svg>
+                <div
+                  aria-disabled="false"
+                  class="upvote-arrow-box"
+                />
+                <br />
+                <span>
+                  0
+                </span>
+                <br />
+                <svg
+                  class="upvote-arrow "
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 256 512"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+                  />
+                </svg>
+                <div
+                  aria-disabled="false"
+                  class="downvote-arrow-box"
+                />
+              </section>
+              <section
+                class="reddit-post-right"
+              >
+                <section
+                  class="reddit-post-right-top"
+                >
+                  <span>
+                    Posted by 
+                    <a
+                      class="subreddit-link"
+                      href="/user/Mrs. Gideon Block"
+                    >
+                      u/
+                      Mrs. Gideon Block
+                    </a>
+                  </span>
+                   
+                  <span>
+                    Posted 
+                    0 minutes ago
+                  </span>
+                </section>
+                <section
+                  class="reddit-post-right-bottom"
+                >
+                  <h6>
+                    Facilis corporis sed veritatis.
+                  </h6>
+                  <div
+                    style="display: block;"
+                  >
+                    <p>
+                      Praesentium magnam fugiat error molestiae laborum est.
+                    </p>
+                  </div>
+                </section>
+                <section
+                  class="reddit-post-right-bottom-footer"
+                >
+                  <a
+                    class="subreddit-link"
+                    href="/r/ipsatemporaautsintaperiamoccaecatiillum/comments/7760116b-dd26-46da-a05a-a010e05cef40/explicabo dolores ipsam laboriosam non itaque voluptas"
+                  >
+                    0
+                     Comments
+                  </a>
+                  
+                </section>
+              </section>
+            </section>
+            <section
+              class="comments-container"
+            >
+              <span>
+                Comment as 
+                Miss Elvis Kunde
+              </span>
+              <section
+                class="comments-submission-container"
+              >
+                <div>
+                  <form>
+                    <fieldset
+                      data-testid="comments-box"
+                    >
+                      <label
+                        for="content"
+                      >
+                        <textarea
+                          id="content"
+                          name="content"
+                          placeholder="What are your thoughts?"
+                        />
+                      </label>
+                      <br />
+                      <button
+                        class="comment-box-submit"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </fieldset>
+                  </form>
+                </div>
+              </section>
+            </section>
+            <div>
+              Nothing yet...
+            </div>
+          </section>
+          <section
+            class="comment-page-right"
+          />
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+`;

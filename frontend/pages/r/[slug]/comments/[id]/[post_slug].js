@@ -11,7 +11,7 @@ function Posts(props) {
         }
     });
 
-    if (error) return <span>Error... Please try again later</span>
+    if (error) {console.log(error); return <span>Error... Please try again later</span>}
     if (loading) return <span>Loading....</span>
 
     return (

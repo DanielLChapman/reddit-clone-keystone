@@ -59,7 +59,7 @@ function CommentsEditBox(props) {
         //add to UI element up one level at top through some prop function
     }}>
         <fieldset>
-                <label htmlFor="content" className="inline-edit-box-comments">
+                <label htmlFor="content" className="inline-edit-box-comments" data-testid="edit-comments-box">
                     <textarea
                         className="content"
                         name="content"

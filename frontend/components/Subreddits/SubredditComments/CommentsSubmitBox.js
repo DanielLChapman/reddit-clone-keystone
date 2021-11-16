@@ -156,7 +156,7 @@ function CommentsBox(props) {
     
         //add to UI element up one level at top through some prop function
     }}>
-        <fieldset>
+        <fieldset data-testid="comments-box">
                 <label htmlFor="content">
                     <textarea
                         id="content"
