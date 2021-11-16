@@ -28,11 +28,11 @@ const Error = ({ error }) => {
   );
 };
 
-DisplayError.defaultProps = {
+Error.defaultProps = {
   error: {},
 };
 
-DisplayError.propTypes = {
+Error.propTypes = {
   error: PropTypes.object,
 };
 

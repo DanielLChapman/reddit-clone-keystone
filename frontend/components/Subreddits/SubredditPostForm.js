@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import React from 'react';
 import useForm from '../../lib/useForm';
+import Error from '../Error';
 import Form from '../styles/SubredditSubmitForm';
 
 
@@ -22,7 +23,7 @@ const CREATE_VOTE = gql`
 `;
 
 
-const SUBREDDIT_TEXT_POST_MUTATION = gql`
+export const SUBREDDIT_TEXT_POST_MUTATION = gql`
     mutation SUBREDDIT_TEXT_POST_MUTATION($title: String!, $content: String,  $subreddit_id: ID!, $type: String!, $link: String ) {
         createVariedPost(
             title: $title,
@@ -57,9 +58,11 @@ function SubredditPostForm(props) {
 
     return (
         <div>
-            {error}
+            {error && (
+                <Error error={error} />
+            )}
             {data && (
-                <span>Success</span>
+                <span>Success. <a href={`/r/${props.subreddit_slug}/comments/${data.createVariedPost.id}/${data.createVariedPost.post_slug}`}>Click here to view your new post!</a></span>
             )}
         <Form onSubmit={async (e) => {
             e.preventDefault();
@@ -75,14 +78,16 @@ function SubredditPostForm(props) {
                     type: 'text'
                 }
             });
-            /*
+            
+            /* Moved to back end!! 
             const voteres = await createPostVote({
                 variables: {
-                    post_id: res.createVa,
+                    post_id: res.createVariedPost.id,
                     vflag: 'Upvote'
                 }
-            });*/
+            });
 
+            */
             /*
 
             Router.push({

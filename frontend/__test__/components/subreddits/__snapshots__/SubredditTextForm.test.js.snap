@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`It switches subreddit content based on props tries to renders a text form with being logged in 1`] = `
+<div>
+  <div>
+    <form
+      class="SubredditSubmitForm__Form-sc-4m25ol-0 dSAjAw"
+    >
+      <fieldset>
+        <label
+          for="title"
+        >
+          Title 
+          <br />
+          <input
+            id="title"
+            name="title"
+            required=""
+            type="text"
+            value=""
+          />
+        </label>
+        <label
+          for="content"
+        >
+          Text: 
+          <br />
+          <textarea
+            id="content"
+            name="content"
+            placeholder=""
+          />
+        </label>
+        <button
+          type="submit"
+        >
+          Create Text Post
+        </button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+`;
