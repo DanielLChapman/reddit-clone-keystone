@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../../User';
+import Error from '../../Error';
 
 const SUBMIT_POST_WITH_PARENT_MUTATION = gql`
     mutation SUBMIT_POST_WITH_PARENT_MUTATION(
@@ -43,7 +44,7 @@ const SUBMIT_POST_WITH_PARENT_MUTATION = gql`
     }
 `;
 
-const SUBMIT_POST_WITHOUT_PARENT_MUTATION = gql`
+export const SUBMIT_POST_WITHOUT_PARENT_MUTATION = gql`
     mutation SUBMIT_POST_WITHOUT_PARENT_MUTATION(
         $post_id: ID!,
         $content: String!,
@@ -75,7 +76,7 @@ const SUBMIT_POST_WITHOUT_PARENT_MUTATION = gql`
     }
 `;
 
-const CREATE_VOTE = gql`
+export const CREATE_VOTE = gql`
     mutation CREATE_VOTE($post_id: ID!, $vflag: String!) {
         createCommentVote(data: {
             comment: {
@@ -156,6 +157,8 @@ function CommentsBox(props) {
     
         //add to UI element up one level at top through some prop function
     }}>
+        {error && <Error error={error} />}
+        {data && <span>Success!</span>}
         <fieldset data-testid="comments-box">
                 <label htmlFor="content">
                     <textarea
