@@ -158,7 +158,7 @@ function CommentsBox(props) {
         //add to UI element up one level at top through some prop function
     }}>
         {error && <Error error={error} />}
-        {data && <span>Success!</span>}
+        {data && <span style={{display: 'none'}}>Success!</span>}
         <fieldset data-testid="comments-box">
                 <label htmlFor="content">
                     <textarea

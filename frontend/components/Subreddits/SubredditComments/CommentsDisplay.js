@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Tree from '../../../lib/commentTree';
 import sortingPosts, { sortingComments } from '../../../lib/postSorting';
 import Dropdown from '../../Dropdown';
-import { CURRENT_USER_QUERY } from '../../User';
+import { CURRENT_USER_QUERY, useUser } from '../../User';
 import { GET_POST_INFO } from '../SubredditCommentsContainer';
 import IndividualComments from './IndividualComments';
 
@@ -56,6 +56,7 @@ const DELETE_COMMENT = gql`
 
 
 function CommentsDisplay(props) {
+    const user = useUser();
     let options = ['Hot', 'Best', 'New', 'Top', 'Rising'];
     const [dropValue, setDropValue] = useState('Hot');
     const tree = new Tree;
@@ -128,13 +129,13 @@ function CommentsDisplay(props) {
         <div className="comment-tree-beginning">
             {
                 props.userComments.comments.map((x, i) => {
-                    return <IndividualComments tree={tree} comment={x} post={props.post} count={1} key={x.id} sortOption={dropValue}
+                    return <IndividualComments user={user} tree={tree} comment={x} post={props.post} count={1} key={x.id} sortOption={dropValue}
                     createPostVote={props.createPostVote} deletePostVote={props.deletePostVote} updatePostVote={props.updatePostVote} 
                     deleteComment={deleteComment}   />
                 })
             }
             {queue.map((x, i) => {
-                return <IndividualComments deleteComment={deleteComment} tree={tree} comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
+                return <IndividualComments user={user} deleteComment={deleteComment} tree={tree} comment={x} count={1} post={props.post} key={x.id} createPostVote={createPostVote} deletePostVote={deletePostVote} updatePostVote={updatePostVote} />
             })}
         </div>
         </>
