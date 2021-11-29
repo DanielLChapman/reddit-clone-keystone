@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import bestMatch from '../../lib/getEditDistance';
 import sortingPosts from '../../lib/postSorting';
+import Error from '../Error';
 
 /* allPosts(where: {
     OR: [
@@ -60,13 +61,15 @@ const SEARCH_QUERY = gql`
 `;
 
 function SearchPage(props) {
+
+
     const {data, error, loading} = useQuery(SEARCH_QUERY, {
         variables: {
             searchTerm: props.query
         }
     });
 
-    if (error) return <span>Error </span>
+    if (error) {return <Error error={error} />} 
     if (loading) return <span>Loading....</span>
 
     let subreddits = [...data.allSubreddits];

@@ -36,3 +36,12 @@ TextPost.propTypes = {
 }
 
 export default TextPost;
+
+
+const newUser = {
+    username,
+}
+
+let copyUser = {...newUserObj};
+copyUser.userId = copyUser.id;
+setUsers((prevArray) => [...prevArray, copyUser]);

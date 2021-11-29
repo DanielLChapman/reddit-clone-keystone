@@ -4,6 +4,8 @@ export default function getPostVoteId(user, postid) {
             return x.id;
         }
     });
+
+    
     try {
         return id.id;
     } catch {

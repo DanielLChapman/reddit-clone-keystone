@@ -19,6 +19,7 @@ export const Comment = list({
     post: relationship({
         ref: 'Post.comments',
         many: false,
+        
     }),
     createdAt: text({ 
         isRequired: true,

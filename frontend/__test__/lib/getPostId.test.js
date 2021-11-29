@@ -16,4 +16,4 @@ describe('Get Post Id', () => {
         expect(getPostVoteId(user, 5)).toEqual(false);
         expect(getPostVoteId(user, 1124)).toEqual(5);
     })
-})
+});

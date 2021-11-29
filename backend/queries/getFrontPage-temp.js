@@ -2,7 +2,7 @@ import {id_array} from '../lib/allSubreddits';
 import { KeystoneContext, SessionStore } from '@keystone-next/types';
 
 
-const getFrontPage = async (_, { name, skip }, KeystoneContext) => {
+const getFrontPage = async (_, { name, skip }, context) => {
 
     // 1. Query the current user see if they are signed in
     const sesh = context.session;
@@ -34,7 +34,7 @@ const getFrontPage = async (_, { name, skip }, KeystoneContext) => {
 
     const {
         data: {post},
-    } = await KeystoneContext.executeGraphql({
+    } = await context.executeGraphql({
         query: `
             allPost(where: {
                 subreddit:{

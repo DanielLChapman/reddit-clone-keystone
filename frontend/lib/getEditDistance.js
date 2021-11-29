@@ -41,7 +41,8 @@ export default function bestMatch(myArray, myQuery, term) {
         let item2 = {...item}; 
         item2.distance = getEditDistance(myQuery, item2[term])
         return item2;
-    })
+    });
+    
     temp.sort(function(a,b) {
       if (a.distance < b.distance) return -1
       else if (a.distance > b.distance) return 1

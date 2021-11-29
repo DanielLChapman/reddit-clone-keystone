@@ -32,6 +32,6 @@ describe('It loads the filter bar', () => {
           expect(identifier).not.toBeDisabled();
 
           let identifier2 = screen.getByTestId('top-filter-bar');
-          expect(identifier2).toHaveAttribute('aria-disabled')
+          expect(identifier2).toHaveAttribute('aria-disabled');
     })
 })

@@ -16,7 +16,7 @@ const user = fakeUser();
 
 jest.mock('next/router', () => ({
     push: jest.fn(),
-  }));
+}));
 
 const mocks = [
     // Mutation Mock
