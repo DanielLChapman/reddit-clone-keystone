@@ -84,7 +84,7 @@ function SubredditSubmitForm(props) {
             }}>
                 <fieldset>
                     <label htmlFor="name">
-                        Name {inputs.errors.name}
+                        Name
                         <br />
                         <span className="lower-form-text">no spaces or special characters.</span>
                         <input 
